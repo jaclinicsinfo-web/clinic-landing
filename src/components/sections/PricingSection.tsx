@@ -6,12 +6,8 @@ import {
   Check,
   Minus,
   Sparkles,
-  ShieldCheck,
-  Zap,
-  Building,
   Building2,
-  Layers,
-  HelpCircle,
+  Zap,
   ArrowRight,
   ChevronDown,
   ChevronUp,
@@ -37,8 +33,8 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
       buttonText: "Começar com o Essencial",
       highlight: false,
       badge: "Início Rápido",
-      accentColor: "border-slate-200",
-      buttonStyle: "bg-slate-900 hover:bg-slate-800 text-white",
+      cardStyle: "bg-[#0b242d] border-teal-800/50 hover:border-teal-600/60",
+      buttonStyle: "bg-teal-950 hover:bg-teal-900 text-teal-200 border border-teal-700/50",
       features: [
         { name: "Núcleo operacional", desc: "Agenda, prontuário, profissionais e LGPD", included: true },
         { name: "Financeiro completo", desc: "Contas a pagar, fluxo de caixa, lotes de convênio", included: false },
@@ -60,8 +56,8 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
       buttonText: "Avançar para o Profissional",
       highlight: true,
       badge: "Mais Escolhido",
-      accentColor: "border-[#0d5c6b] ring-2 ring-[#0d5c6b]/30 shadow-2xl",
-      buttonStyle: "bg-gradient-to-r from-[#0d5c6b] to-[#094754] hover:from-[#094754] hover:to-[#07363f] text-white shadow-lg shadow-teal-900/25",
+      cardStyle: "bg-gradient-to-b from-[#0d343f] to-[#0a2730] border-teal-400 shadow-2xl shadow-teal-950/80 ring-2 ring-teal-400/40",
+      buttonStyle: "bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 font-black shadow-lg shadow-teal-950/60",
       features: [
         { name: "Núcleo operacional", desc: "Agenda, prontuário, profissionais e LGPD", included: true },
         { name: "Financeiro completo", desc: "Contas a pagar, fluxo de caixa, lotes de convênio", included: true },
@@ -83,8 +79,8 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
       buttonText: "Ir para o Ilimitado",
       highlight: false,
       badge: "Recursos Totais + IA",
-      accentColor: "border-slate-800 bg-gradient-to-b from-white to-teal-50/20",
-      buttonStyle: "bg-[#0c3f4a] hover:bg-[#07242b] text-white shadow-md shadow-teal-950/20",
+      cardStyle: "bg-gradient-to-b from-[#0b242d] to-[#071920] border-indigo-500/40 hover:border-indigo-400/60",
+      buttonStyle: "bg-indigo-600 hover:bg-indigo-500 text-white font-bold border border-indigo-400/40",
       features: [
         { name: "Núcleo operacional", desc: "Agenda, prontuário, profissionais e LGPD", included: true },
         { name: "Financeiro completo", desc: "Contas a pagar, fluxo de caixa, lotes de convênio", included: true },
@@ -98,29 +94,29 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
   ];
 
   return (
-    <section id="planos" className="py-24 bg-gradient-to-b from-[#f8fafc] to-[#eef5f6] relative">
+    <section id="planos" className="py-24 bg-gradient-to-b from-[#06161c] via-[#09222b] to-[#06161c] text-white relative border-t border-teal-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal-50 text-[#0d5c6b] border border-teal-200 text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal-500/10 text-teal-300 border border-teal-400/20 text-xs font-bold uppercase tracking-wider mb-3">
             <Zap className="w-3.5 h-3.5" />
             Transparência Sem Letras Miúdas
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-display">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-display">
             Planos sob medida para a sua clínica crescer
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-slate-600">
-            Escolha o pacote ideal para a estrutura da sua equipe. Todos os planos contam com suporte especializado e migração assistida.
+          <p className="mt-3 text-base sm:text-lg text-teal-100/70">
+            Escolha o pacote ideal para a sua equipe. Todos os planos contam com suporte VIP e migração de dados assistida.
           </p>
 
           {/* Billing Cycle Toggle Switch */}
-          <div className="mt-8 inline-flex items-center gap-3 p-1.5 rounded-full bg-slate-200/80 border border-slate-300/80 backdrop-blur-md">
+          <div className="mt-8 inline-flex items-center gap-2 p-1.5 rounded-full bg-teal-950/80 border border-teal-800/60 backdrop-blur-xl">
             <button
               onClick={() => setIsAnnual(false)}
               className={`px-5 py-2 rounded-full text-xs sm:text-sm font-bold transition-all ${
                 !isAnnual
-                  ? "bg-white text-slate-900 shadow-sm"
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-[#0d5c6b] text-white shadow-md shadow-teal-950/50"
+                  : "text-teal-300/80 hover:text-white"
               }`}
             >
               Mensal
@@ -129,13 +125,13 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
               onClick={() => setIsAnnual(true)}
               className={`px-5 py-2 rounded-full text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
                 isAnnual
-                  ? "bg-[#0d5c6b] text-white shadow-md shadow-teal-900/20"
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md shadow-emerald-950/50"
+                  : "text-teal-300/80 hover:text-white"
               }`}
             >
               <span>Anual</span>
-              <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-400 text-slate-900">
-                Economize 20%
+              <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-amber-400 text-slate-950">
+                20% OFF
               </span>
             </button>
           </div>
@@ -153,14 +149,14 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
-                className={`bg-white rounded-3xl p-7 sm:p-8 border flex flex-col justify-between relative transition-all duration-300 ${
-                  plan.accentColor
-                } ${plan.highlight ? "scale-100 lg:-translate-y-3 z-10" : "hover:shadow-lg"}`}
+                className={`rounded-3xl p-7 sm:p-8 border flex flex-col justify-between relative transition-all duration-300 ${
+                  plan.cardStyle
+                } ${plan.highlight ? "scale-100 lg:-translate-y-3 z-10" : "hover:scale-[1.02]"}`}
               >
                 {/* Highlight Badge */}
                 {plan.highlight && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 text-xs font-black uppercase tracking-wider shadow-md flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-slate-950" />
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 text-xs font-black uppercase tracking-wider shadow-md flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5" />
                     {plan.badge}
                   </div>
                 )}
@@ -168,44 +164,44 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                 <div>
                   {/* Header */}
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-slate-900 font-display">
+                    <h3 className="text-xl font-bold text-white font-display">
                       {plan.name}
                     </h3>
                     {!plan.highlight && (
-                      <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">
+                      <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-teal-950 border border-teal-800/40 text-teal-300">
                         {plan.badge}
                       </span>
                     )}
                   </div>
 
-                  <p className="text-xs text-slate-600 mt-2 min-h-[36px]">
+                  <p className="text-xs text-teal-100/70 mt-2 min-h-[36px]">
                     {plan.tagline}
                   </p>
 
                   {/* Price */}
-                  <div className="mt-5 pb-5 border-b border-slate-100">
+                  <div className="mt-5 pb-5 border-b border-teal-900/60">
                     <div className="flex items-baseline gap-1">
-                      <span className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight font-display">
+                      <span className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight font-display">
                         {price}
                       </span>
-                      <span className="text-xs text-slate-500 font-medium">{plan.period}</span>
+                      <span className="text-xs text-teal-300/70 font-medium">{plan.period}</span>
                     </div>
                     {isAnnual && (
-                      <div className="text-[11px] text-emerald-600 font-semibold mt-1">
+                      <div className="text-[11px] text-emerald-400 font-semibold mt-1">
                         Cobrado anualmente (2 meses grátis)
                       </div>
                     )}
                   </div>
 
                   {/* Capacity Limit Box */}
-                  <div className="mt-5 p-3 rounded-xl bg-teal-50/70 border border-teal-100/80 text-xs font-bold text-[#0d5c6b] flex items-center gap-2">
-                    <Building2 className="w-4 h-4 text-[#0d5c6b] shrink-0" />
+                  <div className="mt-5 p-3 rounded-xl bg-teal-950/90 border border-teal-700/50 text-xs font-bold text-teal-200 flex items-center gap-2">
+                    <Building2 className="w-4 h-4 text-teal-400 shrink-0" />
                     <span>Limite: {plan.limit}</span>
                   </div>
 
                   {/* Features Checklist */}
                   <div className="mt-6 space-y-3.5">
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-teal-400/80">
                       Recursos Inclusos:
                     </div>
 
@@ -213,14 +209,14 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                       <div
                         key={feat.name}
                         className={`flex items-start gap-3 text-xs ${
-                          feat.included ? "text-slate-800" : "text-slate-400 opacity-60"
+                          feat.included ? "text-white" : "text-slate-500 opacity-50"
                         }`}
                       >
                         <div
                           className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
                             feat.included
-                              ? "bg-emerald-100 text-emerald-700 font-bold"
-                              : "bg-slate-100 text-slate-400"
+                              ? "bg-emerald-500/20 text-emerald-400 border border-emerald-400/30"
+                              : "bg-slate-900 text-slate-600"
                           }`}
                         >
                           {feat.included ? (
@@ -230,10 +226,10 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                           )}
                         </div>
                         <div>
-                          <strong className={feat.included ? "text-slate-900" : "text-slate-400 line-through font-normal"}>
+                          <strong className={feat.included ? "text-white" : "text-slate-500 line-through font-normal"}>
                             {feat.name}
                           </strong>
-                          <p className="text-[11px] text-slate-500">{feat.desc}</p>
+                          <p className="text-[11px] text-teal-200/60">{feat.desc}</p>
                         </div>
                       </div>
                     ))}
@@ -256,7 +252,7 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                     <span>{plan.buttonText}</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
-                  <p className="text-center text-[11px] text-slate-400 mt-2.5">
+                  <p className="text-center text-[11px] text-teal-300/60 mt-2.5">
                     14 dias de teste · Cancele quando quiser
                   </p>
                 </div>
@@ -269,7 +265,7 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
         <div className="mt-14 text-center">
           <button
             onClick={() => setShowMatrix(!showMatrix)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-bold shadow-sm transition-all"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-teal-950/80 hover:bg-teal-900 text-teal-200 border border-teal-800/60 text-xs font-bold shadow-md transition-all"
           >
             <span>{showMatrix ? "Ocultar comparativo detalhado" : "Ver comparativo detalhado de recursos"}</span>
             {showMatrix ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -283,77 +279,77 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="mt-8 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xl overflow-x-auto"
+              className="mt-8 bg-[#0b242d] rounded-3xl p-6 sm:p-8 border border-teal-800/60 shadow-2xl overflow-x-auto"
             >
               <table className="w-full text-left text-xs min-w-[600px]">
                 <thead>
-                  <tr className="border-b-2 border-slate-200 text-slate-900 text-sm">
+                  <tr className="border-b-2 border-teal-800 text-white text-sm">
                     <th className="pb-4 font-bold">Recurso / Módulo</th>
                     <th className="pb-4 font-bold text-center">Essencial (R$ 300)</th>
-                    <th className="pb-4 font-bold text-center text-[#0d5c6b]">Profissional (R$ 700)</th>
+                    <th className="pb-4 font-bold text-center text-teal-300">Profissional (R$ 700)</th>
                     <th className="pb-4 font-bold text-center">Ilimitado (R$ 1.200)</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 text-slate-700">
+                <tbody className="divide-y divide-teal-900/40 text-teal-100/90">
                   <tr>
-                    <td className="py-3 font-semibold">Limite de Contas / Usuários</td>
-                    <td className="py-3 text-center">Até 5</td>
-                    <td className="py-3 text-center font-bold text-[#0d5c6b]">Até 20</td>
-                    <td className="py-3 text-center font-bold text-emerald-600">Sem teto (Ilimitado)</td>
+                    <td className="py-3.5 font-semibold">Limite de Contas / Usuários</td>
+                    <td className="py-3.5 text-center">Até 5</td>
+                    <td className="py-3.5 text-center font-bold text-teal-300">Até 20</td>
+                    <td className="py-3.5 text-center font-bold text-emerald-400">Sem teto (Ilimitado)</td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold">Unidades / Filiais</td>
-                    <td className="py-3 text-center">1 unidade</td>
-                    <td className="py-3 text-center font-bold text-[#0d5c6b]">Várias unidades</td>
-                    <td className="py-3 text-center font-bold text-emerald-600">Ilimitadas</td>
+                    <td className="py-3.5 font-semibold">Unidades / Filiais</td>
+                    <td className="py-3.5 text-center">1 unidade</td>
+                    <td className="py-3.5 text-center font-bold text-teal-300">Várias unidades</td>
+                    <td className="py-3.5 text-center font-bold text-emerald-400">Ilimitadas</td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold">Agenda Médica & Prontuário LGPD</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 font-semibold">Agenda Médica & Prontuário LGPD</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold">Contas a Pagar / Receber e Fluxo de Caixa</td>
-                    <td className="py-3 text-center text-slate-300">—</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 font-semibold">Contas a Pagar / Receber e Fluxo de Caixa</td>
+                    <td className="py-3.5 text-center text-slate-600">—</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold">Faturamento de Lotes de Convênio (TISS)</td>
-                    <td className="py-3 text-center text-slate-300">—</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 font-semibold">Faturamento de Lotes de Convênio (TISS)</td>
+                    <td className="py-3.5 text-center text-slate-600">—</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold">Relatórios de Faturamento & Inadimplência</td>
-                    <td className="py-3 text-center text-slate-300">—</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 font-semibold">Relatórios de Faturamento & Inadimplência</td>
+                    <td className="py-3.5 text-center text-slate-600">—</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold">Estoque Clínico com Alerta de Mínimo</td>
-                    <td className="py-3 text-center text-slate-300">—</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 font-semibold">Estoque Clínico com Alerta de Mínimo</td>
+                    <td className="py-3.5 text-center text-slate-600">—</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold">Lembretes Automáticos WhatsApp</td>
-                    <td className="py-3 text-center text-slate-300">—</td>
-                    <td className="py-3 text-center text-slate-300">—</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 font-semibold">Lembretes Automáticos WhatsApp</td>
+                    <td className="py-3.5 text-center text-slate-600">—</td>
+                    <td className="py-3.5 text-center text-slate-600">—</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold">Conector Power BI</td>
-                    <td className="py-3 text-center text-slate-300">—</td>
-                    <td className="py-3 text-center text-slate-300">—</td>
-                    <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 font-semibold">Conector Power BI</td>
+                    <td className="py-3.5 text-center text-slate-600">—</td>
+                    <td className="py-3.5 text-center text-slate-600">—</td>
+                    <td className="py-3.5 text-center text-emerald-400 font-bold">✓ Incluso</td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold">Agente de IA (Copiloto Clínico)</td>
-                    <td className="py-3 text-center text-slate-300">—</td>
-                    <td className="py-3 text-center text-slate-300">—</td>
-                    <td className="py-3 text-center text-indigo-600 font-bold">✓ Incluso</td>
+                    <td className="py-3.5 font-semibold">Agente de IA (Copiloto Clínico)</td>
+                    <td className="py-3.5 text-center text-slate-600">—</td>
+                    <td className="py-3.5 text-center text-slate-600">—</td>
+                    <td className="py-3.5 text-center text-indigo-400 font-bold">✓ Incluso</td>
                   </tr>
                 </tbody>
               </table>

@@ -22,7 +22,7 @@ export function TestimonialsSection() {
       rating: 5,
       specialty: "Psicologia & Terapia",
       avatarInitials: "MB",
-      avatarBg: "bg-emerald-700",
+      avatarBg: "bg-emerald-800",
     },
     {
       name: "Dra. Camila Nogueira",
@@ -31,22 +31,22 @@ export function TestimonialsSection() {
       rating: 5,
       specialty: "3 Unidades / 18 Profissionais",
       avatarInitials: "CN",
-      avatarBg: "bg-purple-700",
+      avatarBg: "bg-indigo-800",
     },
   ];
 
   return (
-    <section className="py-24 bg-[#f8fafc] relative overflow-hidden">
+    <section className="py-24 bg-[#06161c] text-white relative overflow-hidden border-t border-teal-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal-50 text-[#0d5c6b] border border-teal-200 text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal-500/10 text-teal-300 border border-teal-400/20 text-xs font-bold uppercase tracking-wider mb-3">
             <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
             Experiência Comprovada
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-display">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-display">
             Quem usa recomenda e não troca
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-slate-600">
+          <p className="mt-3 text-base sm:text-lg text-teal-100/70">
             Veja o que os profissionais e gestores de saúde relatam sobre a transformação da rotina em suas clínicas.
           </p>
         </div>
@@ -59,7 +59,7 @@ export function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="bg-white rounded-3xl p-7 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              className="bg-[#0b242d] rounded-3xl p-7 border border-teal-800/50 shadow-xl hover:border-teal-400/60 hover:shadow-teal-950/60 transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -68,23 +68,23 @@ export function TestimonialsSection() {
                       <Star key={idx} className="w-4 h-4 fill-amber-400" />
                     ))}
                   </div>
-                  <Quote className="w-6 h-6 text-slate-300" />
+                  <Quote className="w-6 h-6 text-teal-700/60" />
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic">
+                <p className="text-xs sm:text-sm text-teal-100/90 leading-relaxed italic">
                   &quot;{item.text}&quot;
                 </p>
               </div>
 
-              <div className="mt-6 pt-5 border-t border-slate-100 flex items-center gap-3">
-                <div className={`w-11 h-11 rounded-full ${item.avatarBg} text-white font-bold text-xs flex items-center justify-center shrink-0`}>
+              <div className="mt-6 pt-5 border-t border-teal-900/60 flex items-center gap-3">
+                <div className={`w-11 h-11 rounded-full ${item.avatarBg} text-white font-bold text-xs flex items-center justify-center shrink-0 border border-white/20`}>
                   {item.avatarInitials}
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900">{item.name}</h4>
-                  <p className="text-[11px] text-slate-500">{item.role}</p>
-                  <span className="inline-flex items-center gap-1 text-[10px] text-emerald-700 font-semibold mt-0.5">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                  <h4 className="text-xs font-bold text-white">{item.name}</h4>
+                  <p className="text-[11px] text-teal-300/70">{item.role}</p>
+                  <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400 font-semibold mt-0.5">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                     {item.specialty}
                   </span>
                 </div>

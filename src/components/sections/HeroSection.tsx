@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Sparkles,
   Calendar,
@@ -19,6 +19,10 @@ import {
   HeartHandshake,
   MessageCircle,
   Award,
+  ChevronRight,
+  Stethoscope,
+  FileText,
+  BadgeCheck,
 } from "lucide-react";
 
 interface HeroSectionProps {
@@ -26,254 +30,276 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ onOpenDemo }: HeroSectionProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<"agenda" | "financeiro" | "ia">("agenda");
   const [appointmentStatus, setAppointmentStatus] = useState<string>("Confirmado");
 
-  return (
-    <section className="relative pt-32 pb-20 lg:pt-36 lg:pb-32 overflow-hidden bg-gradient-to-b from-[#e7f2f4]/60 via-[#f8fafc] to-[#f8fafc]">
-      {/* Ambient background glows */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] pointer-events-none overflow-hidden -z-10">
-        <div className="absolute top-10 left-1/4 w-[500px] h-[350px] bg-gradient-to-tr from-[#0d5c6b]/15 to-[#2a9d8f]/10 rounded-full blur-3xl" />
-        <div className="absolute top-32 right-1/4 w-[450px] h-[300px] bg-gradient-to-bl from-[#e9c46a]/15 to-[#0d5c6b]/10 rounded-full blur-3xl" />
-      </div>
+  // Scroll Parallax & 3D Transform
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  const rotateX = useTransform(scrollYProgress, [0, 0.6], [12, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.6], [0.92, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.85]);
+  const yParallaxLeft = useTransform(scrollYProgress, [0, 0.8], [0, -60]);
+  const yParallaxRight = useTransform(scrollYProgress, [0, 0.8], [0, 60]);
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative pt-28 pb-24 lg:pt-36 lg:pb-36 overflow-hidden bg-gradient-to-b from-[#06161c] via-[#09222b] to-[#06161c] text-white"
+    >
+      {/* Cinematic Ambient Mesh & Aurora Background */}
+      <div className="absolute inset-0 bg-grid-pattern-dark pointer-events-none opacity-40" />
+      
+      {/* Glowing light cones */}
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-[#0d5c6b]/40 via-[#2a9d8f]/20 to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute top-1/3 left-10 w-[450px] h-[450px] bg-[#0d5c6b]/20 rounded-full blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute top-1/4 right-10 w-[450px] h-[450px] bg-[#2a9d8f]/15 rounded-full blur-[120px] pointer-events-none -z-10" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           {/* Top Pill / Badge */}
           <motion.div
-            initial={{ opacity: 0, y: -15 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white shadow-sm border border-teal-200/80 text-xs font-semibold text-[#0d5c6b] mb-6"
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-950/80 border border-teal-500/30 text-xs font-semibold text-teal-200 mb-8 backdrop-blur-xl shadow-lg shadow-teal-950/50"
           >
-            <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
-            <span className="flex h-2 w-2 rounded-full bg-emerald-500 -ml-3" />
-            <span className="font-bold">Clinic Manager 3.0</span>
-            <span className="text-slate-300">|</span>
-            <span className="text-slate-600 font-medium flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-amber-500" />
-              Gestão Clínica com Agente de IA & WhatsApp Integrado
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 -ml-3" />
+            <span className="font-bold text-white">Clinic Manager 3.0</span>
+            <span className="text-teal-700">|</span>
+            <span className="text-teal-200 font-medium flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              IA Integrada & Lembretes WhatsApp sem Bloqueio
             </span>
           </motion.div>
 
           {/* Main Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15] font-display"
+            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.1] font-display"
           >
-            A plataforma definitiva para clínicas que buscam{" "}
-            <span className="bg-gradient-to-r from-[#0d5c6b] via-[#2a9d8f] to-[#147a8d] bg-clip-text text-transparent underline decoration-[#e9c46a]/60 decoration-wavy decoration-2">
-              excelência operacional
-            </span>{" "}
-            e alta rentabilidade.
+            A gestão da sua clínica no{" "}
+            <span className="bg-gradient-to-r from-teal-300 via-emerald-400 to-[#e9c46a] bg-clip-text text-transparent underline decoration-[#2a9d8f]/50 decoration-wavy decoration-2">
+              piloto inteligente.
+            </span>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-normal"
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+            className="mt-6 text-lg sm:text-xl text-teal-100/80 max-w-3xl mx-auto leading-relaxed font-normal"
           >
-            Centralize <strong>agenda inteligente</strong>, <strong>prontuário eletrônico LGPD</strong>, <strong>faturamento de convênios TISS</strong>, <strong>fluxo financeiro</strong> e <strong>lembretes por WhatsApp</strong> em um único ecossistema fluido e sem complexidade.
+            Elimine 85% das faltas com confirmações no WhatsApp, atenda com prontuário eletrônico unificado e fature convênios TISS sem glosas em uma interface ultra-rápida.
           </motion.p>
 
-          {/* Call to Action Buttons */}
+          {/* Action CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
+            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+            className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <button
               onClick={onOpenDemo}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0d5c6b] to-[#0a4956] hover:from-[#094754] hover:to-[#07363f] text-white font-bold text-base flex items-center justify-center gap-3 shadow-xl shadow-teal-900/20 hover:shadow-2xl hover:scale-[1.02] transition-all group active:scale-95"
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0d5c6b] via-[#2a9d8f] to-[#147a8d] hover:brightness-110 text-white font-bold text-base flex items-center justify-center gap-3 shadow-xl shadow-teal-900/40 hover:shadow-teal-500/20 hover:scale-[1.02] transition-all group active:scale-95 border border-teal-300/30"
             >
-              <span>Experimentar Grátis por 14 Dias</span>
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1 text-teal-300" />
+              <span>Começar Teste Gratuito de 14 Dias</span>
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1 text-teal-200" />
             </button>
 
             <a
               href="#planos"
-              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-slate-50 text-slate-700 font-bold text-base border border-slate-200 shadow-sm flex items-center justify-center gap-2 transition-all hover:border-slate-300"
+              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-base border border-white/15 backdrop-blur-md shadow-sm flex items-center justify-center gap-2 transition-all"
             >
               <span>Ver Tabela de Planos</span>
+              <ChevronRight className="w-4 h-4 text-teal-300" />
             </a>
           </motion.div>
 
-          {/* Trust Value Badges */}
+          {/* Value Badges */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs font-semibold text-slate-500"
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs font-semibold text-teal-200/70"
           >
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              Sem taxa de instalação
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              Sem taxa de adesão
             </span>
             <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-[#0d5c6b]" />
-              Conformidade LGPD & CFM/CFP
+              <ShieldCheck className="w-4 h-4 text-teal-300" />
+              100% Conforme LGPD & CFM
             </span>
             <span className="flex items-center gap-1.5">
-              <Zap className="w-4 h-4 text-amber-500" />
-              Setup rápido em menos de 24h
+              <Zap className="w-4 h-4 text-amber-400" />
+              Setup imediato em 24h
             </span>
             <span className="flex items-center gap-1.5">
-              <HeartHandshake className="w-4 h-4 text-rose-500" />
-              Suporte VIP humanizado
+              <HeartHandshake className="w-4 h-4 text-rose-400" />
+              Migração de dados gratuita
             </span>
           </motion.div>
         </div>
 
         {/* ========================================================================= */}
-        {/* Interactive Dashboard Mockup & Live Experience Showcase */}
+        {/* Scroll-Driven 3D Perspective Interactive Dashboard Cockpit */}
         {/* ========================================================================= */}
         <motion.div
-          initial={{ opacity: 0, y: 40, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.35, ease: "easeOut" }}
-          className="mt-14 relative max-w-5xl mx-auto"
+          style={{
+            rotateX,
+            scale,
+            opacity,
+            transformPerspective: 1200,
+          }}
+          className="mt-16 relative max-w-5xl mx-auto perspective-1200"
         >
-          {/* Decorative Backing Frame */}
-          <div className="absolute -inset-1.5 bg-gradient-to-r from-[#0d5c6b] via-[#2a9d8f] to-[#e9c46a] rounded-3xl blur opacity-30 group-hover:opacity-100 transition duration-1000 -z-10" />
+          {/* Ambient Glow behind Cockpit */}
+          <div className="absolute -inset-2 bg-gradient-to-r from-[#0d5c6b] via-[#2a9d8f] to-[#e9c46a] rounded-3xl blur-2xl opacity-40 -z-10" />
 
           {/* Main Dashboard Window */}
-          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200/90 overflow-hidden">
-            {/* Window Browser Header */}
-            <div className="bg-slate-900 px-4 py-3 flex items-center justify-between text-slate-400 text-xs border-b border-slate-800">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
-                <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-                <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-                <span className="ml-3 font-mono text-[11px] text-slate-400 hidden sm:inline">
-                  https://app.clinicmanager.com.br/dashboard
+          <div className="bg-[#0b242d]/95 backdrop-blur-2xl rounded-3xl border border-teal-500/30 shadow-2xl shadow-black/80 overflow-hidden">
+            {/* Top Browser Bar */}
+            <div className="bg-[#071a20] px-5 py-3.5 flex items-center justify-between border-b border-teal-900/70">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
+                  <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
+                  <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
+                </div>
+                <span className="font-mono text-xs text-teal-300/80 bg-teal-950/60 px-3 py-1 rounded-lg border border-teal-800/40 hidden sm:inline">
+                  https://app.clinicmanager.com.br/painel-clinico
                 </span>
               </div>
 
-              {/* Live Interactive Tab Switcher in the browser bar */}
-              <div className="flex items-center gap-1 bg-slate-800 p-0.5 rounded-lg">
+              {/* Interactive Module Tabs */}
+              <div className="flex items-center gap-1 bg-teal-950/80 p-1 rounded-xl border border-teal-800/40">
                 <button
                   onClick={() => setActiveTab("agenda")}
-                  className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
                     activeTab === "agenda"
-                      ? "bg-[#0d5c6b] text-white"
-                      : "text-slate-400 hover:text-slate-200"
+                      ? "bg-[#0d5c6b] text-white shadow-md shadow-teal-900/60"
+                      : "text-teal-300/80 hover:text-white"
                   }`}
                 >
-                  Agenda ao Vivo
+                  ⚡ Agenda ao Vivo
                 </button>
                 <button
                   onClick={() => setActiveTab("financeiro")}
-                  className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
                     activeTab === "financeiro"
-                      ? "bg-[#0d5c6b] text-white"
-                      : "text-slate-400 hover:text-slate-200"
+                      ? "bg-[#0d5c6b] text-white shadow-md shadow-teal-900/60"
+                      : "text-teal-300/80 hover:text-white"
                   }`}
                 >
-                  Financeiro TISS
+                  💰 Financeiro TISS
                 </button>
                 <button
                   onClick={() => setActiveTab("ia")}
-                  className={`px-3 py-1 rounded-md text-xs font-medium transition-colors flex items-center gap-1 ${
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
                     activeTab === "ia"
-                      ? "bg-indigo-600 text-white"
-                      : "text-slate-400 hover:text-slate-200"
+                      ? "bg-indigo-600 text-white shadow-md shadow-indigo-900/60"
+                      : "text-teal-300/80 hover:text-white"
                   }`}
                 >
                   <Sparkles className="w-3 h-3 text-amber-300" />
-                  Agente IA
+                  🤖 Agente IA
                 </button>
               </div>
             </div>
 
-            {/* Dashboard Inner Body */}
-            <div className="p-4 sm:p-6 bg-[#f8fafc]">
-              {/* Top Quick Metrics */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-5">
-                <div className="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-sm">
-                  <div className="flex items-center justify-between text-slate-500 text-xs">
+            {/* Inner Dashboard Body */}
+            <div className="p-5 sm:p-7 bg-gradient-to-b from-[#0a232b] to-[#071b22]">
+              {/* Metrics Row */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
+                <div className="p-4 rounded-2xl bg-teal-950/50 border border-teal-800/40">
+                  <div className="flex items-center justify-between text-teal-300/80 text-xs">
                     <span>Consultas Hoje</span>
-                    <Calendar className="w-4 h-4 text-[#0d5c6b]" />
+                    <Calendar className="w-4 h-4 text-teal-400" />
                   </div>
-                  <div className="text-xl font-bold text-slate-900 mt-1 font-display">28 atendimentos</div>
-                  <div className="text-[11px] text-emerald-600 font-semibold mt-0.5 flex items-center gap-1">
-                    <TrendingUp className="w-3 h-3" /> 96% de presença confirmada
+                  <div className="text-2xl font-black text-white mt-1 font-display">28 agendadas</div>
+                  <div className="text-[11px] text-emerald-400 font-bold mt-1 flex items-center gap-1">
+                    <TrendingUp className="w-3 h-3" /> 96% confirmadas
                   </div>
                 </div>
 
-                <div className="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-sm">
-                  <div className="flex items-center justify-between text-slate-500 text-xs">
-                    <span>Receita do Mês</span>
-                    <DollarSign className="w-4 h-4 text-emerald-600" />
+                <div className="p-4 rounded-2xl bg-teal-950/50 border border-teal-800/40">
+                  <div className="flex items-center justify-between text-teal-300/80 text-xs">
+                    <span>Faturamento do Mês</span>
+                    <DollarSign className="w-4 h-4 text-emerald-400" />
                   </div>
-                  <div className="text-xl font-bold text-slate-900 mt-1 font-display">R$ 54.890</div>
-                  <div className="text-[11px] text-emerald-600 font-semibold mt-0.5">
+                  <div className="text-2xl font-black text-white mt-1 font-display">R$ 54.890</div>
+                  <div className="text-[11px] text-emerald-400 font-bold mt-1">
                     +24% vs mês anterior
                   </div>
                 </div>
 
-                <div className="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-sm">
-                  <div className="flex items-center justify-between text-slate-500 text-xs">
-                    <span>No-Show (Faltas)</span>
-                    <Activity className="w-4 h-4 text-amber-500" />
+                <div className="p-4 rounded-2xl bg-teal-950/50 border border-teal-800/40">
+                  <div className="flex items-center justify-between text-teal-300/80 text-xs">
+                    <span>Taxa de No-Show</span>
+                    <Activity className="w-4 h-4 text-amber-400" />
                   </div>
-                  <div className="text-xl font-bold text-emerald-700 mt-1 font-display">3.8%</div>
-                  <div className="text-[11px] text-slate-500 mt-0.5">
-                    (Média nacional: 25%)
+                  <div className="text-2xl font-black text-emerald-400 mt-1 font-display">3.8%</div>
+                  <div className="text-[11px] text-teal-300/70 mt-1">
+                    Média Brasil: 25%
                   </div>
                 </div>
 
-                <div className="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-sm">
-                  <div className="flex items-center justify-between text-slate-500 text-xs">
-                    <span>Lembretes WhatsApp</span>
-                    <MessageCircle className="w-4 h-4 text-emerald-500" />
+                <div className="p-4 rounded-2xl bg-teal-950/50 border border-teal-800/40">
+                  <div className="flex items-center justify-between text-teal-300/80 text-xs">
+                    <span>WhatsApp Automático</span>
+                    <MessageCircle className="w-4 h-4 text-emerald-400" />
                   </div>
-                  <div className="text-xl font-bold text-slate-900 mt-1 font-display">142 enviados</div>
-                  <div className="text-[11px] text-teal-700 font-medium mt-0.5">
-                    100% automatizados
+                  <div className="text-2xl font-black text-white mt-1 font-display">142 enviados</div>
+                  <div className="text-[11px] text-teal-300 font-medium mt-1">
+                    0 bloqueios (API Oficial)
                   </div>
                 </div>
               </div>
 
-              {/* Dynamic Tab Content */}
+              {/* Dynamic Tab Body */}
               {activeTab === "agenda" && (
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                  {/* Interactive Agenda Card */}
-                  <div className="lg:col-span-2 bg-white rounded-xl p-4 sm:p-5 border border-slate-200 shadow-sm">
-                    <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                  <div className="lg:col-span-2 p-5 rounded-2xl bg-teal-950/70 border border-teal-800/50">
+                    <div className="flex items-center justify-between pb-3 mb-4 border-b border-teal-800/60">
                       <div>
-                        <h4 className="font-bold text-slate-900 text-sm flex items-center gap-2">
-                          <Clock className="w-4 h-4 text-[#0d5c6b]" />
-                          Grade de Atendimentos — Sala 02 (Dra. Helena Vaz)
+                        <h4 className="font-bold text-white text-sm flex items-center gap-2">
+                          <Clock className="w-4 h-4 text-teal-400" />
+                          Consultas da Tarde · Sala 02 (Dra. Helena Vaz)
                         </h4>
-                        <p className="text-xs text-slate-500">
-                          Horários sincronizados em tempo real com WhatsApp e Recepção
+                        <p className="text-xs text-teal-300/70">
+                          Clique no status para simular a chegada do paciente na recepção
                         </p>
                       </div>
-                      <span className="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full text-xs font-semibold">
-                        Ao Vivo
+                      <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold">
+                        ● Ao Vivo
                       </span>
                     </div>
 
-                    <div className="space-y-2.5">
-                      {/* Item 1 - Interactive */}
-                      <div className="p-3 rounded-xl bg-teal-50/50 border border-teal-200/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="space-y-3">
+                      {/* Interactive Item 1 */}
+                      <div className="p-3.5 rounded-xl bg-teal-900/60 border border-teal-600/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-[#0d5c6b] text-white flex items-center justify-center font-bold text-xs">
+                          <div className="w-10 h-10 rounded-full bg-[#0d5c6b] text-white flex items-center justify-center font-bold text-xs border border-teal-400/40">
                             MC
                           </div>
                           <div>
-                            <div className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                            <div className="text-xs font-bold text-white flex items-center gap-2">
                               Marcos Castro
-                              <span className="px-2 py-0.5 rounded-md bg-white text-teal-800 text-[10px] font-semibold border border-teal-200">
-                                Unimed · Consulta Geral
+                              <span className="px-2 py-0.5 rounded-md bg-teal-800/80 text-teal-200 text-[10px] font-semibold">
+                                Unimed · Retorno
                               </span>
                             </div>
-                            <div className="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
+                            <div className="text-[11px] text-teal-300/80 flex items-center gap-2 mt-0.5">
                               <span>🕒 14:00 - 14:45</span>
                               <span>•</span>
                               <span>Prontuário #4092</span>
@@ -282,23 +308,15 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
                         </div>
 
                         <div className="flex items-center gap-2">
-                          <div className="text-xs font-semibold text-slate-600">Status:</div>
+                          <span className="text-xs text-teal-300 font-semibold">Status:</span>
                           <select
                             value={appointmentStatus}
                             onChange={(e) => setAppointmentStatus(e.target.value)}
                             aria-label="Status do atendimento de Marcos Castro"
-                            className={`text-xs font-bold px-2.5 py-1 rounded-lg border focus:outline-none transition-colors ${
-                              appointmentStatus === "Confirmado"
-                                ? "bg-emerald-100 text-emerald-800 border-emerald-300"
-                                : appointmentStatus === "Em Atendimento"
-                                ? "bg-blue-100 text-blue-800 border-blue-300"
-                                : appointmentStatus === "Finalizado"
-                                ? "bg-slate-100 text-slate-700 border-slate-300"
-                                : "bg-amber-100 text-amber-800 border-amber-300"
-                            }`}
+                            className="text-xs font-bold px-3 py-1.5 rounded-lg bg-[#071f26] text-emerald-300 border border-teal-500/50 focus:outline-none cursor-pointer"
                           >
                             <option value="Confirmado">✅ Confirmado (Zap)</option>
-                            <option value="Em Espera">⏳ Na Recepção</option>
+                            <option value="Na Recepção">⏳ Na Recepção</option>
                             <option value="Em Atendimento">🩺 Em Consulta</option>
                             <option value="Finalizado">🏁 Concluído</option>
                           </select>
@@ -306,19 +324,19 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
                       </div>
 
                       {/* Item 2 */}
-                      <div className="p-3 rounded-xl bg-white border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 opacity-90">
+                      <div className="p-3.5 rounded-xl bg-teal-950/40 border border-teal-800/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 opacity-90">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-xs">
+                          <div className="w-10 h-10 rounded-full bg-purple-900/80 text-purple-200 flex items-center justify-center font-bold text-xs border border-purple-500/40">
                             AS
                           </div>
                           <div>
-                            <div className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                            <div className="text-xs font-bold text-white flex items-center gap-2">
                               Aline Silveira
-                              <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[10px] font-semibold">
-                                Particular · PIX Pago
+                              <span className="px-2 py-0.5 rounded-md bg-emerald-950/80 text-emerald-300 text-[10px] font-semibold border border-emerald-500/30">
+                                Particular · PIX Pago R$ 280
                               </span>
                             </div>
-                            <div className="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
+                            <div className="text-[11px] text-teal-300/80 flex items-center gap-2 mt-0.5">
                               <span>🕒 15:00 - 15:50</span>
                               <span>•</span>
                               <span>Sessão Terapia #12</span>
@@ -326,61 +344,35 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
                           </div>
                         </div>
 
-                        <span className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold self-start sm:self-auto">
+                        <span className="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold self-start sm:self-auto">
                           ✅ Confirmado (WhatsApp)
-                        </span>
-                      </div>
-
-                      {/* Item 3 */}
-                      <div className="p-3 rounded-xl bg-white border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 opacity-75">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs">
-                            RF
-                          </div>
-                          <div>
-                            <div className="text-xs font-bold text-slate-900 flex items-center gap-2">
-                              Rodrigo Ferreira
-                              <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[10px] font-semibold">
-                                Bradesco Saúde · Retorno
-                              </span>
-                            </div>
-                            <div className="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                              <span>🕒 16:00 - 16:30</span>
-                              <span>•</span>
-                              <span>Anamnese Atualizada</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <span className="px-2.5 py-1 rounded-lg bg-teal-50 text-[#0d5c6b] border border-teal-200 text-xs font-semibold self-start sm:self-auto">
-                          💬 Lembrete Enviado
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  {/* WhatsApp Bot Real-time Feed Simulation */}
-                  <div className="bg-gradient-to-b from-[#0c3f4a] to-[#07242b] rounded-xl p-4 text-white flex flex-col justify-between shadow-sm">
+                  {/* WhatsApp Live Feed Card */}
+                  <div className="p-5 rounded-2xl bg-gradient-to-b from-[#09303a] to-[#061e24] border border-teal-700/50 flex flex-col justify-between shadow-lg">
                     <div>
-                      <div className="flex items-center justify-between border-b border-teal-800/80 pb-3 mb-3">
+                      <div className="flex items-center justify-between pb-3 mb-3 border-b border-teal-800/80">
                         <div className="flex items-center gap-2">
                           <MessageCircle className="w-4 h-4 text-emerald-400" />
-                          <span className="font-bold text-xs">Robô WhatsApp Ativo</span>
+                          <span className="font-bold text-xs text-white">Robô WhatsApp Ativo</span>
                         </div>
                         <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
                       </div>
 
                       <div className="space-y-2.5 text-xs">
-                        <div className="bg-teal-900/60 p-2.5 rounded-xl border border-teal-700/50">
+                        <div className="bg-teal-950/80 p-3 rounded-xl border border-teal-700/40">
                           <div className="text-[10px] text-emerald-300 font-semibold">
-                            Lembrete automático · 13:42
+                            Disparo Automático · 13:42
                           </div>
                           <p className="text-teal-100 mt-1">
                             &quot;Olá Marcos! Confirmamos sua consulta hoje às 14h com Dra. Helena?&quot;
                           </p>
                         </div>
 
-                        <div className="bg-emerald-950/70 p-2.5 rounded-xl border border-emerald-600/40 text-emerald-200">
+                        <div className="bg-emerald-950/90 p-3 rounded-xl border border-emerald-600/50 text-emerald-200">
                           <div className="text-[10px] text-emerald-400 font-semibold">
                             Resposta do Paciente · 13:45
                           </div>
@@ -398,120 +390,100 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
               )}
 
               {activeTab === "financeiro" && (
-                <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100">
+                <div className="p-6 rounded-2xl bg-teal-950/70 border border-teal-800/50">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-teal-800/60">
                     <div>
-                      <h4 className="font-bold text-slate-900 text-sm">
-                        Conciliação Financeira & Faturamento de Lotes TISS
+                      <h4 className="font-bold text-white text-base">
+                        Faturamento de Lotes TISS & Conciliação PIX
                       </h4>
-                      <p className="text-xs text-slate-500">
-                        Zero glosas com validação prévia de carteirinhas e guias de autorização
+                      <p className="text-xs text-teal-300/80">
+                        Zero glosas com validação de carteirinhas e guias de autorização
                       </p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold rounded-lg">
-                        Lote #08/2026 Aprovado
-                      </span>
-                    </div>
+                    <span className="px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold rounded-lg self-start sm:self-auto">
+                      Lote #08/2026 Aprovado
+                    </span>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                      <div className="text-xs text-slate-500">Convênios a Faturar</div>
-                      <div className="text-2xl font-bold text-slate-900 mt-1 font-display">R$ 38.450,00</div>
-                      <div className="text-[11px] text-slate-600 mt-1">42 guias TISS prontas para envio XML</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="p-4 rounded-xl bg-[#08222b] border border-teal-800/50">
+                      <div className="text-xs text-teal-300">Convênios a Faturar</div>
+                      <div className="text-2xl font-black text-white mt-1">R$ 38.450,00</div>
+                      <div className="text-[11px] text-emerald-400 mt-1 font-semibold">42 guias TISS prontas para XML</div>
                     </div>
-
-                    <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                      <div className="text-xs text-slate-500">Particular & PIX Instantâneo</div>
-                      <div className="text-2xl font-bold text-emerald-600 mt-1 font-display">R$ 16.440,00</div>
-                      <div className="text-[11px] text-emerald-700 mt-1">100% conciliado automaticamente</div>
+                    <div className="p-4 rounded-xl bg-[#08222b] border border-teal-800/50">
+                      <div className="text-xs text-teal-300">Particular & PIX</div>
+                      <div className="text-2xl font-black text-emerald-400 mt-1">R$ 16.440,00</div>
+                      <div className="text-[11px] text-emerald-400 mt-1 font-semibold">100% conciliado instantaneamente</div>
                     </div>
-
-                    <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                      <div className="text-xs text-slate-500">Repasses Médicos Programados</div>
-                      <div className="text-2xl font-bold text-[#0d5c6b] mt-1 font-display">R$ 27.180,00</div>
-                      <div className="text-[11px] text-slate-600 mt-1">Cálculo de comissões por profissional</div>
+                    <div className="p-4 rounded-xl bg-[#08222b] border border-teal-800/50">
+                      <div className="text-xs text-teal-300">Repasses Médicos</div>
+                      <div className="text-2xl font-black text-teal-300 mt-1">R$ 27.180,00</div>
+                      <div className="text-[11px] text-teal-200 mt-1 font-semibold">Cálculo de comissões por profissional</div>
                     </div>
                   </div>
                 </div>
               )}
 
               {activeTab === "ia" && (
-                <div className="bg-gradient-to-br from-indigo-950 via-slate-900 to-[#0c3f4a] rounded-xl p-5 text-white shadow-sm">
-                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-indigo-800/60">
-                    <div className="flex items-center gap-2">
-                      <div className="p-1.5 rounded-lg bg-indigo-500/20 text-indigo-300">
-                        <Bot className="w-5 h-5" />
+                <div className="p-6 rounded-2xl bg-gradient-to-br from-indigo-950/80 via-[#0a232b] to-[#071b22] border border-indigo-500/40">
+                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-indigo-800/60">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-xl bg-indigo-600/30 text-indigo-300 border border-indigo-400/40">
+                        <Bot className="w-6 h-6" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-sm text-white flex items-center gap-2">
-                          Clinic AI Assistant
-                          <span className="px-2 py-0.5 rounded-md bg-indigo-500/30 text-indigo-200 text-[10px] font-semibold border border-indigo-400/30">
-                            Modelo Clínico Especializado
-                          </span>
+                        <h4 className="font-bold text-white text-base">
+                          Clinic AI Copilot — Assistente Clínico
                         </h4>
-                        <p className="text-xs text-indigo-200">
-                          Sumarização de prontuários, transcrição de áudio e insights operacionais
+                        <p className="text-xs text-indigo-200/80">
+                          Sumarização de prontuários, transcrição de voz e insights preditivos
                         </p>
                       </div>
                     </div>
-                    <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-400/30">
+                    <span className="text-xs px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-400/30">
                       Pronto para Análise
                     </span>
                   </div>
 
-                  <div className="space-y-3">
-                    <div className="p-3 rounded-xl bg-slate-800/80 border border-indigo-700/40 text-xs">
-                      <div className="text-indigo-300 font-semibold mb-1 flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                        Sumarização de Evolução Clínica (Consulta de 45 min):
-                      </div>
-                      <p className="text-slate-200 leading-relaxed">
-                        &quot;Paciente relata melhora de 60% nos episódios de ansiedade após introdução do protocolo comportamental. Sono regularizado. Prescrição de apoio mantida por mais 30 dias. Próximo retorno agendado em 4 semanas.&quot;
-                      </p>
+                  <div className="p-4 rounded-xl bg-slate-950/70 border border-indigo-700/40 text-xs space-y-2">
+                    <div className="text-indigo-300 font-bold flex items-center gap-1.5">
+                      <Sparkles className="w-4 h-4 text-amber-300" />
+                      Evolução Clínica Estruturada com 1 Clique:
                     </div>
-
-                    <div className="flex flex-wrap items-center gap-2 text-[11px] text-indigo-200">
-                      <span className="px-3 py-1 rounded-lg bg-indigo-900/50 border border-indigo-700/50">
-                        ⚡ Economia de 8 minutos por atendimento
-                      </span>
-                      <span className="px-3 py-1 rounded-lg bg-indigo-900/50 border border-indigo-700/50">
-                        🔒 Sem compartilhamento externo de dados
-                      </span>
-                    </div>
+                    <p className="text-slate-200 leading-relaxed font-mono">
+                      &quot;Paciente relata melhora de 60% nos episódios de ansiedade após adesão ao protocolo comportamental. Sono regularizado. Prescrição de apoio mantida por 30 dias. Retorno agendado.&quot;
+                    </p>
                   </div>
                 </div>
               )}
             </div>
           </div>
 
-          {/* Floating Callout Badges with Dynamic Micro-animations */}
+          {/* Floating Parallax Badges */}
           <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-6 -left-6 sm:-left-8 bg-white p-3.5 rounded-2xl shadow-xl border border-slate-200/80 hidden md:flex items-center gap-3"
+            style={{ y: yParallaxLeft }}
+            className="absolute -top-6 -left-6 sm:-left-10 p-4 rounded-2xl bg-[#0d343f]/90 border border-teal-400/40 text-white shadow-2xl backdrop-blur-xl hidden md:flex items-center gap-3 animate-float-subtle"
           >
-            <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-400/30">
               <MessageCircle className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-xs font-bold text-slate-900">-85% Faltas e No-Show</div>
-              <div className="text-[10px] text-slate-500">Confirmação automática no WhatsApp</div>
+              <div className="text-xs font-bold text-white">-85% Faltas e No-Show</div>
+              <div className="text-[10px] text-teal-300">Confirmação automática WhatsApp</div>
             </div>
           </motion.div>
 
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute -bottom-6 -right-6 sm:-right-8 bg-white p-3.5 rounded-2xl shadow-xl border border-slate-200/80 hidden md:flex items-center gap-3"
+            style={{ y: yParallaxRight }}
+            className="absolute -bottom-6 -right-6 sm:-right-10 p-4 rounded-2xl bg-[#0d343f]/90 border border-teal-400/40 text-white shadow-2xl backdrop-blur-xl hidden md:flex items-center gap-3 animate-float-delayed"
           >
-            <div className="w-10 h-10 rounded-xl bg-[#0d5c6b]/10 text-[#0d5c6b] flex items-center justify-center">
-              <ShieldCheck className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center border border-amber-400/30">
+              <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-xs font-bold text-slate-900">100% Seguro & LGPD</div>
-              <div className="text-[10px] text-slate-500">Criptografia bancária de ponta a ponta</div>
+              <div className="text-xs font-bold text-white">IA Clínica Especializada</div>
+              <div className="text-[10px] text-teal-300">Evoluções médicas em 1 clique</div>
             </div>
           </motion.div>
         </motion.div>

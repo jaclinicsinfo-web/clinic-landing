@@ -41,17 +41,17 @@ export function FaqSection() {
   ];
 
   return (
-    <section id="faq" className="py-24 bg-white relative">
+    <section id="faq" className="py-24 bg-[#06161c] text-white relative border-t border-teal-950">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal-50 text-[#0d5c6b] border border-teal-200 text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal-500/10 text-teal-300 border border-teal-400/20 text-xs font-bold uppercase tracking-wider mb-3">
             <HelpCircle className="w-3.5 h-3.5" />
             Tire Suas Dúvidas
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-display">
             Perguntas Frequentes
           </h2>
-          <p className="mt-3 text-base text-slate-600">
+          <p className="mt-3 text-base text-teal-100/70">
             Tudo o que você precisa saber para começar a usar o Clinic Manager hoje mesmo.
           </p>
         </div>
@@ -62,18 +62,18 @@ export function FaqSection() {
             return (
               <div
                 key={faq.question}
-                className="rounded-2xl border border-slate-200/90 overflow-hidden bg-slate-50/50 transition-colors"
+                className="rounded-2xl border border-teal-800/50 overflow-hidden bg-[#0b242d] transition-colors"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none"
                 >
-                  <span className="text-sm sm:text-base font-bold text-slate-900 font-display">
+                  <span className="text-sm sm:text-base font-bold text-white font-display">
                     {faq.question}
                   </span>
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
-                      isOpen ? "bg-[#0d5c6b] text-white rotate-180" : "bg-slate-200/70 text-slate-600"
+                      isOpen ? "bg-[#0d5c6b] text-white rotate-180" : "bg-teal-950 text-teal-300"
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -88,7 +88,7 @@ export function FaqSection() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/60">
+                      <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-teal-100/80 leading-relaxed border-t border-teal-900/60">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -99,17 +99,17 @@ export function FaqSection() {
           })}
         </div>
 
-        {/* Still have questions banner */}
-        <div className="mt-12 p-6 rounded-2xl bg-teal-50/80 border border-teal-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        {/* WhatsApp support callout */}
+        <div className="mt-12 p-6 rounded-2xl bg-teal-950/60 border border-teal-700/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div>
-            <h4 className="text-sm font-bold text-slate-900">Ainda tem alguma dúvida específica?</h4>
-            <p className="text-xs text-slate-600 mt-0.5">Nossa equipe de consultores responde em menos de 5 minutos.</p>
+            <h4 className="text-sm font-bold text-white">Ainda tem alguma dúvida específica?</h4>
+            <p className="text-xs text-teal-200/70 mt-0.5">Nossa equipe de consultores responde em menos de 5 minutos.</p>
           </div>
           <a
             href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20Clinic%20Manager"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 rounded-xl bg-[#0d5c6b] hover:bg-[#094754] text-white font-bold text-xs flex items-center gap-2 shadow-md transition-all shrink-0"
+            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold text-xs flex items-center gap-2 shadow-md transition-all shrink-0 hover:brightness-110"
           >
             <MessageSquare className="w-4 h-4" />
             Falar no WhatsApp

@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ScrollProgressBar } from "@/components/layout/ScrollProgressBar";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { SocialProofSection } from "@/components/sections/SocialProofSection";
+import { ScrollJourneySection } from "@/components/sections/ScrollJourneySection";
 import { ModulesBentoSection } from "@/components/sections/ModulesBentoSection";
 import { InteractiveDemoSection } from "@/components/sections/InteractiveDemoSection";
 import { RoiCalculatorSection } from "@/components/sections/RoiCalculatorSection";
@@ -39,7 +40,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen relative flex flex-col">
+    <main className="min-h-screen relative flex flex-col bg-[#06161c]">
       {/* Top Scroll Indicator */}
       <ScrollProgressBar />
 
@@ -49,6 +50,7 @@ export default function Home() {
       {/* Page Sections */}
       <HeroSection onOpenDemo={() => setDemoModalOpen(true)} />
       <SocialProofSection />
+      <ScrollJourneySection />
       <ModulesBentoSection />
       <InteractiveDemoSection />
       <RoiCalculatorSection onOpenDemo={() => setDemoModalOpen(true)} />
@@ -67,10 +69,10 @@ export default function Home() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Falar no WhatsApp"
-        className="fixed bottom-6 right-6 z-30 w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all group"
+        className="fixed bottom-6 right-6 z-30 w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all group border border-emerald-300/40"
       >
         <MessageCircle className="w-7 h-7" />
-        <span className="absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+        <span className="absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-slate-700">
           Fale com um Especialista
         </span>
       </a>
