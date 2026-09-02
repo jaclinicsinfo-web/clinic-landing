@@ -77,7 +77,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
             className="text-4xl sm:text-6xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12] font-display"
           >
             A plataforma definitiva para clínicas que buscam{" "}
-            <span className="bg-gradient-to-r from-[#0d5c6b] via-[#107082] to-[#2a9d8f] bg-clip-text text-transparent underline decoration-[#e9c46a]/60 decoration-wavy decoration-2">
+            <span className="bg-gradient-to-r from-[#0d5c6b] via-[#107082] to-[#2a9d8f] bg-clip-text text-transparent">
               excelência operacional
             </span>{" "}
             e alta rentabilidade.
