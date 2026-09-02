@@ -2,16 +2,17 @@
 
 @layer base {
   :root {
-    --background: #081a20;
-    --foreground: #f1f7f9;
+    --background: #f8fafc;
+    --foreground: #0f172a;
     --primary: #0d5c6b;
-    --primary-hover: #0a4956;
+    --primary-hover: #094754;
     --primary-subtle: #e7f2f4;
-    --primary-glow: rgba(13, 92, 107, 0.4);
+    --primary-glow: rgba(13, 92, 107, 0.15);
     
-    --card: #0c2b34;
-    --card-foreground: #f1f7f9;
-    --border: rgba(255, 255, 255, 0.1);
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+    --border: #e2e8f0;
+    --border-subtle: rgba(226, 232, 240, 0.8);
     
     --accent-teal: #2a9d8f;
     --accent-gold: #f59e0b;
@@ -24,19 +25,19 @@
   }
 
   body {
-    background-color: #06161c;
-    color: #f1f7f9;
+    background-color: var(--background);
+    color: var(--foreground);
     font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
   }
 
   ::selection {
-    background: #2a9d8f;
+    background: #0d5c6b;
     color: #ffffff;
   }
 }
 
-/* Custom 3D & Modern SaaS Animations */
+/* 3D & Smooth Modern SaaS Animations */
 .perspective-1000 {
   perspective: 1000px;
 }
@@ -49,73 +50,57 @@
   transform-style: preserve-3d;
 }
 
-.bg-grid-pattern-dark {
-  background-size: 40px 40px;
+.bg-grid-pattern {
+  background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(13, 92, 107, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(13, 92, 107, 0.04) 1px, transparent 1px);
 }
 
-.bg-radial-gradient {
-  background: radial-gradient(circle at 50% 0%, rgba(13, 92, 107, 0.35) 0%, rgba(6, 22, 28, 0.8) 70%, #06161c 100%);
+.bg-grid-pattern-dark {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
 }
 
-.glass-card {
-  background: rgba(12, 43, 52, 0.65);
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.glassmorphism-dark {
+  background: rgba(12, 38, 47, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.glass-card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.glass-card-hover:hover {
-  background: rgba(14, 52, 64, 0.8);
-  border-color: rgba(42, 157, 143, 0.4);
-  box-shadow: 0 20px 40px -15px rgba(13, 92, 107, 0.3);
-  transform: translateY(-4px);
-}
-
-.glow-teal-subtle {
-  box-shadow: 0 0 60px -15px rgba(42, 157, 143, 0.3);
+.glow-teal-soft {
+  box-shadow: 0 10px 40px -10px rgba(13, 92, 107, 0.12);
 }
 
 .glow-teal-lg {
-  box-shadow: 0 0 100px -20px rgba(13, 92, 107, 0.5);
+  box-shadow: 0 20px 60px -15px rgba(13, 92, 107, 0.25);
 }
 
-/* Animated Shimmer / Border Beam */
-@keyframes border-beam {
-  0% {
-    offset-distance: 0%;
-  }
-  100% {
-    offset-distance: 100%;
-  }
+/* Card Hover Elevation */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-@keyframes gradient-x {
-  0%, 100% {
-    background-size: 200% 200%;
-    background-position: left center;
-  }
-  50% {
-    background-size: 200% 200%;
-    background-position: right center;
-  }
-}
-
-.animate-gradient-x {
-  animation: gradient-x 6s ease infinite;
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.08);
 }
 
 @keyframes float-subtle {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px) rotate(0.5deg);
+    transform: translateY(-8px);
   }
 }
 
@@ -124,7 +109,7 @@
 }
 
 .animate-float-delayed {
-  animation: float-subtle 6s ease-in-out infinite 2.5s;
+  animation: float-subtle 6s ease-in-out infinite 2s;
 }
 
 /* Custom Scrollbar */
@@ -133,14 +118,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #06161c;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #143e4b;
+  background: #cbd5e1;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2a9d8f;
+  background: #0d5c6b;
 }

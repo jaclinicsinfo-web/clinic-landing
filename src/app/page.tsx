@@ -40,7 +40,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen relative flex flex-col bg-[#06161c]">
+    <main className="min-h-screen relative flex flex-col bg-[#f8fafc] text-slate-900 selection:bg-[#0d5c6b] selection:text-white">
       {/* Top Scroll Indicator */}
       <ScrollProgressBar />
 
@@ -69,10 +69,10 @@ export default function Home() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Falar no WhatsApp"
-        className="fixed bottom-6 right-6 z-30 w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all group border border-emerald-300/40"
+        className="fixed bottom-6 right-6 z-30 w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all group border-2 border-white"
       >
         <MessageCircle className="w-7 h-7" />
-        <span className="absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-slate-700">
+        <span className="absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
           Fale com um Especialista
         </span>
       </a>

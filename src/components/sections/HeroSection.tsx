@@ -15,14 +15,9 @@ import {
   Users,
   DollarSign,
   Activity,
-  Play,
   HeartHandshake,
   MessageCircle,
-  Award,
   ChevronRight,
-  Stethoscope,
-  FileText,
-  BadgeCheck,
 } from "lucide-react";
 
 interface HeroSectionProps {
@@ -41,87 +36,84 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
   });
 
   const rotateX = useTransform(scrollYProgress, [0, 0.6], [12, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.6], [0.92, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.85]);
-  const yParallaxLeft = useTransform(scrollYProgress, [0, 0.8], [0, -60]);
-  const yParallaxRight = useTransform(scrollYProgress, [0, 0.8], [0, 60]);
+  const scale = useTransform(scrollYProgress, [0, 0.6], [0.93, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.9]);
+  const yParallaxLeft = useTransform(scrollYProgress, [0, 0.8], [0, -50]);
+  const yParallaxRight = useTransform(scrollYProgress, [0, 0.8], [0, 50]);
 
   return (
     <section
       ref={containerRef}
-      className="relative pt-28 pb-24 lg:pt-36 lg:pb-36 overflow-hidden bg-gradient-to-b from-[#06161c] via-[#09222b] to-[#06161c] text-white"
+      className="relative pt-32 pb-20 lg:pt-36 lg:pb-32 overflow-hidden bg-gradient-to-b from-[#f0f6f8] via-[#f8fafc] to-[#f8fafc]"
     >
-      {/* Cinematic Ambient Mesh & Aurora Background */}
-      <div className="absolute inset-0 bg-grid-pattern-dark pointer-events-none opacity-40" />
-      
-      {/* Glowing light cones */}
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-[#0d5c6b]/40 via-[#2a9d8f]/20 to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
-      <div className="absolute top-1/3 left-10 w-[450px] h-[450px] bg-[#0d5c6b]/20 rounded-full blur-[120px] pointer-events-none -z-10" />
-      <div className="absolute top-1/4 right-10 w-[450px] h-[450px] bg-[#2a9d8f]/15 rounded-full blur-[120px] pointer-events-none -z-10" />
+      {/* Subtle light grid and soft ambient glows */}
+      <div className="absolute inset-0 bg-grid-pattern pointer-events-none opacity-60" />
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-tr from-[#0d5c6b]/10 via-[#2a9d8f]/10 to-amber-200/20 rounded-full blur-[100px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           {/* Top Pill / Badge */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-950/80 border border-teal-500/30 text-xs font-semibold text-teal-200 mb-8 backdrop-blur-xl shadow-lg shadow-teal-950/50"
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white shadow-xs border border-teal-200/80 text-xs font-semibold text-[#0d5c6b] mb-6 backdrop-blur-md"
           >
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 -ml-3" />
-            <span className="font-bold text-white">Clinic Manager 3.0</span>
-            <span className="text-teal-700">|</span>
-            <span className="text-teal-200 font-medium flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              IA Integrada & Lembretes WhatsApp sem Bloqueio
+            <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
+            <span className="flex h-2 w-2 rounded-full bg-emerald-500 -ml-3" />
+            <span className="font-bold">Clinic Manager 3.0</span>
+            <span className="text-slate-300">|</span>
+            <span className="text-slate-600 font-medium flex items-center gap-1">
+              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+              Gestão Clínica com Agente de IA & WhatsApp Integrado
             </span>
           </motion.div>
 
           {/* Main Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.1] font-display"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl sm:text-6xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12] font-display"
           >
-            A gestão da sua clínica no{" "}
-            <span className="bg-gradient-to-r from-teal-300 via-emerald-400 to-[#e9c46a] bg-clip-text text-transparent underline decoration-[#2a9d8f]/50 decoration-wavy decoration-2">
-              piloto inteligente.
-            </span>
+            A plataforma definitiva para clínicas que buscam{" "}
+            <span className="bg-gradient-to-r from-[#0d5c6b] via-[#107082] to-[#2a9d8f] bg-clip-text text-transparent underline decoration-[#e9c46a]/60 decoration-wavy decoration-2">
+              excelência operacional
+            </span>{" "}
+            e alta rentabilidade.
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="mt-6 text-lg sm:text-xl text-teal-100/80 max-w-3xl mx-auto leading-relaxed font-normal"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-normal"
           >
-            Elimine 85% das faltas com confirmações no WhatsApp, atenda com prontuário eletrônico unificado e fature convênios TISS sem glosas em uma interface ultra-rápida.
+            Centralize <strong>agenda inteligente</strong>, <strong>prontuário eletrônico LGPD</strong>, <strong>faturamento de convênios TISS</strong> e <strong>lembretes por WhatsApp</strong> em um único ecossistema fluido e sem complexidade.
           </motion.p>
 
           {/* Action CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-            className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <button
               onClick={onOpenDemo}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0d5c6b] via-[#2a9d8f] to-[#147a8d] hover:brightness-110 text-white font-bold text-base flex items-center justify-center gap-3 shadow-xl shadow-teal-900/40 hover:shadow-teal-500/20 hover:scale-[1.02] transition-all group active:scale-95 border border-teal-300/30"
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0d5c6b] to-[#094754] hover:from-[#094754] hover:to-[#07363f] text-white font-bold text-base flex items-center justify-center gap-3 shadow-xl shadow-teal-900/15 hover:shadow-2xl hover:scale-[1.02] transition-all group active:scale-95"
             >
-              <span>Começar Teste Gratuito de 14 Dias</span>
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1 text-teal-200" />
+              <span>Experimentar Grátis por 14 Dias</span>
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1 text-teal-300" />
             </button>
 
             <a
               href="#planos"
-              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-base border border-white/15 backdrop-blur-md shadow-sm flex items-center justify-center gap-2 transition-all"
+              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-slate-50 text-slate-700 font-bold text-base border border-slate-200 shadow-xs flex items-center justify-center gap-2 transition-all hover:border-slate-300"
             >
               <span>Ver Tabela de Planos</span>
-              <ChevronRight className="w-4 h-4 text-teal-300" />
+              <ChevronRight className="w-4 h-4 text-slate-400" />
             </a>
           </motion.div>
 
@@ -129,23 +121,23 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs font-semibold text-teal-200/70"
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs font-semibold text-slate-500"
           >
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              Sem taxa de adesão
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              Sem taxa de instalação
             </span>
             <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-teal-300" />
-              100% Conforme LGPD & CFM
+              <ShieldCheck className="w-4 h-4 text-[#0d5c6b]" />
+              Conformidade LGPD & CFM/CFP
             </span>
             <span className="flex items-center gap-1.5">
-              <Zap className="w-4 h-4 text-amber-400" />
-              Setup imediato em 24h
+              <Zap className="w-4 h-4 text-amber-500" />
+              Setup rápido em 24h
             </span>
             <span className="flex items-center gap-1.5">
-              <HeartHandshake className="w-4 h-4 text-rose-400" />
+              <HeartHandshake className="w-4 h-4 text-rose-500" />
               Migração de dados gratuita
             </span>
           </motion.div>
@@ -161,15 +153,15 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
             opacity,
             transformPerspective: 1200,
           }}
-          className="mt-16 relative max-w-5xl mx-auto perspective-1200"
+          className="mt-14 relative max-w-5xl mx-auto perspective-1200"
         >
-          {/* Ambient Glow behind Cockpit */}
-          <div className="absolute -inset-2 bg-gradient-to-r from-[#0d5c6b] via-[#2a9d8f] to-[#e9c46a] rounded-3xl blur-2xl opacity-40 -z-10" />
+          {/* Subtle Ambient Backing Glow */}
+          <div className="absolute -inset-1.5 bg-gradient-to-r from-[#0d5c6b]/30 via-[#2a9d8f]/20 to-[#e9c46a]/30 rounded-3xl blur-xl opacity-60 -z-10" />
 
-          {/* Main Dashboard Window */}
-          <div className="bg-[#0b242d]/95 backdrop-blur-2xl rounded-3xl border border-teal-500/30 shadow-2xl shadow-black/80 overflow-hidden">
+          {/* Main Dashboard Window with Crisp Dark Frame */}
+          <div className="bg-[#0b242d] rounded-3xl border border-slate-700/60 shadow-2xl shadow-slate-950/25 overflow-hidden text-white">
             {/* Top Browser Bar */}
-            <div className="bg-[#071a20] px-5 py-3.5 flex items-center justify-between border-b border-teal-900/70">
+            <div className="bg-[#071a20] px-5 py-3.5 flex items-center justify-between border-b border-teal-900/60">
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
                   <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
@@ -177,7 +169,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
                   <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
                 </div>
                 <span className="font-mono text-xs text-teal-300/80 bg-teal-950/60 px-3 py-1 rounded-lg border border-teal-800/40 hidden sm:inline">
-                  https://app.clinicmanager.com.br/painel-clinico
+                  https://app.clinicmanager.com.br/dashboard
                 </span>
               </div>
 
@@ -185,7 +177,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
               <div className="flex items-center gap-1 bg-teal-950/80 p-1 rounded-xl border border-teal-800/40">
                 <button
                   onClick={() => setActiveTab("agenda")}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
                     activeTab === "agenda"
                       ? "bg-[#0d5c6b] text-white shadow-md shadow-teal-900/60"
                       : "text-teal-300/80 hover:text-white"
@@ -195,7 +187,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
                 </button>
                 <button
                   onClick={() => setActiveTab("financeiro")}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
                     activeTab === "financeiro"
                       ? "bg-[#0d5c6b] text-white shadow-md shadow-teal-900/60"
                       : "text-teal-300/80 hover:text-white"
@@ -205,7 +197,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
                 </button>
                 <button
                   onClick={() => setActiveTab("ia")}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
                     activeTab === "ia"
                       ? "bg-indigo-600 text-white shadow-md shadow-indigo-900/60"
                       : "text-teal-300/80 hover:text-white"
@@ -261,7 +253,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
                   </div>
                   <div className="text-2xl font-black text-white mt-1 font-display">142 enviados</div>
                   <div className="text-[11px] text-teal-300 font-medium mt-1">
-                    0 bloqueios (API Oficial)
+                    100% automatizados
                   </div>
                 </div>
               </div>
@@ -460,30 +452,30 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
             </div>
           </div>
 
-          {/* Floating Parallax Badges */}
+          {/* Floating Parallax Badges - Clean White Glass Cards */}
           <motion.div
             style={{ y: yParallaxLeft }}
-            className="absolute -top-6 -left-6 sm:-left-10 p-4 rounded-2xl bg-[#0d343f]/90 border border-teal-400/40 text-white shadow-2xl backdrop-blur-xl hidden md:flex items-center gap-3 animate-float-subtle"
+            className="absolute -top-6 -left-6 sm:-left-8 p-4 rounded-2xl bg-white/95 border border-slate-200 text-slate-800 shadow-xl backdrop-blur-xl hidden md:flex items-center gap-3 animate-float-subtle"
           >
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-400/30">
+            <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
               <MessageCircle className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-xs font-bold text-white">-85% Faltas e No-Show</div>
-              <div className="text-[10px] text-teal-300">Confirmação automática WhatsApp</div>
+              <div className="text-xs font-bold text-slate-900">-85% Faltas e No-Show</div>
+              <div className="text-[10px] text-slate-500">Confirmação automática WhatsApp</div>
             </div>
           </motion.div>
 
           <motion.div
             style={{ y: yParallaxRight }}
-            className="absolute -bottom-6 -right-6 sm:-right-10 p-4 rounded-2xl bg-[#0d343f]/90 border border-teal-400/40 text-white shadow-2xl backdrop-blur-xl hidden md:flex items-center gap-3 animate-float-delayed"
+            className="absolute -bottom-6 -right-6 sm:-right-8 p-4 rounded-2xl bg-white/95 border border-slate-200 text-slate-800 shadow-xl backdrop-blur-xl hidden md:flex items-center gap-3 animate-float-delayed"
           >
-            <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center border border-amber-400/30">
+            <div className="w-10 h-10 rounded-xl bg-teal-100 text-[#0d5c6b] flex items-center justify-center font-bold">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-xs font-bold text-white">IA Clínica Especializada</div>
-              <div className="text-[10px] text-teal-300">Evoluções médicas em 1 clique</div>
+              <div className="text-xs font-bold text-slate-900">IA Clínica Especializada</div>
+              <div className="text-[10px] text-slate-500">Evoluções médicas em 1 clique</div>
             </div>
           </motion.div>
         </motion.div>
