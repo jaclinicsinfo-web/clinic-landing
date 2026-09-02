@@ -31,6 +31,21 @@
     overflow-x: hidden;
   }
 
+  /* Force pointer cursor on all buttons, links, selects, and interactive elements */
+  button,
+  [role="button"],
+  a,
+  select,
+  summary,
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  input[type="range"],
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer !important;
+  }
+
   ::selection {
     background: #0d5c6b;
     color: #ffffff;
