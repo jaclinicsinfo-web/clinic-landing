@@ -10,6 +10,7 @@ interface PlanSelectModalProps {
   onClose: () => void;
   planName: string;
   planPrice: string;
+  annualTotal?: string;
   planLimit: string;
   isAnnual?: boolean;
 }
@@ -19,6 +20,7 @@ export function PlanSelectModal({
   onClose,
   planName,
   planPrice,
+  annualTotal,
   planLimit,
   isAnnual = false,
 }: PlanSelectModalProps) {
@@ -88,14 +90,20 @@ export function PlanSelectModal({
                 )}
               </div>
 
-              <div className="mt-3 flex items-baseline justify-between">
+              <div className="mt-3 flex items-baseline justify-between gap-4">
                 <div>
                   <h3 className="text-2xl font-bold text-white">{planName}</h3>
                   <p className="text-xs text-teal-200 mt-0.5">{planLimit}</p>
                 </div>
-                <div className="text-right">
+                <div className="text-right shrink-0">
                   <div className="text-2xl font-extrabold text-white">{planPrice}</div>
-                  <div className="text-xs text-teal-200">sem taxa de adesão</div>
+                  {isAnnual && annualTotal ? (
+                    <div className="text-xs text-amber-300 font-medium mt-0.5">
+                      Total anual: <strong className="text-white">{annualTotal}</strong> ({planPrice} × 12)
+                    </div>
+                  ) : (
+                    <div className="text-xs text-teal-200">sem taxa de adesão</div>
+                  )}
                 </div>
               </div>
             </div>
@@ -125,7 +133,7 @@ export function PlanSelectModal({
 
                   <div className="mt-6 flex flex-col sm:flex-row gap-3">
                     <a
-                      href={`https://wa.me/5511999999999?text=Ol%C3%A1%2C%20acabei%20de%20selecionar%20o%20${encodeURIComponent(planName)}%20no%20site%20para%20minha%20cl%C3%ADnica%20(${encodeURIComponent(formData.clinicName)})`}
+                      href={`https://wa.me/5511999999999?text=Ol%C3%A1%2C%20acabei%20de%20selecionar%20o%20${encodeURIComponent(planName)}%20(${isAnnual && annualTotal ? `Anual: ${annualTotal} - ${planPrice} x 12` : `Mensal: ${planPrice}`})%20no%20site%20para%20minha%20cl%C3%ADnica%20(${encodeURIComponent(formData.clinicName)})`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm flex items-center justify-center gap-2 transition-all shadow-md"

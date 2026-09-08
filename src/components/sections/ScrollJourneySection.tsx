@@ -105,7 +105,7 @@ export function ScrollJourneySection() {
       time: "18:00",
       tag: "Diretoria & Analytics",
       title: "Fechamento DRE & Repasses Médicos",
-      desc: "No final do dia, todos os repasses e comissões dos médicos e terapeutas estão calculados automaticamente, com relatórios de lucratividade por sala e gráficos consolidados no Power BI.",
+      desc: "No final do dia, todos os repasses e comissões dos médicos e terapeutas estão calculados automaticamente, com painel de métricas, lucratividade por sala e gráficos consolidados no Power BI.",
       icon: TrendingUp,
       accent: "text-amber-600 bg-amber-50 border-amber-200",
       uiTitle: "DRE em Tempo Real & Repasses Médicos",

@@ -70,7 +70,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
           >
             <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
             <span className="flex h-2 w-2 rounded-full bg-emerald-500 -ml-3" />
-            <span className="font-bold">Clinic Manager 3.0</span>
+            <span className="font-bold">Clinic Manager</span>
             <span className="text-slate-300">|</span>
             <span className="text-slate-600 font-medium flex items-center gap-1">
               <Sparkles className="w-3.5 h-3.5 text-amber-500" />

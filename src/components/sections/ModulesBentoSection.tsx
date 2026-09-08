@@ -235,10 +235,10 @@ export function ModulesBentoSection() {
                 <Sparkles className="w-3 h-3" /> Exclusivo Ilimitado
               </div>
               <h4 className="text-lg font-bold font-display text-white">
-                Power BI & Agente de IA
+                Métricas da Clínica & Power BI
               </h4>
               <p className="text-xs text-indigo-200 mt-2 leading-relaxed">
-                Dashboards executivos em tempo real e IA para transcrição de consultas, sumarização de anamnese e previsões financeiras.
+                Dashboards executivos com indicadores vitais em tempo real: taxa de no-show, faturamento por convênio, ticket médio, ocupação de salas e DRE integrado.
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-indigo-800/60 flex items-center gap-1.5 text-emerald-300 font-bold text-xs">

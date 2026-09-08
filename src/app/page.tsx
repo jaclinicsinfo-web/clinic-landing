@@ -22,9 +22,16 @@ import { MessageCircle } from "lucide-react";
 export default function Home() {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [planModalOpen, setPlanModalOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState({
+  const [selectedPlan, setSelectedPlan] = useState<{
+    name: string;
+    price: string;
+    annualTotal?: string;
+    limit: string;
+    isAnnual: boolean;
+  }>({
     name: "Plano Profissional",
     price: "R$ 700/mês",
+    annualTotal: "R$ 6.960/ano",
     limit: "Até 20 contas · várias unidades",
     isAnnual: false,
   });
@@ -32,6 +39,7 @@ export default function Home() {
   const handleSelectPlan = (plan: {
     name: string;
     price: string;
+    annualTotal?: string;
     limit: string;
     isAnnual: boolean;
   }) => {
@@ -88,6 +96,7 @@ export default function Home() {
         onClose={() => setPlanModalOpen(false)}
         planName={selectedPlan.name}
         planPrice={selectedPlan.price}
+        annualTotal={selectedPlan.annualTotal}
         planLimit={selectedPlan.limit}
         isAnnual={selectedPlan.isAnnual}
       />

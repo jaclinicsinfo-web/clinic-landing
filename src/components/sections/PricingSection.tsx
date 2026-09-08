@@ -14,7 +14,13 @@ import {
 } from "lucide-react";
 
 interface PricingSectionProps {
-  onSelectPlan: (plan: { name: string; price: string; limit: string; isAnnual: boolean }) => void;
+  onSelectPlan: (plan: {
+    name: string;
+    price: string;
+    annualTotal?: string;
+    limit: string;
+    isAnnual: boolean;
+  }) => void;
 }
 
 export function PricingSection({ onSelectPlan }: PricingSectionProps) {
@@ -29,6 +35,8 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
       limit: "Até 5 contas · 1 unidade",
       monthlyPrice: "R$ 300",
       annualPrice: "R$ 250",
+      annualTotal: "R$ 3.000",
+      annualSavings: "R$ 600",
       period: "/mês",
       buttonText: "Começar com o Essencial",
       highlight: false,
@@ -41,7 +49,7 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
         { name: "Relatórios", desc: "Faturamento, inadimplência, produtividade", included: false },
         { name: "Estoque", desc: "Produtos, movimentação, alerta de mínimo", included: false },
         { name: "Integrações e lembretes", desc: "WhatsApp, e-mail, calendário", included: false },
-        { name: "Power BI", desc: "Conector de inteligência de dados", included: false },
+        { name: "Métricas & Dashboards (Power BI)", desc: "KPIs em tempo real: ocupação, no-show, ticket médio e lucratividade", included: false },
         { name: "Agente de IA", desc: "Copiloto clínico e sumarizador", included: false },
       ],
     },
@@ -52,6 +60,8 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
       limit: "Até 20 contas · várias unidades",
       monthlyPrice: "R$ 700",
       annualPrice: "R$ 580",
+      annualTotal: "R$ 6.960",
+      annualSavings: "R$ 1.440",
       period: "/mês",
       buttonText: "Avançar para o Profissional",
       highlight: true,
@@ -64,7 +74,7 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
         { name: "Relatórios", desc: "Faturamento, inadimplência, produtividade", included: true },
         { name: "Estoque", desc: "Produtos, movimentação, alerta de mínimo", included: true },
         { name: "Integrações e lembretes", desc: "WhatsApp, e-mail, calendário", included: false },
-        { name: "Power BI", desc: "Conector de inteligência de dados", included: false },
+        { name: "Métricas & Dashboards (Power BI)", desc: "KPIs em tempo real: ocupação, no-show, ticket médio e lucratividade", included: false },
         { name: "Agente de IA", desc: "Copiloto clínico e sumarizador", included: false },
       ],
     },
@@ -75,6 +85,8 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
       limit: "Contas sem teto · unidades sem teto",
       monthlyPrice: "R$ 1.200",
       annualPrice: "R$ 990",
+      annualTotal: "R$ 11.880",
+      annualSavings: "R$ 2.520",
       period: "/mês",
       buttonText: "Ir para o Ilimitado",
       highlight: false,
@@ -87,7 +99,7 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
         { name: "Relatórios", desc: "Faturamento, inadimplência, produtividade", included: true },
         { name: "Estoque", desc: "Produtos, movimentação, alerta de mínimo", included: true },
         { name: "Integrações e lembretes", desc: "WhatsApp, e-mail, calendário", included: true },
-        { name: "Power BI", desc: "Conector de inteligência de dados", included: true },
+        { name: "Métricas & Dashboards (Power BI)", desc: "KPIs em tempo real: ocupação, no-show, ticket médio e lucratividade", included: true },
         { name: "Agente de IA", desc: "Copiloto clínico e sumarizador", included: true },
       ],
     },
@@ -186,9 +198,21 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                       </span>
                       <span className="text-xs text-slate-500 font-medium">{plan.period}</span>
                     </div>
-                    {isAnnual && (
-                      <div className="text-[11px] text-emerald-600 font-semibold mt-1">
-                        Cobrado anualmente (2 meses grátis)
+
+                    {isAnnual ? (
+                      <div className="mt-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between text-xs">
+                        <span className="text-slate-600 font-medium">
+                          Total anual: <strong className="text-slate-900 font-bold text-sm">{plan.annualTotal}</strong>
+                          <span className="text-slate-400 font-normal ml-1">({plan.annualPrice}/mês × 12)</span>
+                        </span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">
+                          Economize {plan.annualSavings}
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="text-xs text-slate-500 font-medium mt-2 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+                        Faturamento mensal flexível · Sem fidelidade ou carência
                       </div>
                     )}
                   </div>
@@ -243,6 +267,7 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                       onSelectPlan({
                         name: plan.name,
                         price: `${price}${plan.period}`,
+                        annualTotal: isAnnual ? `${plan.annualTotal}/ano` : undefined,
                         limit: plan.limit,
                         isAnnual,
                       })
@@ -285,9 +310,45 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                 <thead>
                   <tr className="border-b-2 border-slate-200 text-slate-900 text-sm">
                     <th className="pb-4 font-bold">Recurso / Módulo</th>
-                    <th className="pb-4 font-bold text-center">Essencial (R$ 300)</th>
-                    <th className="pb-4 font-bold text-center text-[#0d5c6b]">Profissional (R$ 700)</th>
-                    <th className="pb-4 font-bold text-center">Ilimitado (R$ 1.200)</th>
+                    <th className="pb-4 font-bold text-center">
+                      <div>Essencial</div>
+                      <div className="text-xs font-normal text-slate-500 mt-1">
+                        {isAnnual ? (
+                          <div>
+                            <span className="text-sm font-black text-slate-900 block">R$ 3.000/ano</span>
+                            <span className="text-[11px] text-emerald-700 font-semibold block">R$ 250/mês (12x)</span>
+                          </div>
+                        ) : (
+                          <span className="text-sm font-bold text-slate-800">R$ 300/mês</span>
+                        )}
+                      </div>
+                    </th>
+                    <th className="pb-4 font-bold text-center text-[#0d5c6b]">
+                      <div>Profissional</div>
+                      <div className="text-xs font-semibold text-[#0d5c6b] mt-1">
+                        {isAnnual ? (
+                          <div>
+                            <span className="text-sm font-black text-[#0d5c6b] block">R$ 6.960/ano</span>
+                            <span className="text-[11px] text-teal-800 font-semibold block">R$ 580/mês (12x)</span>
+                          </div>
+                        ) : (
+                          <span className="text-sm font-bold text-[#0d5c6b]">R$ 700/mês</span>
+                        )}
+                      </div>
+                    </th>
+                    <th className="pb-4 font-bold text-center">
+                      <div>Ilimitado</div>
+                      <div className="text-xs font-normal text-slate-500 mt-1">
+                        {isAnnual ? (
+                          <div>
+                            <span className="text-sm font-black text-slate-900 block">R$ 11.880/ano</span>
+                            <span className="text-[11px] text-emerald-700 font-semibold block">R$ 990/mês (12x)</span>
+                          </div>
+                        ) : (
+                          <span className="text-sm font-bold text-slate-800">R$ 1.200/mês</span>
+                        )}
+                      </div>
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 text-slate-700">
@@ -340,7 +401,12 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                     <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold">Conector Power BI</td>
+                    <td className="py-3">
+                      <div className="font-bold text-slate-900">Métricas & Dashboards de Gestão (Power BI)</div>
+                      <div className="text-[11px] text-slate-500 font-normal">
+                        KPIs em tempo real: taxa de no-show, ocupação de salas, ticket médio e lucratividade por convênio
+                      </div>
+                    </td>
                     <td className="py-3 text-center text-slate-300">—</td>
                     <td className="py-3 text-center text-slate-300">—</td>
                     <td className="py-3 text-center text-emerald-600 font-bold">✓ Incluso</td>

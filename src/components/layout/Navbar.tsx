@@ -58,9 +58,6 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
                 <span className="font-extrabold text-xl tracking-tight text-slate-900 font-display">
                   Clinic<span className="text-[#0d5c6b]">Manager</span>
                 </span>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-teal-50 text-[#0d5c6b] border border-teal-200/60 hidden sm:inline-flex items-center gap-1">
-                  <Sparkles className="w-2.5 h-2.5 text-amber-500" /> v3.0 IA
-                </span>
               </div>
               <span className="text-[11px] text-slate-500 font-medium hidden md:block">
                 Software de Gestão Clínica Integrada
