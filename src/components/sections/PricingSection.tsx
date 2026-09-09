@@ -51,6 +51,7 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
         { name: "Integrações e lembretes", desc: "WhatsApp, e-mail, calendário", included: false },
         { name: "Métricas & Dashboards (Power BI)", desc: "KPIs em tempo real: ocupação, no-show, ticket médio e lucratividade", included: false },
         { name: "Agente de IA", desc: "Copiloto clínico e sumarizador", included: false },
+        { name: "Suporte humanizado por WhatsApp", desc: "Atendimento direto com pessoa real (a partir do Profissional)", included: false },
       ],
     },
     {
@@ -76,6 +77,7 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
         { name: "Integrações e lembretes", desc: "WhatsApp, e-mail, calendário", included: false },
         { name: "Métricas & Dashboards (Power BI)", desc: "KPIs em tempo real: ocupação, no-show, ticket médio e lucratividade", included: false },
         { name: "Agente de IA", desc: "Copiloto clínico e sumarizador", included: false },
+        { name: "Suporte humanizado por WhatsApp", desc: "Atendimento com pessoa real / especialista para dúvidas e rotina", included: true },
       ],
     },
     {
@@ -101,6 +103,7 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
         { name: "Integrações e lembretes", desc: "WhatsApp, e-mail, calendário", included: true },
         { name: "Métricas & Dashboards (Power BI)", desc: "KPIs em tempo real: ocupação, no-show, ticket médio e lucratividade", included: true },
         { name: "Agente de IA", desc: "Copiloto clínico e sumarizador", included: true },
+        { name: "Suporte humanizado por WhatsApp", desc: "Atendimento com pessoa real / especialista para dúvidas e rotina", included: true },
       ],
     },
   ];
@@ -118,7 +121,7 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
             Planos sob medida para a sua clínica crescer
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
-            Escolha o pacote ideal para a sua equipe. Todos os planos contam com suporte VIP e migração de dados assistida.
+            Escolha o pacote ideal para a sua equipe. Suporte humanizado com especialistas reais via WhatsApp nos planos Profissional e Ilimitado.
           </p>
 
           {/* Billing Cycle Toggle Switch */}
@@ -416,6 +419,26 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
                     <td className="py-3 text-center text-slate-300">—</td>
                     <td className="py-3 text-center text-slate-300">—</td>
                     <td className="py-3 text-center text-indigo-600 font-bold">✓ Incluso</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3">
+                      <div className="font-bold text-slate-900">Suporte & Atendimento com Pessoa Real</div>
+                      <div className="text-[11px] text-slate-500 font-normal">
+                        Canais de auxílio, dúvidas e suporte humanizado via WhatsApp
+                      </div>
+                    </td>
+                    <td className="py-3 text-center text-slate-500">
+                      <div className="font-medium text-xs">E-mail & Chamados</div>
+                      <div className="text-[10px] text-slate-400 mt-0.5">Fila padrão</div>
+                    </td>
+                    <td className="py-3 text-center font-bold text-[#0d5c6b]">
+                      <div className="text-emerald-700 font-bold text-xs">✓ Humanizado (WhatsApp)</div>
+                      <div className="text-[10px] text-teal-800 font-normal mt-0.5">Especialista dedicado</div>
+                    </td>
+                    <td className="py-3 text-center font-bold text-emerald-600">
+                      <div className="text-emerald-700 font-bold text-xs">✓ Humanizado (WhatsApp)</div>
+                      <div className="text-[10px] text-teal-800 font-normal mt-0.5">Especialista dedicado</div>
+                    </td>
                   </tr>
                 </tbody>
               </table>

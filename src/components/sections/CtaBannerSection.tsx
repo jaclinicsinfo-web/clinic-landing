@@ -47,7 +47,7 @@ export function CtaBannerSection({ onOpenDemo }: CtaBannerSectionProps) {
               </button>
 
               <a
-                href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20o%20Clinic%20Manager"
+                href="https://wa.me/5516992792142?text=Ol%C3%A1%2C%20gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20o%20Clinic%20Manager"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-teal-900/60 hover:bg-teal-900/80 text-white font-bold text-base border border-white/20 flex items-center justify-center gap-2 transition-all"

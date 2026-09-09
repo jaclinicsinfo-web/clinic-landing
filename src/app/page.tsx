@@ -73,7 +73,7 @@ export default function Home() {
 
       {/* Floating WhatsApp Quick Action */}
       <a
-        href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20estou%20no%20site%20do%20Clinic%20Manager%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida"
+        href="https://wa.me/5516992792142?text=Ol%C3%A1%2C%20estou%20no%20site%20do%20Clinic%20Manager%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Falar no WhatsApp"

@@ -129,17 +129,23 @@ export function PlanSelectModal({
                     <p className="text-slate-600">
                       Você pode testar todos os recursos na prática. Se não se adaptar, devolvemos 100% do seu investimento sem burocracia.
                     </p>
+                    {(planName.includes("Profissional") || planName.includes("Ilimitado")) && (
+                      <div className="pt-2 border-t border-teal-200/50 flex items-center gap-1.5 text-emerald-700 font-semibold">
+                        <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                        <span>Seu plano inclui atendimento & suporte humanizado por WhatsApp com especialista real.</span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="mt-6 flex flex-col sm:flex-row gap-3">
                     <a
-                      href={`https://wa.me/5511999999999?text=Ol%C3%A1%2C%20acabei%20de%20selecionar%20o%20${encodeURIComponent(planName)}%20(${isAnnual && annualTotal ? `Anual: ${annualTotal} - ${planPrice} x 12` : `Mensal: ${planPrice}`})%20no%20site%20para%20minha%20cl%C3%ADnica%20(${encodeURIComponent(formData.clinicName)})`}
+                      href={`https://wa.me/5516992792142?text=Ol%C3%A1%2C%20acabei%20de%20selecionar%20o%20${encodeURIComponent(planName)}%20(${isAnnual && annualTotal ? `Anual: ${annualTotal} - ${planPrice} x 12` : `Mensal: ${planPrice}`})%20no%20site%20para%20minha%20cl%C3%ADnica%20(${encodeURIComponent(formData.clinicName)})`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm flex items-center justify-center gap-2 transition-all shadow-md"
                     >
                       <MessageSquare className="w-4 h-4" />
-                      Falar com Consultor no WhatsApp
+                      Falar com Especialista no WhatsApp
                     </a>
                     <button
                       onClick={handleFinish}
@@ -220,7 +226,7 @@ export function PlanSelectModal({
                     <div className="mt-3 flex items-center justify-center gap-4 text-[11px] text-slate-400">
                       <span>✓ Setup guiado gratuito</span>
                       <span>✓ Migração de dados incluída</span>
-                      <span>✓ Suporte VIP</span>
+                      <span>✓ Suporte humanizado</span>
                     </div>
                   </div>
                 </form>

@@ -84,8 +84,8 @@ export function Footer() {
             <ul className="space-y-2.5 text-slate-400">
               <li className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-emerald-400" />
-                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                  (11) 99999-9999 (WhatsApp)
+                <a href="https://wa.me/5516992792142" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  (16) 99279-2142 (WhatsApp)
                 </a>
               </li>
               <li className="flex items-center gap-2">
@@ -102,7 +102,7 @@ export function Footer() {
 
             <div className="pt-2">
               <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-teal-200">
-                🛡️ Suporte técnico humanizado disponível de Segunda a Sábado.
+                🛡️ Suporte técnico humanizado com especialistas reais de Segunda a Sábado.
               </div>
             </div>
           </div>

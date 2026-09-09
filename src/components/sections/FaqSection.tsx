@@ -38,6 +38,11 @@ export function FaqSection() {
       answer:
         "Sim, sem multas contratuais e sem pegadinhas. No plano mensal você pode cancelar quando quiser. Se sua clínica crescer e precisar de mais contas ou do módulo financeiro, o upgrade é instantâneo.",
     },
+    {
+      question: "Como funciona o suporte técnico e atendimento aos planos?",
+      answer:
+        "Nos planos Profissional (Intermediário) e Ilimitado (Avançado), o atendimento é 100% humanizado: você e sua equipe conversam diretamente no WhatsApp com uma pessoa real da nossa equipe de especialistas para tirar dúvidas e auxiliar na rotina, sem chatbots ou robôs engessados.",
+    },
   ];
 
   return (
@@ -106,7 +111,7 @@ export function FaqSection() {
             <p className="text-xs text-slate-600 mt-0.5">Nossa equipe de consultores responde em menos de 5 minutos.</p>
           </div>
           <a
-            href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20Clinic%20Manager"
+            href="https://wa.me/5516992792142?text=Ol%C3%A1%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20Clinic%20Manager"
             target="_blank"
             rel="noopener noreferrer"
             className="px-5 py-2.5 rounded-xl bg-[#0d5c6b] hover:bg-[#094754] text-white font-bold text-xs flex items-center gap-2 shadow-md transition-all shrink-0"

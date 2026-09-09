@@ -81,13 +81,13 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
           {/* Action CTAs */}
           <div className="hidden sm:flex items-center gap-3">
             <a
-              href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Clinic%20Manager"
+              href="https://wa.me/5516992792142?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Clinic%20Manager"
               target="_blank"
               rel="noopener noreferrer"
               className="px-3.5 py-2 text-xs font-semibold text-slate-700 hover:text-[#0d5c6b] flex items-center gap-1.5 transition-colors"
             >
               <Phone className="w-3.5 h-3.5 text-emerald-600" />
-              <span>(11) 99999-9999</span>
+              <span>(16) 99279-2142</span>
             </a>
 
             <button
@@ -151,13 +151,13 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
                   <span>Agendar Demonstração Gratuita</span>
                 </button>
                 <a
-                  href="https://wa.me/5511999999999"
+                  href="https://wa.me/5516992792142"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-2.5 rounded-xl border border-slate-200 text-slate-700 font-medium text-sm flex items-center justify-center gap-2"
                 >
                   <Phone className="w-4 h-4 text-emerald-600" />
-                  <span>Falar no WhatsApp: (11) 99999-9999</span>
+                  <span>Falar no WhatsApp: (16) 99279-2142</span>
                 </a>
               </div>
             </div>
