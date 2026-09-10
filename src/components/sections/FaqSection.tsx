@@ -11,22 +11,22 @@ export function FaqSection() {
     {
       question: "Como funciona o período de teste grátis de 14 dias?",
       answer:
-        "Você terá acesso completo e irrestrito a todos os recursos do plano escolhido por 14 dias. Não cobramos taxa de adesão e você só decide assinar se o sistema realmente transformar a rotina da sua clínica.",
+        "Você terá acesso aos recursos da plataforma por 14 dias. Sem taxa de adesão: o comercial apresenta as condições e você só segue se fizer sentido para a clínica.",
     },
     {
       question: "Vocês ajudam a migrar os dados do meu sistema antigo?",
       answer:
-        "Sim! Nossa equipe de implantação realiza a importação completa do cadastro de pacientes, contatos, históricos e prontuários antigos a partir de planilhas Excel ou backups de outros softwares do mercado, sem custo adicional.",
+        "Sim! Nossa equipe de implantação realiza a importação completa do cadastro de pacientes, contatos e históricos de evolução a partir de planilhas Excel ou backups de outros softwares do mercado, sem custo adicional.",
     },
     {
       question: "É difícil treinar a recepção e os médicos da clínica?",
       answer:
-        "O Clinic Manager foi desenvolvido com foco total em usabilidade intuitiva (Zero Curva de Aprendizado). Em menos de 20 minutos de treinamento guiado, secretárias e profissionais de saúde já dominam a agenda e o prontuário com total facilidade.",
+        "O Clinic Manager foi desenvolvido com foco total em usabilidade intuitiva (Zero Curva de Aprendizado). Em menos de 20 minutos de treinamento guiado, secretárias e profissionais de saúde já dominam a agenda e o acompanhamento de evolução com total facilidade.",
     },
     {
-      question: "Como funcionam os lembretes automáticos no WhatsApp?",
+      question: "Como funcionam os lembretes de consulta?",
       answer:
-        "Utilizamos a API Oficial do WhatsApp Business. O sistema envia a confirmação automática no horário configurado (ex: 24h ou 48h antes da consulta). Quando o paciente clica em 'Confirmar' ou 'Remarcar', o status na agenda muda em tempo real.",
+        "Pelo módulo de integração, o sistema envia lembretes das consultas para pacientes e profissionais, via WhatsApp e e-mail, no horário configurado pela clínica.",
     },
     {
       question: "O módulo de faturamento de convênios suporta o padrão TISS e XML?",
@@ -34,30 +34,40 @@ export function FaqSection() {
         "Sim, 100% compatível com as normas da ANS e padrão TISS 4.01. Você pode gerar guias de consulta, SADT, faturar lotes, gerar arquivos XML para envio nas operadoras (Unimed, Bradesco, Amil, SulAmérica, etc.) e conciliar glosas com rapidez.",
     },
     {
-      question: "Posso mudar de plano ou cancelar a qualquer momento?",
+      question: "Como faço para contratar?",
       answer:
-        "Sim, sem multas contratuais e sem pegadinhas. No plano mensal você pode cancelar quando quiser. Se sua clínica crescer e precisar de mais contas ou do módulo financeiro, o upgrade é instantâneo.",
+        "Fale com o comercial. Eles apresentam as condições sob medida para o tamanho e a rotina da sua clínica — valores não ficam expostos no site.",
     },
     {
-      question: "Como funciona o suporte técnico e atendimento aos planos?",
+      question: "O que o agente de IA faz?",
       answer:
-        "Nos planos Profissional (Intermediário) e Ilimitado (Avançado), o atendimento é 100% humanizado: você e sua equipe conversam diretamente no WhatsApp com uma pessoa real da nossa equipe de especialistas para tirar dúvidas e auxiliar na rotina, sem chatbots ou robôs engessados.",
+        "É um assistente para tirar dúvidas, no estilo ChatGPT. A equipe pergunta sobre a rotina e o uso do sistema e recebe uma resposta. Ele não registra acompanhamento de evolução e não resume consulta.",
+    },
+    {
+      question: "O sistema tem tema claro e escuro?",
+      answer:
+        "Sim. Em Configurações > Estilização você escolhe o visual claro ou escuro. A preferência é salva na sua conta e vale em qualquer dispositivo — computador, tablet ou celular.",
+    },
+    {
+      question: "Como funciona o suporte?",
+      answer:
+        "O atendimento é humanizado: você e sua equipe falam no WhatsApp com uma pessoa real da equipe, para tirar dúvidas e auxiliar na rotina.",
     },
   ];
 
   return (
-    <section id="faq" className="py-24 bg-white text-slate-900 relative border-t border-slate-200/80">
+    <section id="faq" className="py-12 md:py-16 lg:py-20 bg-ja-card text-ja-ink relative border-t border-ja-line">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal-50 text-[#0d5c6b] border border-teal-200 text-xs font-bold uppercase tracking-wider mb-3">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ja-surface text-ja-teal border border-ja-line text-xs font-bold uppercase tracking-wider mb-3">
             <HelpCircle className="w-3.5 h-3.5" />
             Tire Suas Dúvidas
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display">
+          <h2 className="text-3xl sm:text-4xl font-bold text-ja-ink tracking-tight">
             Perguntas Frequentes
           </h2>
-          <p className="mt-3 text-base text-slate-600">
-            Tudo o que você precisa saber para começar a usar o Clinic Manager hoje mesmo.
+          <p className="mt-3 text-base text-ja-muted">
+            Tudo o que você precisa saber para começar a usar a J.A. Clinics hoje mesmo.
           </p>
         </div>
 
@@ -67,18 +77,18 @@ export function FaqSection() {
             return (
               <div
                 key={faq.question}
-                className="rounded-2xl border border-slate-200/90 overflow-hidden bg-slate-50/50 transition-colors"
+                className="rounded-2xl border border-ja-line overflow-hidden bg-ja-surface transition-colors"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none"
+                  className="w-full min-h-11 p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none"
                 >
-                  <span className="text-sm sm:text-base font-bold text-slate-900 font-display">
+                  <span className="text-sm sm:text-base font-bold text-ja-ink">
                     {faq.question}
                   </span>
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
-                      isOpen ? "bg-[#0d5c6b] text-white rotate-180" : "bg-slate-200/70 text-slate-600"
+                      isOpen ? "bg-ja-teal text-white rotate-180" : "bg-ja-card text-ja-muted border border-ja-line"
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -93,7 +103,7 @@ export function FaqSection() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/60">
+                      <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-ja-muted leading-relaxed border-t border-ja-line">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -105,16 +115,16 @@ export function FaqSection() {
         </div>
 
         {/* WhatsApp support callout */}
-        <div className="mt-12 p-6 rounded-2xl bg-teal-50/80 border border-teal-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div className="mt-12 p-6 rounded-2xl bg-ja-surface border border-ja-line flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div>
-            <h4 className="text-sm font-bold text-slate-900">Ainda tem alguma dúvida específica?</h4>
-            <p className="text-xs text-slate-600 mt-0.5">Nossa equipe de consultores responde em menos de 5 minutos.</p>
+            <h4 className="text-sm font-bold text-ja-ink">Ainda tem alguma dúvida específica?</h4>
+            <p className="text-xs text-ja-muted mt-0.5">Nossa equipe de consultores responde em menos de 5 minutos.</p>
           </div>
           <a
-            href="https://wa.me/5516992792142?text=Ol%C3%A1%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20Clinic%20Manager"
+            href="https://wa.me/5516992792142?text=Ol%C3%A1%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20a%20J.A.%20Clinics"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 rounded-xl bg-[#0d5c6b] hover:bg-[#094754] text-white font-bold text-xs flex items-center gap-2 shadow-md transition-all shrink-0"
+            className="min-h-11 px-5 py-2.5 rounded-xl bg-ja-teal hover:bg-ja-dark text-white font-bold text-xs flex items-center gap-2 transition-colors shrink-0"
           >
             <MessageSquare className="w-4 h-4" />
             Falar no WhatsApp

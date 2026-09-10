@@ -12,6 +12,7 @@ import {
   PieChart,
   BellRing,
   Bot,
+  Palette,
 } from "lucide-react";
 
 export function ModulesBentoSection() {
@@ -35,25 +36,21 @@ export function ModulesBentoSection() {
   };
 
   return (
-    <section id="modulos" className="py-24 bg-white text-slate-900 relative overflow-hidden border-t border-slate-200/80">
-      {/* Background accents */}
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-
+    <section id="modulos" className="py-12 md:py-16 lg:py-20 bg-ja-card text-ja-ink relative overflow-hidden border-t border-ja-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal-50 text-[#0d5c6b] border border-teal-200 text-xs font-bold uppercase tracking-wider mb-3">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ja-surface text-ja-teal border border-ja-line text-xs font-bold uppercase tracking-wider mb-3">
             <Boxes className="w-3.5 h-3.5" />
             Arquitetura Modular Completa
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-display">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ja-ink tracking-tight">
             Tudo o que sua clínica precisa para{" "}
-            <span className="text-[#0d5c6b]">
+            <span className="text-ja-teal">
               operar no piloto profissional
             </span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-600">
+          <p className="mt-4 text-base sm:text-lg text-ja-muted">
             Chega de sistemas lentos e planilhas desconexas. Conheça os módulos integrados que aceleram do agendamento ao fechamento.
           </p>
         </div>
@@ -69,76 +66,76 @@ export function ModulesBentoSection() {
           {/* Card 1 (Large - 2 cols) : Núcleo Operacional */}
           <motion.div
             variants={cardVariants}
-            className="md:col-span-2 lg:col-span-2 bg-gradient-to-br from-white to-teal-50/40 rounded-3xl p-7 sm:p-8 border border-teal-100 shadow-sm hover:shadow-xl transition-all duration-300 relative group overflow-hidden"
+            className="md:col-span-2 lg:col-span-2 bg-ja-surface rounded-2xl p-7 sm:p-8 border border-ja-line shadow-sm hover:shadow-lg transition-all duration-300 relative group overflow-hidden"
           >
             <div className="flex items-center justify-between">
-              <div className="w-12 h-12 rounded-2xl bg-[#0d5c6b] text-white flex items-center justify-center shadow-md shadow-teal-900/20">
-                <Calendar className="w-6 h-6 text-teal-200" />
+              <div className="w-12 h-12 rounded-2xl bg-ja-teal text-white flex items-center justify-center">
+                <Calendar className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-teal-100/70 text-[#0d5c6b]">
-                Módulo Essencial
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-ja-card text-ja-teal border border-ja-line">
+                Núcleo da clínica
               </span>
             </div>
 
-            <h3 className="text-2xl font-bold text-slate-900 mt-5 font-display">
+            <h3 className="text-2xl font-bold text-ja-ink mt-5 font-display">
               Núcleo Operacional & Agenda Inteligente
             </h3>
-            <p className="text-sm text-slate-600 mt-2 leading-relaxed">
-              Agenda visual com filtros por profissional, especialidade e sala. Prontuário eletrônico completo, anamnese personalizável, histórico de consultas e total conformidade com a LGPD.
+            <p className="text-sm text-ja-muted mt-2 leading-relaxed">
+              Agenda visual com filtros por profissional, especialidade e sala. Acompanhamento de evolução, histórico de consultas e conformidade com a LGPD.
             </p>
 
             {/* Interactive mini-preview */}
-            <div className="mt-6 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-xs space-y-2">
-              <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-100">
-                <span className="font-bold text-slate-700">Agenda de Hoje · 8 Profissionais</span>
-                <span className="text-emerald-600 font-semibold">100% Sincronizada</span>
+            <div className="mt-6 p-4 rounded-2xl bg-ja-card border border-ja-line shadow-xs space-y-2">
+              <div className="flex items-center justify-between text-xs pb-2 border-b border-ja-line">
+                <span className="font-bold text-ja-ink">Agenda de Hoje · 8 Profissionais</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold">100% Sincronizada</span>
               </div>
               <div className="grid grid-cols-3 gap-2 text-center text-xs">
-                <div className="p-2.5 rounded-xl bg-teal-50 text-[#0d5c6b] font-semibold">
-                  <div className="text-base font-bold text-slate-900">24</div>
-                  <div className="text-[10px] text-slate-500">Agendados</div>
+                <div className="p-2.5 rounded-xl bg-ja-surface text-ja-teal font-semibold">
+                  <div className="text-base font-bold text-ja-ink">24</div>
+                  <div className="text-[10px] text-ja-muted">Agendados</div>
                 </div>
-                <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-700 font-semibold">
-                  <div className="text-base font-bold text-emerald-600">19</div>
-                  <div className="text-[10px] text-slate-500">Confirmados</div>
+                <div className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-semibold">
+                  <div className="text-base font-bold text-emerald-600 dark:text-emerald-400">19</div>
+                  <div className="text-[10px] text-ja-muted">Confirmados</div>
                 </div>
-                <div className="p-2.5 rounded-xl bg-amber-50 text-amber-700 font-semibold">
-                  <div className="text-base font-bold text-slate-900">0</div>
-                  <div className="text-[10px] text-slate-500">Faltas</div>
+                <div className="p-2.5 rounded-xl bg-ja-surface text-ja-teal font-semibold">
+                  <div className="text-base font-bold text-ja-ink">0</div>
+                  <div className="text-[10px] text-ja-muted">Faltas</div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-600">
-              <span className="px-2.5 py-1 rounded-lg bg-slate-100 font-medium">✓ Bloqueio de Feriados</span>
-              <span className="px-2.5 py-1 rounded-lg bg-slate-100 font-medium">✓ Encaixes Inteligentes</span>
-              <span className="px-2.5 py-1 rounded-lg bg-slate-100 font-medium">✓ Telemedicina Integrada</span>
+            <div className="mt-4 flex flex-wrap gap-2 text-xs text-ja-muted">
+              <span className="px-2.5 py-1 rounded-lg bg-ja-card border border-ja-line font-medium">✓ Bloqueio de Feriados</span>
+              <span className="px-2.5 py-1 rounded-lg bg-ja-card border border-ja-line font-medium">✓ Encaixes Inteligentes</span>
+              <span className="px-2.5 py-1 rounded-lg bg-ja-card border border-ja-line font-medium">✓ Telemedicina Integrada</span>
             </div>
           </motion.div>
 
           {/* Card 2 (Large - 2 cols) : Financeiro & Lotes de Convênios */}
           <motion.div
             variants={cardVariants}
-            className="md:col-span-1 lg:col-span-2 bg-gradient-to-br from-white to-slate-50 rounded-3xl p-7 sm:p-8 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 relative group overflow-hidden"
+            className="md:col-span-1 lg:col-span-2 bg-ja-card rounded-2xl p-7 sm:p-8 border border-ja-line shadow-sm hover:shadow-lg transition-all duration-300 relative group overflow-hidden"
           >
             <div className="flex items-center justify-between">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center shadow-md shadow-emerald-900/20">
-                <DollarSign className="w-6 h-6 text-emerald-200" />
+              <div className="w-12 h-12 rounded-2xl bg-ja-brand text-white flex items-center justify-center">
+                <DollarSign className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-ja-surface text-ja-teal border border-ja-line">
                 TISS & Convênios
               </span>
             </div>
 
-            <h3 className="text-2xl font-bold text-slate-900 mt-5 font-display">
+            <h3 className="text-2xl font-bold text-ja-ink mt-5 font-display">
               Financeiro Completo & Faturamento de Lotes
             </h3>
-            <p className="text-sm text-slate-600 mt-2 leading-relaxed">
+            <p className="text-sm text-ja-muted mt-2 leading-relaxed">
               Gestão rigorosa de fluxo de caixa, contas a pagar/receber, emissão de cobranças com QR Code PIX automático e envio de lotes TISS sem glosas.
             </p>
 
             {/* Financial Preview snippet */}
-            <div className="mt-6 p-4 rounded-2xl bg-slate-900 text-white shadow-xs">
+            <div className="mt-6 p-4 rounded-2xl bg-ja-brand text-white">
               <div className="flex items-center justify-between text-xs mb-1">
                 <span className="text-slate-400">Fluxo de Caixa Mensal</span>
                 <span className="text-emerald-400 font-bold">+18.4% de margem</span>
@@ -150,51 +147,51 @@ export function ModulesBentoSection() {
               </div>
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-600">
-              <span className="px-2.5 py-1 rounded-lg bg-slate-100 font-medium">✓ Conciliação Bancária</span>
-              <span className="px-2.5 py-1 rounded-lg bg-slate-100 font-medium">✓ Tabela CBHPM / TUSS</span>
-              <span className="px-2.5 py-1 rounded-lg bg-slate-100 font-medium">✓ DRE em Tempo Real</span>
+            <div className="mt-4 flex flex-wrap gap-2 text-xs text-ja-muted">
+              <span className="px-2.5 py-1 rounded-lg bg-ja-surface border border-ja-line font-medium">✓ Conciliação Bancária</span>
+              <span className="px-2.5 py-1 rounded-lg bg-ja-surface border border-ja-line font-medium">✓ Tabela CBHPM / TUSS</span>
+              <span className="px-2.5 py-1 rounded-lg bg-ja-surface border border-ja-line font-medium">✓ DRE em Tempo Real</span>
             </div>
           </motion.div>
 
-          {/* Card 3 (1 col) : Lembretes por WhatsApp */}
+          {/* Card 3 (1 col) : Integrações e lembretes */}
           <motion.div
             variants={cardVariants}
-            className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+            className="bg-ja-card rounded-2xl p-6 border border-ja-line shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
           >
             <div>
-              <div className="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
+              <div className="w-11 h-11 rounded-2xl bg-ja-surface text-ja-teal border border-ja-line flex items-center justify-center mb-4">
                 <MessageSquare className="w-5 h-5" />
               </div>
-              <h4 className="text-lg font-bold text-slate-900 font-display">
-                Lembretes no WhatsApp
+              <h4 className="text-lg font-bold text-ja-ink font-display">
+                Integrações e lembretes
               </h4>
-              <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                Mensagens automáticas de confirmação com resposta direta. Se o paciente desmarcar, a vaga é liberada automaticamente na agenda.
+              <p className="text-xs text-ja-muted mt-2 leading-relaxed">
+                Envio automático de lembretes das consultas para pacientes e profissionais, via WhatsApp e e-mail.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-emerald-700 font-bold text-xs">
-              <span>✓ Redução de 85% no no-show</span>
+            <div className="mt-4 pt-3 border-t border-ja-line flex items-center gap-1.5 text-ja-teal font-bold text-xs">
+              <span>WhatsApp e e-mail</span>
             </div>
           </motion.div>
 
           {/* Card 4 (1 col) : Estoque Clínico */}
           <motion.div
             variants={cardVariants}
-            className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+            className="bg-ja-card rounded-2xl p-6 border border-ja-line shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
           >
             <div>
-              <div className="w-11 h-11 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4">
+              <div className="w-11 h-11 rounded-2xl bg-ja-surface text-ja-teal border border-ja-line flex items-center justify-center mb-4">
                 <Boxes className="w-5 h-5" />
               </div>
-              <h4 className="text-lg font-bold text-slate-900 font-display">
+              <h4 className="text-lg font-bold text-ja-ink font-display">
                 Estoque & Suprimentos
               </h4>
-              <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+              <p className="text-xs text-ja-muted mt-2 leading-relaxed">
                 Controle de medicamentos, descartáveis e insumos por lote e validade. Alertas automáticos antes do estoque crítico acabar.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-amber-700 font-bold text-xs">
+            <div className="mt-4 pt-3 border-t border-ja-line flex items-center gap-1.5 text-ja-teal font-bold text-xs">
               <BellRing className="w-4 h-4" />
               Alerta de mínimo inteligente
             </div>
@@ -203,49 +200,67 @@ export function ModulesBentoSection() {
           {/* Card 5 (1 col) : Relatórios & Analytics */}
           <motion.div
             variants={cardVariants}
-            className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+            className="bg-ja-card rounded-2xl p-6 border border-ja-line shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
           >
             <div>
-              <div className="w-11 h-11 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4">
+              <div className="w-11 h-11 rounded-2xl bg-ja-surface text-ja-teal border border-ja-line flex items-center justify-center mb-4">
                 <BarChart3 className="w-5 h-5" />
               </div>
-              <h4 className="text-lg font-bold text-slate-900 font-display">
-                Relatórios Gerenciais
+              <h4 className="text-lg font-bold text-ja-ink font-display">
+                Relatórios & Power BI
               </h4>
-              <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+              <p className="text-xs text-ja-muted mt-2 leading-relaxed">
                 Indicadores de produtividade médica, ticket médio por especialidade, taxa de retorno e índice de inadimplência em 1 clique.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-blue-700 font-bold text-xs">
+            <div className="mt-4 pt-3 border-t border-ja-line flex items-center gap-1.5 text-ja-teal font-bold text-xs">
               <PieChart className="w-4 h-4" />
               Exportação em PDF & Excel
             </div>
           </motion.div>
 
-          {/* Card 6 (1 col - Highlight) : Agente de IA & Power BI */}
+          {/* Card 6 (1 col - Highlight) : Agente de IA */}
           <motion.div
             variants={cardVariants}
-            className="bg-gradient-to-br from-indigo-950 to-slate-900 rounded-3xl p-6 text-white shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+            className="bg-ja-brand rounded-2xl p-6 text-white shadow-md hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
           >
             <div>
-              <div className="w-11 h-11 rounded-2xl bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 flex items-center justify-center mb-4">
+              <div className="w-11 h-11 rounded-2xl bg-ja-teal text-white flex items-center justify-center mb-4">
                 <Bot className="w-5 h-5" />
               </div>
-              <div className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-300/30 mb-2">
-                <Sparkles className="w-3 h-3" /> Exclusivo Ilimitado
+              <div className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-ja-teal text-white mb-2">
+                <Sparkles className="w-3 h-3" /> Assistente
               </div>
-              <h4 className="text-lg font-bold font-display text-white">
-                Métricas da Clínica & Power BI
+              <h4 className="text-lg font-bold text-white">
+                Agente de IA
               </h4>
-              <p className="text-xs text-indigo-200 mt-2 leading-relaxed">
-                Dashboards executivos com indicadores vitais em tempo real: taxa de no-show, faturamento por convênio, ticket médio, ocupação de salas e DRE integrado.
+              <p className="text-xs text-white/70 mt-2 leading-relaxed">
+                Assistente para tirar dúvidas da equipe, no estilo ChatGPT. Responde perguntas sobre a rotina e o sistema — sem registrar evolução.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-indigo-800/60 flex items-center gap-1.5 text-emerald-300 font-bold text-xs">
-              <span>⚡ Inteligência Clínica Ativa</span>
+            <div className="mt-4 pt-3 border-t border-white/10 flex items-center gap-1.5 text-white/80 font-bold text-xs">
+              <span>Tira dúvidas da clínica</span>
             </div>
           </motion.div>
         </motion.div>
+
+        <a
+          href="#estilizacao"
+          className="mt-8 flex items-center justify-between gap-4 rounded-2xl border border-ja-line bg-ja-surface px-5 py-4 hover:border-ja-teal/40 transition-colors"
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <span className="w-10 h-10 rounded-xl bg-ja-teal text-white inline-flex items-center justify-center shrink-0">
+              <Palette className="w-5 h-5" />
+            </span>
+            <div className="min-w-0">
+              <div className="text-sm font-bold text-ja-ink">Tema claro e escuro</div>
+              <p className="text-xs text-ja-muted">
+                A preferência é salva na conta e vale em qualquer dispositivo. Experimente nesta página.
+              </p>
+            </div>
+          </div>
+          <span className="text-xs font-bold text-ja-teal shrink-0">Ver temas →</span>
+        </a>
       </div>
     </section>
   );

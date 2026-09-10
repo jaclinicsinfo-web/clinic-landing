@@ -9,20 +9,18 @@ export function TestimonialsSection() {
     {
       name: "Dra. Renata Albuquerque",
       role: "Diretora Clínica · Instituto Viva Saúde (SP)",
-      text: "Antes do Clinic Manager, tínhamos cerca de 20% de faltas todo mês. Com o envio automático de lembretes no WhatsApp e a confirmação em 1 clique, nossa taxa de no-show caiu para menos de 4%. O sistema se pagou logo na primeira semana.",
+      text: "Antes, tínhamos cerca de 20% de faltas todo mês. Com os lembretes automáticos no WhatsApp e no e-mail para pacientes e profissionais, nossa taxa de no-show caiu para menos de 4%.",
       rating: 5,
       specialty: "Multi-especialidades (12 médicos)",
       avatarInitials: "RA",
-      avatarBg: "bg-[#0d5c6b]",
     },
     {
       name: "Dr. Marcelo Bittencourt",
       role: "Psicólogo Clínico & Gestor · Espaço Mente & Ação (RJ)",
-      text: "A facilidade do prontuário com controle de humor e notas de evolução agilizou meu atendimento. Além disso, a conciliação automática com PIX facilitou a vida dos meus pacientes e da minha contabilidade.",
+      text: "O acompanhamento de evolução, com notas e histórico do paciente, agilizou meu atendimento. Além disso, a conciliação automática com PIX facilitou a vida dos meus pacientes e da minha contabilidade.",
       rating: 5,
       specialty: "Psicologia & Terapia",
       avatarInitials: "MB",
-      avatarBg: "bg-emerald-700",
     },
     {
       name: "Dra. Camila Nogueira",
@@ -31,27 +29,26 @@ export function TestimonialsSection() {
       rating: 5,
       specialty: "3 Unidades / 18 Profissionais",
       avatarInitials: "CN",
-      avatarBg: "bg-purple-700",
     },
   ];
 
   return (
-    <section className="py-24 bg-[#f8fafc] text-slate-900 relative overflow-hidden border-t border-slate-200/80">
+    <section className="py-12 md:py-16 lg:py-20 bg-ja-surface text-ja-ink relative overflow-hidden border-t border-ja-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal-50 text-[#0d5c6b] border border-teal-200 text-xs font-bold uppercase tracking-wider mb-3">
-            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ja-card text-ja-teal border border-ja-line text-xs font-bold uppercase tracking-wider mb-3">
+            <Star className="w-3.5 h-3.5 fill-ja-teal text-ja-teal" />
             Experiência Comprovada
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-display">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ja-ink tracking-tight">
             Quem usa recomenda e não troca
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-slate-600">
+          <p className="mt-3 text-base sm:text-lg text-ja-muted">
             Veja o que os profissionais e gestores de saúde relatam sobre a transformação da rotina em suas clínicas.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {testimonials.map((item, i) => (
             <motion.div
               key={item.name}
@@ -59,32 +56,32 @@ export function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="bg-white rounded-3xl p-7 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              className="bg-ja-card rounded-2xl p-7 border border-ja-line shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex text-amber-400">
+                  <div className="flex text-ja-teal">
                     {[...Array(item.rating)].map((_, idx) => (
-                      <Star key={idx} className="w-4 h-4 fill-amber-400" />
+                      <Star key={idx} className="w-4 h-4 fill-ja-teal" />
                     ))}
                   </div>
-                  <Quote className="w-6 h-6 text-slate-300" />
+                  <Quote className="w-6 h-6 text-ja-line" />
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic">
+                <p className="text-sm text-ja-ink/80 leading-relaxed">
                   &quot;{item.text}&quot;
                 </p>
               </div>
 
-              <div className="mt-6 pt-5 border-t border-slate-100 flex items-center gap-3">
-                <div className={`w-11 h-11 rounded-full ${item.avatarBg} text-white font-bold text-xs flex items-center justify-center shrink-0`}>
+              <div className="mt-6 pt-5 border-t border-ja-line flex items-center gap-3">
+                <div className="w-11 h-11 rounded-full bg-ja-teal text-white font-bold text-xs flex items-center justify-center shrink-0">
                   {item.avatarInitials}
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900">{item.name}</h4>
-                  <p className="text-[11px] text-slate-500">{item.role}</p>
-                  <span className="inline-flex items-center gap-1 text-[10px] text-emerald-700 font-semibold mt-0.5">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                  <h4 className="text-xs font-bold text-ja-ink">{item.name}</h4>
+                  <p className="text-[11px] text-ja-muted">{item.role}</p>
+                  <span className="inline-flex items-center gap-1 text-[10px] text-ja-teal font-semibold mt-0.5">
+                    <CheckCircle2 className="w-3 h-3" />
                     {item.specialty}
                   </span>
                 </div>

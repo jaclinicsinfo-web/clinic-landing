@@ -18,55 +18,56 @@ export function ScrollJourneySection() {
   const steps = [
     {
       time: "08:00",
-      tag: "Recepção Inteligente",
-      title: "Confirmação Automática no WhatsApp",
-      desc: "O Clinic Manager dispara lembretes interativos pela API Oficial. O paciente confirma com 1 toque e a grade da recepção atualiza em tempo real, sem que a secretária precise passar o dia no telefone.",
+      tag: "Integrações e lembretes",
+      title: "Lembretes no WhatsApp e no e-mail",
+      desc: "O módulo de integração envia lembretes das consultas para pacientes e profissionais, via WhatsApp e e-mail, no horário configurado pela clínica.",
       icon: MessageSquare,
-      accent: "text-emerald-600 bg-emerald-50 border-emerald-200",
-      uiTitle: "Robô de Atendimento WhatsApp Oficial",
+      accent: "text-ja-teal bg-ja-surface border-ja-line",
+      uiTitle: "Lembretes de consulta",
       uiContent: (
         <div className="space-y-3 text-xs">
-          <div className="p-3.5 rounded-xl bg-teal-950/80 border border-teal-700/50">
-            <div className="text-[10px] text-emerald-300 font-bold">Disparo Automático · 24h antes</div>
-            <p className="text-teal-100 mt-1">
-              &quot;Olá Marcos! Confirmamos sua consulta hoje às 14h com Dra. Helena Vaz na Unidade Jardins?&quot;
+          <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
+            <div className="text-[10px] text-white/70 font-bold">WhatsApp · paciente · 24h antes</div>
+            <p className="text-white/85 mt-1">
+              &quot;Olá Marcos! Lembrete: consulta amanhã às 14h com Dra. Helena Vaz na Unidade Jardins.&quot;
             </p>
           </div>
-          <div className="p-3.5 rounded-xl bg-emerald-950/90 border border-emerald-600/50 text-emerald-200">
-            <div className="text-[10px] text-emerald-400 font-bold">Resposta do Paciente</div>
-            <p className="mt-1 font-semibold">&quot;[1] Sim, confirmado! Já estou a caminho.&quot;</p>
+          <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
+            <div className="text-[10px] text-white/70 font-bold">E-mail · profissional</div>
+            <p className="text-white/85 mt-1">
+              &quot;Dra. Helena, você tem 6 atendimentos amanhã. Primeiro horário: 08h00.&quot;
+            </p>
           </div>
-          <div className="p-2.5 rounded-lg bg-teal-900/40 border border-teal-600/40 flex items-center justify-between text-teal-200 text-[11px]">
-            <span>Status da Recepção:</span>
-            <span className="font-bold text-emerald-400">Presença Confirmada na Grade ✓</span>
+          <div className="p-2.5 rounded-lg bg-white/5 border border-white/10 flex items-center justify-between text-white/75 text-[11px]">
+            <span>Canais:</span>
+            <span className="font-bold text-white">WhatsApp e e-mail</span>
           </div>
         </div>
       ),
     },
     {
       time: "10:30",
-      tag: "Atendimento Clínico",
-      title: "Prontuário Ágil com Agente de IA",
-      desc: "O médico ou psicólogo atende com histórico completo na tela. Utilize comandos de voz e deixe a inteligência artificial estruturar o resumo da consulta, gerar prescrições digitais e termos LGPD em segundos.",
+      tag: "Assistente de IA",
+      title: "IA para tirar dúvidas, no estilo ChatGPT",
+      desc: "O agente de IA responde perguntas da equipe sobre a rotina e o uso do sistema — como um ChatGPT da clínica. Ele não registra acompanhamento de evolução.",
       icon: Bot,
-      accent: "text-indigo-600 bg-indigo-50 border-indigo-200",
-      uiTitle: "Prontuário Eletrônico com IA Copilot",
+      accent: "text-ja-teal bg-ja-surface border-ja-line",
+      uiTitle: "Assistente de IA",
       uiContent: (
         <div className="space-y-3 text-xs">
-          <div className="p-3 rounded-xl bg-indigo-950/60 border border-indigo-700/50">
-            <div className="flex items-center justify-between text-indigo-300 font-bold text-[11px] mb-1">
-              <span>Mariana Oliveira da Silva (34 anos)</span>
-              <span className="text-emerald-400 font-semibold">Termo LGPD Assinado</span>
-            </div>
-            <p className="text-slate-300 text-[11px]">Anamnese prévia: Tratamento contínuo · Retorno mensal</p>
+          <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+            <div className="text-white/55 font-bold text-[10px] mb-1">Pergunta da recepção</div>
+            <p className="text-white/85">
+              &quot;Como remarcar um paciente e avisar o profissional?&quot;
+            </p>
           </div>
-          <div className="p-3 rounded-xl bg-slate-950/80 border border-indigo-500/40">
-            <div className="text-amber-300 font-bold text-[10px] flex items-center gap-1 mb-1">
-              <Sparkles className="w-3 h-3 text-amber-400" />
-              Evolução Sumarizada por IA (Pronta para CFM):
+          <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+            <div className="text-white font-bold text-[10px] flex items-center gap-1 mb-1">
+              <Sparkles className="w-3 h-3" />
+              Resposta do assistente
             </div>
-            <p className="text-slate-200 font-mono text-[11px] leading-relaxed">
-              &quot;Paciente refere redução de 60% nas queixas principais. Boa tolerância terapêutica. Prescrição renovada por 30 dias.&quot;
+            <p className="text-white/80 leading-relaxed">
+              &quot;Abra a agenda, escolha o horário, remarque o atendimento e dispare o lembrete pelo módulo de integração — WhatsApp e e-mail para o paciente e para o profissional.&quot;
             </p>
           </div>
         </div>
@@ -78,7 +79,7 @@ export function ScrollJourneySection() {
       title: "Lotes de Convênio Sem Glosas & PIX Instantâneo",
       desc: "O sistema valida as carteirinhas e regras contratuais de cada operadora (Unimed, Bradesco, Amil, SulAmérica). O arquivo XML é exportado no padrão TISS 4.01 sem erros que causem glosas.",
       icon: DollarSign,
-      accent: "text-emerald-600 bg-emerald-50 border-emerald-200",
+      accent: "text-ja-teal bg-ja-surface border-ja-line",
       uiTitle: "Validador TISS & Lotes de Faturamento",
       uiContent: (
         <div className="space-y-3 text-xs">
@@ -107,7 +108,7 @@ export function ScrollJourneySection() {
       title: "Fechamento DRE & Repasses Médicos",
       desc: "No final do dia, todos os repasses e comissões dos médicos e terapeutas estão calculados automaticamente, com painel de métricas, lucratividade por sala e gráficos consolidados no Power BI.",
       icon: TrendingUp,
-      accent: "text-amber-600 bg-amber-50 border-amber-200",
+      accent: "text-ja-teal bg-ja-surface border-ja-line",
       uiTitle: "DRE em Tempo Real & Repasses Médicos",
       uiContent: (
         <div className="space-y-3 text-xs">
@@ -136,18 +137,18 @@ export function ScrollJourneySection() {
   ];
 
   return (
-    <section className="py-24 bg-[#f8fafc] text-slate-900 relative overflow-hidden border-t border-slate-200/80">
+    <section className="py-12 md:py-16 lg:py-20 bg-ja-surface text-ja-ink relative overflow-hidden border-t border-ja-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal-50 text-[#0d5c6b] border border-teal-200 text-xs font-bold uppercase tracking-wider mb-3">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ja-card text-ja-teal border border-ja-line text-xs font-bold uppercase tracking-wider mb-3">
             <Clock className="w-3.5 h-3.5" />
-            Um Dia na Sua Clínica com Clinic Manager
+            Um dia na sua clínica com J.A. Clinics
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-display">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ja-ink tracking-tight">
             A jornada completa da recepção ao fechamento
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-600">
-            Veja como o Clinic Manager opera de ponta a ponta sem ruídos e com total automação.
+          <p className="mt-4 text-base sm:text-lg text-ja-muted">
+            Veja como a operação roda de ponta a ponta sem ruídos e com total automação.
           </p>
         </div>
 
@@ -164,16 +165,16 @@ export function ScrollJourneySection() {
                   onClick={() => setActiveStep(index)}
                   className={`p-6 rounded-3xl border cursor-pointer transition-all duration-300 ${
                     isActive
-                      ? "bg-white border-[#0d5c6b] ring-2 ring-[#0d5c6b]/20 shadow-xl scale-[1.02]"
-                      : "bg-white/70 border-slate-200 hover:bg-white hover:border-slate-300 opacity-80 hover:opacity-100"
+                      ? "bg-ja-card border-ja-teal ring-2 ring-ja-teal/20 shadow-xl scale-[1.02]"
+                      : "bg-ja-card/70 border-ja-line hover:bg-ja-card hover:border-ja-teal/30 opacity-80 hover:opacity-100"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-xs font-extrabold text-[#0d5c6b] bg-teal-50 px-2.5 py-1 rounded-lg border border-teal-200">
+                      <span className="font-mono text-xs font-extrabold text-ja-teal bg-ja-surface px-2.5 py-1 rounded-lg border border-ja-line">
                         {step.time}
                       </span>
-                      <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                      <span className="text-xs font-bold text-ja-muted uppercase tracking-wider">
                         {step.tag}
                       </span>
                     </div>
@@ -182,10 +183,10 @@ export function ScrollJourneySection() {
                     </div>
                   </div>
 
-                  <h3 className="text-lg font-bold text-slate-900 mt-3 font-display">
+                  <h3 className="text-lg font-bold text-ja-ink mt-3 font-display">
                     {step.title}
                   </h3>
-                  <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                  <p className="text-xs text-ja-muted mt-1.5 leading-relaxed">
                     {step.desc}
                   </p>
                 </motion.div>
@@ -195,7 +196,7 @@ export function ScrollJourneySection() {
 
           {/* Interactive Screen Preview Column - High-Impact Dark Cockpit Frame */}
           <div className="lg:col-span-6 lg:sticky lg:top-32">
-            <div className="bg-[#0b242d] rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl shadow-slate-900/25 relative overflow-hidden text-white backdrop-blur-2xl">
+            <div className="bg-ja-brand rounded-2xl p-6 sm:p-8 border border-white/10 relative overflow-hidden text-white">
               <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
 
               <div className="flex items-center justify-between pb-4 mb-5 border-b border-teal-800/60">

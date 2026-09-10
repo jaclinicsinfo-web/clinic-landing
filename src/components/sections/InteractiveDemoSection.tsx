@@ -8,18 +8,12 @@ import {
   FileText,
   DollarSign,
   Boxes,
-  Sparkles,
   Maximize2,
   X,
   CheckCircle2,
-  Users,
-  Clock,
-  ArrowRight,
   TrendingUp,
   BarChart3,
-  Bot,
   Eye,
-  ShieldCheck,
 } from "lucide-react";
 
 export function InteractiveDemoSection() {
@@ -50,29 +44,29 @@ export function InteractiveDemoSection() {
       name: "Agenda",
       icon: Calendar,
       tag: "Recepção Ágil",
-      title: "Agenda Inteligente & Confirmação WhatsApp",
-      desc: "Visualização por dia, semana ou mês com filtros por profissional e sala. Status atualizado em tempo real com o WhatsApp Oficial.",
+      title: "Agenda Inteligente",
+      desc: "Visualização por dia, semana ou mês com filtros por profissional e sala. Lembretes de consulta saem pelo módulo de integração, via WhatsApp e e-mail.",
       screenshot: "/screenshots/agenda.png",
       badge: "Produção",
       highlights: [
         "Visualização multi-profissional e por salas",
-        "Confirmação e remarcação com 1 clique no WhatsApp",
-        "Encaixes automáticos e controle de no-show",
+        "Lembretes para pacientes e profissionais",
+        "WhatsApp e e-mail no mesmo módulo",
       ],
     },
     {
       id: "pacientes",
-      name: "Pacientes & Prontuário",
+      name: "Pacientes & Evolução",
       icon: FileText,
       tag: "Segurança LGPD",
-      title: "Prontuário Eletrônico & Histórico Clínico",
-      desc: "Cadastro completo com CPF, convênio, termos de consentimento LGPD, odontograma interativo, evolução clínica e controle financeiro por paciente.",
+      title: "Acompanhamento de evolução",
+      desc: "Cadastro de pacientes com histórico de atendimentos, notas de evolução, anexos e controle financeiro por paciente — em conformidade com a LGPD.",
       screenshot: "/screenshots/pacientes.png",
       badge: "Produção",
       highlights: [
-        "Prontuário com validade jurídica CFM/CFP",
-        "Histórico clínico unificado e anexos de exames",
-        "Odontograma e controle de procedimentos",
+        "Acompanhamento de evolução por paciente",
+        "Histórico de consultas e anexos de exames",
+        "Notas de evolução e controle de procedimentos",
       ],
     },
     {
@@ -125,22 +119,21 @@ export function InteractiveDemoSection() {
   const currentMod = modules.find((m) => m.id === activeModule) || modules[0];
 
   return (
-    <section id="preview" className="py-24 bg-[#0a232b] text-white relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#0d5c6b]/30 rounded-full blur-[140px] pointer-events-none" />
+    <section id="preview" className="py-12 md:py-16 lg:py-20 bg-ja-brand text-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid-pattern-dark opacity-30 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal-400/10 text-teal-300 border border-teal-400/20 text-xs font-bold uppercase tracking-wider mb-3">
-            <Eye className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/8 text-white/80 border border-white/12 text-xs font-bold uppercase tracking-wider mb-3">
+            <Eye className="w-3.5 h-3.5" />
             Telas Reais em Produção
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-display">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
             Conheça o sistema por dentro
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-teal-100/80">
-            Veja as telas reais do <strong>Clinic Manager</strong> em funcionamento. Clique nos módulos para navegar e ampliar.
+          <p className="mt-4 text-base sm:text-lg text-white/70">
+            Veja as telas reais em funcionamento. Clique nos módulos para navegar e ampliar.
           </p>
 
           {/* Module Selector Buttons */}
@@ -154,8 +147,8 @@ export function InteractiveDemoSection() {
                   onClick={() => setActiveModule(m.id as any)}
                   className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                     isActive
-                      ? "bg-[#0d5c6b] text-white shadow-lg shadow-teal-950/60 ring-1 ring-teal-400/40"
-                      : "text-teal-200/80 hover:text-white hover:bg-white/5"
+                      ? "bg-ja-teal text-white"
+                      : "text-white/70 hover:text-white hover:bg-white/5"
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -167,11 +160,11 @@ export function InteractiveDemoSection() {
         </div>
 
         {/* Showcase Container */}
-        <div className="bg-[#071b22] rounded-3xl border border-teal-800/70 p-5 sm:p-8 shadow-2xl relative overflow-hidden">
+        <div className="bg-[#0a2f36] rounded-2xl border border-white/10 p-5 sm:p-8 relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Description & Features Column */}
             <div className="lg:col-span-4 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ja-teal text-white text-xs font-bold">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                 {currentMod.tag}
               </div>
@@ -180,17 +173,17 @@ export function InteractiveDemoSection() {
                 {currentMod.title}
               </h3>
 
-              <p className="text-sm text-teal-100/80 leading-relaxed">
+              <p className="text-sm text-white/70 leading-relaxed">
                 {currentMod.desc}
               </p>
 
               <div className="space-y-2.5 pt-2">
-                <div className="text-xs font-bold text-teal-300 uppercase tracking-wider">
+                <div className="text-xs font-bold text-white/55 uppercase tracking-wider">
                   Destaques deste módulo:
                 </div>
                 {currentMod.highlights.map((h) => (
-                  <div key={h} className="flex items-start gap-2.5 text-xs text-teal-100/90">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <div key={h} className="flex items-start gap-2.5 text-xs text-white/75">
+                    <CheckCircle2 className="w-4 h-4 text-white/60 shrink-0 mt-0.5" />
                     <span>{h}</span>
                   </div>
                 ))}
@@ -199,7 +192,7 @@ export function InteractiveDemoSection() {
               <div className="pt-4 flex items-center gap-3">
                 <button
                   onClick={() => setLightboxImage(currentMod.screenshot)}
-                  className="px-4 py-2.5 rounded-xl bg-teal-900/80 hover:bg-teal-800 text-teal-200 hover:text-white text-xs font-bold flex items-center gap-2 border border-teal-700/60 transition-colors cursor-pointer"
+                  className="min-h-11 px-4 py-2.5 rounded-xl bg-ja-teal hover:bg-ja-teal-hover text-white text-xs font-bold flex items-center gap-2 transition-colors"
                 >
                   <Maximize2 className="w-4 h-4" />
                   <span>Ampliar Tela em Tela Cheia</span>
@@ -225,7 +218,7 @@ export function InteractiveDemoSection() {
 
                 {/* Hover Overlay with Zoom Button */}
                 <div className="absolute inset-0 bg-slate-950/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-xs pointer-events-none">
-                  <div className="px-5 py-2.5 rounded-xl bg-[#0d5c6b] text-white text-xs font-bold flex items-center gap-2 shadow-2xl border border-teal-300/40 scale-95 group-hover:scale-100 transition-transform">
+                      <div className="px-5 py-2.5 rounded-xl bg-ja-teal text-white text-xs font-bold flex items-center gap-2 scale-95 group-hover:scale-100 transition-transform">
                     <Maximize2 className="w-4 h-4" />
                     <span>Clique para Ampliar em Tela Cheia (100% Nítido)</span>
                   </div>

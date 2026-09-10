@@ -1,40 +1,44 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import { BRAND } from "@/lib/brand";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 const inter = Inter({
-  variable: "--font-sans",
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-display",
-  subsets: ["latin"],
-  display: "swap",
-});
+const themeInitScript = `(function(){try{var t=localStorage.getItem('ja-theme');if(t==='dark'){document.documentElement.classList.add('dark');document.documentElement.style.colorScheme='dark'}}catch(e){}})();`;
 
 export const metadata: Metadata = {
-  title: "Clinic Manager | Sistema Completo de Gestão para Clínicas e Consultórios",
+  title: `${BRAND.name} | Gestão clínica completa. Menos faltas. Mais controle.`,
   description:
-    "O ERP mais completo e intuitivo para clínicas médicas, psicologia e odontologia. Agenda inteligente, prontuário eletrônico LGPD, faturamento de convênios, financeiro e Agente de IA.",
+    "Gestão clínica completa com agenda, acompanhamento de evolução, faturamento TISS, lembretes por WhatsApp e e-mail e assistente de IA para tirar dúvidas. Experimente 14 dias.",
   keywords: [
+    "J.A. Clinics",
     "gestão de clínicas",
     "software médico",
-    "prontuário eletrônico",
+    "acompanhamento de evolução",
     "agenda médica online",
     "faturamento TISS",
     "sistema para consultório",
     "Clinic Manager",
-    "ERP para psicologia",
   ],
-  authors: [{ name: "Clinic Manager Team" }],
+  authors: [{ name: BRAND.name }],
+  icons: {
+    icon: "/icon-squircle.png",
+    apple: "/icon-squircle.png",
+  },
   openGraph: {
-    title: "Clinic Manager | Gestão Clínica de Alta Performance",
+    title: `${BRAND.name} | Gestão clínica completa`,
     description:
-      "Aumente o faturamento da sua clínica, reduza faltas em até 85% e automatize a rotina com IA integrada.",
+      "Menos faltas. Mais controle. Agenda, acompanhamento de evolução, TISS, lembretes por WhatsApp e e-mail, e IA para tirar dúvidas.",
     type: "website",
     locale: "pt_BR",
+    siteName: BRAND.name,
   },
 };
 
@@ -44,9 +48,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${jakarta.variable} scroll-smooth`}>
-      <body className="min-h-screen bg-[#f8fafc] text-[#0f1a24] antialiased selection:bg-[#0d5c6b] selection:text-white flex flex-col font-sans">
-        {children}
+    <html lang="pt-BR" className={`${inter.variable} scroll-smooth`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className="min-h-screen bg-ja-surface text-ja-ink antialiased selection:bg-ja-teal selection:text-white flex flex-col font-sans">
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
