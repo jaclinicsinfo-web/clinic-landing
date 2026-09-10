@@ -9,7 +9,6 @@ import {
   History,
   FileCheck2,
   Server,
-  UserCheck,
   KeyRound,
 } from "lucide-react";
 

@@ -16,10 +16,16 @@ import {
   Eye,
 } from "lucide-react";
 
+type ModuleId =
+  | "dashboard"
+  | "agenda"
+  | "pacientes"
+  | "financeiro"
+  | "estoque"
+  | "relatorios";
+
 export function InteractiveDemoSection() {
-  const [activeModule, setActiveModule] = useState<
-    "dashboard" | "agenda" | "pacientes" | "financeiro" | "estoque" | "relatorios"
-  >("dashboard");
+  const [activeModule, setActiveModule] = useState<ModuleId>("dashboard");
 
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
@@ -144,7 +150,7 @@ export function InteractiveDemoSection() {
               return (
                 <button
                   key={m.id}
-                  onClick={() => setActiveModule(m.id as any)}
+                  onClick={() => setActiveModule(m.id as ModuleId)}
                   className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                     isActive
                       ? "bg-ja-teal text-white"
