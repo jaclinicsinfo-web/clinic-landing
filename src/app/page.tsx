@@ -18,6 +18,8 @@ import { ScheduleDemoModal } from "@/components/modals/ScheduleDemoModal";
 import { MessageCircle } from "lucide-react";
 import { CONTACT_CONFIG } from "@/lib/constants";
 
+// home
+
 export default function Home() {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
 
