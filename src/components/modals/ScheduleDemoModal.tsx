@@ -101,7 +101,7 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
                     <ul className="space-y-1 ml-5 list-disc">
                       <li>Tour pelos módulos que sua clínica mais precisa</li>
                       <li>Simulação de importação de pacientes sem perda de histórico</li>
-                      <li>Tira-dúvidas sobre tabela TISS, PIX e o assistente de IA</li>
+                      <li>Comparação dos planos Essencial, Profissional e Ilimitado</li>
                     </ul>
                   </div>
 

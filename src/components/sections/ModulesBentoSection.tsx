@@ -81,7 +81,7 @@ export function ModulesBentoSection() {
               Núcleo Operacional & Agenda Inteligente
             </h3>
             <p className="text-sm text-ja-muted mt-2 leading-relaxed">
-              Agenda visual com filtros por profissional, especialidade e sala. Acompanhamento de evolução, histórico de consultas e conformidade com a LGPD.
+              Grade do dia, da semana e do mês, com profissional, sala e status. Acompanhamento de evolução e histórico de consultas do paciente.
             </p>
 
             {/* Interactive mini-preview */}
@@ -107,9 +107,9 @@ export function ModulesBentoSection() {
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2 text-xs text-ja-muted">
-              <span className="px-2.5 py-1 rounded-lg bg-ja-card border border-ja-line font-medium">✓ Bloqueio de Feriados</span>
-              <span className="px-2.5 py-1 rounded-lg bg-ja-card border border-ja-line font-medium">✓ Encaixes Inteligentes</span>
-              <span className="px-2.5 py-1 rounded-lg bg-ja-card border border-ja-line font-medium">✓ Telemedicina Integrada</span>
+              <span className="px-2.5 py-1 rounded-lg bg-ja-card border border-ja-line font-medium">✓ Bloqueio de horário</span>
+              <span className="px-2.5 py-1 rounded-lg bg-ja-card border border-ja-line font-medium">✓ Lista de espera</span>
+              <span className="px-2.5 py-1 rounded-lg bg-ja-card border border-ja-line font-medium">✓ Particular ou convênio</span>
             </div>
           </motion.div>
 
@@ -123,15 +123,15 @@ export function ModulesBentoSection() {
                 <DollarSign className="w-6 h-6" />
               </div>
               <span className="text-xs font-bold px-3 py-1 rounded-full bg-ja-surface text-ja-teal border border-ja-line">
-                TISS & Convênios
+                Financeiro
               </span>
             </div>
 
             <h3 className="text-2xl font-bold text-ja-ink mt-5 font-display">
-              Financeiro Completo & Faturamento de Lotes
+              Financeiro e lotes de convênio
             </h3>
             <p className="text-sm text-ja-muted mt-2 leading-relaxed">
-              Gestão rigorosa de fluxo de caixa, contas a pagar/receber, emissão de cobranças com QR Code PIX automático e envio de lotes TISS sem glosas.
+              Contas a pagar e a receber, fluxo de caixa, DRE simplificado e comissões. O lote do convênio registra glosa e o valor recebido.
             </p>
 
             {/* Financial Preview snippet */}
@@ -142,15 +142,15 @@ export function ModulesBentoSection() {
               </div>
               <div className="text-2xl font-black font-display text-white">R$ 148.920,00</div>
               <div className="mt-2 text-[11px] text-slate-300 flex items-center justify-between">
-                <span>Guias TISS validadas: 100%</span>
-                <span className="text-emerald-400 font-semibold">Repasses automatizados</span>
+                <span>Lotes de convênio e glosa</span>
+                <span className="text-emerald-400 font-semibold">Comissões calculadas</span>
               </div>
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2 text-xs text-ja-muted">
-              <span className="px-2.5 py-1 rounded-lg bg-ja-surface border border-ja-line font-medium">✓ Conciliação Bancária</span>
-              <span className="px-2.5 py-1 rounded-lg bg-ja-surface border border-ja-line font-medium">✓ Tabela CBHPM / TUSS</span>
-              <span className="px-2.5 py-1 rounded-lg bg-ja-surface border border-ja-line font-medium">✓ DRE em Tempo Real</span>
+              <span className="px-2.5 py-1 rounded-lg bg-ja-surface border border-ja-line font-medium">✓ PIX, dinheiro, cartão e boleto</span>
+              <span className="px-2.5 py-1 rounded-lg bg-ja-surface border border-ja-line font-medium">✓ Fluxo de caixa</span>
+              <span className="px-2.5 py-1 rounded-lg bg-ja-surface border border-ja-line font-medium">✓ DRE simplificado</span>
             </div>
           </motion.div>
 
@@ -167,7 +167,7 @@ export function ModulesBentoSection() {
                 Integrações e lembretes
               </h4>
               <p className="text-xs text-ja-muted mt-2 leading-relaxed">
-                Envio automático de lembretes das consultas para pacientes e profissionais, via WhatsApp e e-mail.
+                No plano Ilimitado, envio de lembretes das consultas para pacientes e profissionais, via WhatsApp e e-mail.
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-ja-line flex items-center gap-1.5 text-ja-teal font-bold text-xs">
@@ -188,7 +188,7 @@ export function ModulesBentoSection() {
                 Estoque & Suprimentos
               </h4>
               <p className="text-xs text-ja-muted mt-2 leading-relaxed">
-                Controle de medicamentos, descartáveis e insumos por lote e validade. Alertas automáticos antes do estoque crítico acabar.
+                Saldo, custo e estoque mínimo de insumos. O aviso aparece quando a quantidade fica abaixo do mínimo.
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-ja-line flex items-center gap-1.5 text-ja-teal font-bold text-xs">
@@ -207,15 +207,15 @@ export function ModulesBentoSection() {
                 <BarChart3 className="w-5 h-5" />
               </div>
               <h4 className="text-lg font-bold text-ja-ink font-display">
-                Relatórios & Power BI
+                Relatórios
               </h4>
               <p className="text-xs text-ja-muted mt-2 leading-relaxed">
-                Indicadores de produtividade médica, ticket médio por especialidade, taxa de retorno e índice de inadimplência em 1 clique.
+                Faturamento, atendimentos, inadimplência, novos e recorrentes, produtividade e comissões. A exportação sai em CSV.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-ja-line flex items-center gap-1.5 text-ja-teal font-bold text-xs">
+            <div className="mt-4 pt-3 border-t border-ja-line flex items-center gap-1.5 text-ja-muted font-bold text-xs">
               <PieChart className="w-4 h-4" />
-              Exportação em PDF & Excel
+              Power BI: em desenvolvimento
             </div>
           </motion.div>
 
@@ -228,18 +228,18 @@ export function ModulesBentoSection() {
               <div className="w-11 h-11 rounded-2xl bg-ja-teal text-white flex items-center justify-center mb-4">
                 <Bot className="w-5 h-5" />
               </div>
-              <div className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-ja-teal text-white mb-2">
-                <Sparkles className="w-3 h-3" /> Assistente
+              <div className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/15 text-white mb-2">
+                <Sparkles className="w-3 h-3" /> Em desenvolvimento
               </div>
               <h4 className="text-lg font-bold text-white">
                 Agente de IA
               </h4>
               <p className="text-xs text-white/70 mt-2 leading-relaxed">
-                Assistente para tirar dúvidas da equipe, no estilo ChatGPT. Responde perguntas sobre a rotina e o sistema — sem registrar evolução.
+                Reservado no plano Ilimitado. A tela já está no menu e ainda não responde. A implementação entra nas próximas entregas.
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-white/10 flex items-center gap-1.5 text-white/80 font-bold text-xs">
-              <span>Tira dúvidas da clínica</span>
+              <span>Em desenvolvimento</span>
             </div>
           </motion.div>
         </motion.div>

@@ -47,57 +47,55 @@ export function ScrollJourneySection() {
     },
     {
       time: "10:30",
-      tag: "Assistente de IA",
-      title: "IA para tirar dúvidas, no estilo ChatGPT",
-      desc: "O agente de IA responde perguntas da equipe sobre a rotina e o uso do sistema — como um ChatGPT da clínica. Ele não registra acompanhamento de evolução.",
+      tag: "Agente de IA",
+      title: "Assistente em desenvolvimento",
+      desc: "O agente de IA está no plano Ilimitado e segue em desenvolvimento. A tela já aparece no menu e ainda não responde no painel.",
       icon: Bot,
       accent: "text-ja-teal bg-ja-surface border-ja-line",
-      uiTitle: "Assistente de IA",
+      uiTitle: "Agente de IA",
       uiContent: (
         <div className="space-y-3 text-xs">
           <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-            <div className="text-white/55 font-bold text-[10px] mb-1">Pergunta da recepção</div>
-            <p className="text-white/85">
-              &quot;Como remarcar um paciente e avisar o profissional?&quot;
-            </p>
-          </div>
-          <div className="p-3 rounded-xl bg-white/5 border border-white/10">
             <div className="text-white font-bold text-[10px] flex items-center gap-1 mb-1">
               <Sparkles className="w-3 h-3" />
-              Resposta do assistente
+              Em desenvolvimento
             </div>
-            <p className="text-white/80 leading-relaxed">
-              &quot;Abra a agenda, escolha o horário, remarque o atendimento e dispare o lembrete pelo módulo de integração — WhatsApp e e-mail para o paciente e para o profissional.&quot;
+            <p className="text-white/85 leading-relaxed">
+              Incluso no plano Ilimitado. A área está liberada no menu e a implementação entra nas próximas entregas.
             </p>
+          </div>
+          <div className="p-2.5 rounded-lg bg-white/5 border border-white/10 flex items-center justify-between text-white/75 text-[11px]">
+            <span>Status no painel:</span>
+            <span className="font-bold text-white">Em breve neste plano</span>
           </div>
         </div>
       ),
     },
     {
       time: "14:00",
-      tag: "Faturamento & TISS",
-      title: "Lotes de Convênio Sem Glosas & PIX Instantâneo",
-      desc: "O sistema valida as carteirinhas e regras contratuais de cada operadora (Unimed, Bradesco, Amil, SulAmérica). O arquivo XML é exportado no padrão TISS 4.01 sem erros que causem glosas.",
+      tag: "Financeiro",
+      title: "Lote de convênio, glosa e recebimento",
+      desc: "A partir do plano Profissional, a clínica fecha o lote do convênio, lança a glosa e registra o valor recebido. O particular entra como PIX, dinheiro, cartão ou boleto.",
       icon: DollarSign,
       accent: "text-ja-teal bg-ja-surface border-ja-line",
-      uiTitle: "Validador TISS & Lotes de Faturamento",
+      uiTitle: "Lote de convênio",
       uiContent: (
         <div className="space-y-3 text-xs">
           <div className="grid grid-cols-2 gap-2">
             <div className="p-2.5 rounded-xl bg-teal-950/70 border border-teal-700/50">
-              <div className="text-[10px] text-teal-300">Lote #08/2026 TISS</div>
+              <div className="text-[10px] text-teal-300">Lote Unimed · set/2026</div>
               <div className="text-lg font-black text-white mt-0.5">R$ 38.450</div>
-              <div className="text-[10px] text-emerald-400 font-semibold">42 guias sem divergência</div>
+              <div className="text-[10px] text-emerald-400 font-semibold">Valor apresentado</div>
             </div>
             <div className="p-2.5 rounded-xl bg-teal-950/70 border border-teal-700/50">
               <div className="text-[10px] text-teal-300">Particular (PIX)</div>
               <div className="text-lg font-black text-emerald-400 mt-0.5">R$ 16.440</div>
-              <div className="text-[10px] text-teal-300 font-semibold">Conciliado no ato</div>
+              <div className="text-[10px] text-teal-300 font-semibold">Recebimento registrado</div>
             </div>
           </div>
-          <div className="p-2.5 rounded-xl bg-emerald-950/50 border border-emerald-600/40 text-emerald-200 text-[11px] flex items-center justify-between">
-            <span>Validação de Carteirinhas:</span>
-            <span className="font-bold text-emerald-400">0 Glosas Identificadas ✓</span>
+          <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-[11px] flex items-center justify-between">
+            <span>Glosa lançada no lote:</span>
+            <span className="font-bold text-white">Valor recebido conferido</span>
           </div>
         </div>
       ),
@@ -105,11 +103,11 @@ export function ScrollJourneySection() {
     {
       time: "18:00",
       tag: "Diretoria & Analytics",
-      title: "Fechamento DRE & Repasses Médicos",
-      desc: "No final do dia, todos os repasses e comissões dos médicos e terapeutas estão calculados automaticamente, com painel de métricas, lucratividade por sala e gráficos consolidados no Power BI.",
+      title: "DRE simplificado e comissões",
+      desc: "No plano Profissional, o fechamento mostra o DRE simplificado e as comissões dos profissionais. O Power BI está em desenvolvimento, incluso no Ilimitado.",
       icon: TrendingUp,
       accent: "text-ja-teal bg-ja-surface border-ja-line",
-      uiTitle: "DRE em Tempo Real & Repasses Médicos",
+      uiTitle: "DRE simplificado e comissões",
       uiContent: (
         <div className="space-y-3 text-xs">
           <div className="p-3 rounded-xl bg-teal-950/80 border border-teal-700/50">

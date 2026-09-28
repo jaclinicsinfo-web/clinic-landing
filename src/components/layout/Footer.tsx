@@ -21,7 +21,7 @@ export function Footer() {
             </a>
 
             <p className="text-white/60 leading-relaxed max-w-sm text-[13px]">
-              Gestão clínica completa para consultórios e clínicas. Agenda, acompanhamento de evolução, faturamento TISS, lembretes por WhatsApp e e-mail, e assistente de IA para tirar dúvidas.
+              Gestão clínica para consultórios e clínicas. Agenda, pacientes, financeiro, estoque, relatórios e lembretes por WhatsApp e e-mail.
             </p>
 
             <p className="text-[11px] tracking-wide text-white/40">
@@ -43,13 +43,13 @@ export function Footer() {
               Módulos do Sistema
             </h4>
             <ul className="space-y-2 text-[13px] text-white/60">
-              <li><a href="#modulos" className="hover:text-white transition-colors">Agenda Inteligente</a></li>
-              <li><a href="#modulos" className="hover:text-white transition-colors">Acompanhamento de evolução</a></li>
-              <li><a href="#modulos" className="hover:text-white transition-colors">Financeiro & Fluxo de Caixa</a></li>
-              <li><a href="#modulos" className="hover:text-white transition-colors">Lotes de Convênios (TISS)</a></li>
-              <li><a href="#modulos" className="hover:text-white transition-colors">Estoque & Medicamentos</a></li>
-              <li><a href="#modulos" className="hover:text-white transition-colors">Integrações e lembretes</a></li>
-              <li><a href="#modulos" className="hover:text-white transition-colors">Agente de IA</a></li>
+              <li><a href="#planos" className="hover:text-white transition-colors">Planos e preços</a></li>
+              <li><a href="#modulos" className="hover:text-white transition-colors">Agenda</a></li>
+              <li><a href="#modulos" className="hover:text-white transition-colors">Pacientes e evolução</a></li>
+              <li><a href="#modulos" className="hover:text-white transition-colors">Financeiro e convênios</a></li>
+              <li><a href="#modulos" className="hover:text-white transition-colors">Estoque</a></li>
+              <li><a href="#modulos" className="hover:text-white transition-colors">Lembretes WhatsApp e e-mail</a></li>
+              <li><a href="#modulos" className="hover:text-white transition-colors">Power BI e agente de IA</a></li>
               <li><a href="#estilizacao" className="hover:text-white transition-colors">Tema claro e escuro</a></li>
             </ul>
           </div>
@@ -59,6 +59,7 @@ export function Footer() {
               Navegação
             </h4>
             <ul className="space-y-2 text-[13px] text-white/60">
+              <li><a href="#planos" className="hover:text-white transition-colors">Planos</a></li>
               <li><a href="#modulos" className="hover:text-white transition-colors">Funcionalidades</a></li>
               <li><a href="#estilizacao" className="hover:text-white transition-colors">Estilização</a></li>
               <li><a href="#preview" className="hover:text-white transition-colors">Preview Interativo</a></li>

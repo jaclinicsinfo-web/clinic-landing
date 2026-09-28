@@ -25,6 +25,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
 
   const navLinks = [
     { label: "Funcionalidades", href: "#modulos" },
+    { label: "Planos", href: "#planos" },
     { label: "Tema", href: "#estilizacao" },
     { label: "Preview", href: "#preview" },
     { label: "ROI", href: "#calculadora" },

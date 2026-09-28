@@ -2,8 +2,9 @@ export const BRAND = {
   name: "J.A. Clinics",
   product: "Clinic Manager",
   poweredBy: "powered by Clinic Manager",
-  logoSrc: "/logo.png",
-  iconSrc: "/icon-squircle.png",
+  logoSrc: "/brand/logo-ja-clinics-compacta.png",
+  logoFullSrc: "/brand/logo-ja-clinics.png",
+  iconSrc: "/brand/marca-ja-clinics.png",
 } as const;
 
 export const TOKENS = {

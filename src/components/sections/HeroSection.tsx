@@ -98,7 +98,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
               transition={{ duration: 0.45, delay: 0.05 }}
               className="mt-7 text-[13px] sm:text-sm font-medium text-white/70 tracking-wide"
             >
-              J.A. Clinics · Gestão clínica com IA, WhatsApp e e-mail
+              J.A. Clinics · Gestão de consultório e clínica
             </motion.p>
 
             <motion.h1
@@ -116,7 +116,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
               transition={{ duration: 0.5, delay: 0.16 }}
               className="mt-5 text-[15px] sm:text-base text-white/72 leading-relaxed max-w-md"
             >
-              Agenda, acompanhamento de evolução e faturamento TISS. Lembretes por WhatsApp e e-mail — assistente de IA para tirar dúvidas — e tema claro ou escuro, salvo na sua conta.
+              Agenda, pacientes e evolução no Essencial. Financeiro, estoque e relatórios no Profissional. Lembretes por WhatsApp e e-mail no Ilimitado.
             </motion.p>
 
             <motion.div
@@ -133,10 +133,10 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
                 <ArrowRight className="w-4 h-4" />
               </button>
               <a
-                href="#modulos"
+                href="#planos"
                 className="min-h-11 px-6 rounded-xl border border-white/30 hover:border-white/55 text-white font-semibold text-sm inline-flex items-center justify-center transition-colors"
               >
-                Ver funcionalidades
+                Ver planos
               </a>
             </motion.div>
 
@@ -146,7 +146,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="mt-6 text-[12px] font-medium tracking-[0.14em] uppercase text-white/65"
             >
-              LGPD · TISS · Setup em 24h
+              Essencial · Profissional · Ilimitado
             </motion.p>
           </div>
 

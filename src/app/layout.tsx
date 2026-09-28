@@ -17,26 +17,25 @@ const themeInitScript = `(function(){try{var t=localStorage.getItem('ja-theme');
 export const metadata: Metadata = {
   title: `${BRAND.name} | Gestão clínica completa. Menos faltas. Mais controle.`,
   description:
-    "Gestão clínica completa com agenda, acompanhamento de evolução, faturamento TISS, lembretes por WhatsApp e e-mail e assistente de IA para tirar dúvidas. Experimente 14 dias.",
+    "Gestão clínica com agenda, pacientes, financeiro, estoque, relatórios e lembretes por WhatsApp e e-mail. Planos Essencial, Profissional e Ilimitado. Experimente 14 dias.",
   keywords: [
     "J.A. Clinics",
     "gestão de clínicas",
     "software médico",
     "acompanhamento de evolução",
     "agenda médica online",
-    "faturamento TISS",
     "sistema para consultório",
     "Clinic Manager",
   ],
   authors: [{ name: BRAND.name }],
   icons: {
-    icon: "/icon-squircle.png",
-    apple: "/icon-squircle.png",
+    icon: "/brand/marca-ja-clinics.png",
+    apple: "/brand/marca-ja-clinics.png",
   },
   openGraph: {
     title: `${BRAND.name} | Gestão clínica completa`,
     description:
-      "Menos faltas. Mais controle. Agenda, acompanhamento de evolução, TISS, lembretes por WhatsApp e e-mail, e IA para tirar dúvidas.",
+      "Menos faltas. Mais controle. Agenda, pacientes, financeiro e lembretes por WhatsApp e e-mail.",
     type: "website",
     locale: "pt_BR",
     siteName: BRAND.name,

@@ -8,6 +8,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { InteractiveDemoSection } from "@/components/sections/InteractiveDemoSection";
 import { ScrollJourneySection } from "@/components/sections/ScrollJourneySection";
 import { ModulesBentoSection } from "@/components/sections/ModulesBentoSection";
+import { PlansSection } from "@/components/sections/PlansSection";
 import { RoiCalculatorSection } from "@/components/sections/RoiCalculatorSection";
 import { SecuritySection } from "@/components/sections/SecuritySection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
@@ -33,6 +34,7 @@ export default function Home() {
       <InteractiveDemoSection />
       <ScrollJourneySection />
       <ModulesBentoSection />
+      <PlansSection onOpenDemo={() => setDemoModalOpen(true)} />
       <ThemeSection />
       <RoiCalculatorSection onOpenDemo={() => setDemoModalOpen(true)} />
       <SecuritySection />

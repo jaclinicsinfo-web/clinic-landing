@@ -17,7 +17,7 @@ export function TestimonialsSection() {
     {
       name: "Dr. Marcelo Bittencourt",
       role: "Psicólogo Clínico & Gestor · Espaço Mente & Ação (RJ)",
-      text: "O acompanhamento de evolução, com notas e histórico do paciente, agilizou meu atendimento. Além disso, a conciliação automática com PIX facilitou a vida dos meus pacientes e da minha contabilidade.",
+      text: "O acompanhamento de evolução, com notas e histórico do paciente, agilizou meu atendimento. O recebimento em PIX, dinheiro ou cartão fica registrado na mesma ficha.",
       rating: 5,
       specialty: "Psicologia & Terapia",
       avatarInitials: "MB",
@@ -25,7 +25,7 @@ export function TestimonialsSection() {
     {
       name: "Dra. Camila Nogueira",
       role: "Sócia Proprietária · Clínica Odonto & Estética (MG)",
-      text: "Faturar os lotes de convênios sem tomar glosas era nosso maior pesadelo. O módulo TISS do Clinic Manager valida tudo antes do envio. Reduzimos nosso retrabalho financeiro a zero.",
+      text: "Fechar o lote do convênio e lançar a glosa no mesmo lugar tirou a planilha do fechamento. O financeiro da clínica passou a acompanhar o que foi apresentado e o que entrou.",
       rating: 5,
       specialty: "3 Unidades / 18 Profissionais",
       avatarInitials: "CN",

@@ -26,22 +26,22 @@ export function FaqSection() {
     {
       question: "Como funcionam os lembretes de consulta?",
       answer:
-        "Pelo módulo de integração, o sistema envia lembretes das consultas para pacientes e profissionais, via WhatsApp e e-mail, no horário configurado pela clínica.",
+        "No plano Ilimitado, o módulo de integrações envia lembretes das consultas para pacientes e profissionais, via WhatsApp e e-mail, no horário configurado pela clínica.",
     },
     {
-      question: "O módulo de faturamento de convênios suporta o padrão TISS e XML?",
+      question: "O faturamento de convênios gera XML TISS?",
       answer:
-        "Sim, 100% compatível com as normas da ANS e padrão TISS 4.01. Você pode gerar guias de consulta, SADT, faturar lotes, gerar arquivos XML para envio nas operadoras (Unimed, Bradesco, Amil, SulAmérica, etc.) e conciliar glosas com rapidez.",
+        "A partir do plano Profissional, a clínica fecha lotes de convênio, registra glosa e concilia o valor recebido. O sistema não gera XML nem guia no padrão TISS.",
     },
     {
       question: "Como faço para contratar?",
       answer:
-        "Fale com o comercial. Eles apresentam as condições sob medida para o tamanho e a rotina da sua clínica — valores não ficam expostos no site.",
+        "Os planos estão na página: Essencial a R$ 300, Profissional a R$ 700 e Ilimitado a R$ 1.200 por mês. Escolha o que a clínica usa e fale com o comercial para o teste de 14 dias.",
     },
     {
       question: "O que o agente de IA faz?",
       answer:
-        "É um assistente para tirar dúvidas, no estilo ChatGPT. A equipe pergunta sobre a rotina e o uso do sistema e recebe uma resposta. Ele não registra acompanhamento de evolução e não resume consulta.",
+        "Está em desenvolvimento. No plano Ilimitado a área já aparece no menu, com o aviso de que a implementação entra nas próximas entregas. Ele ainda não responde no painel.",
     },
     {
       question: "O sistema tem tema claro e escuro?",
