@@ -112,7 +112,7 @@ export function PlansSection({ onOpenDemo }: PlansSectionProps) {
                     : "bg-ja-brand hover:bg-ja-dark text-white"
                 }`}
               >
-                Experimentar 14 dias
+                Agendar demonstração
                 <ArrowRight className="w-4 h-4" />
               </button>
               <a

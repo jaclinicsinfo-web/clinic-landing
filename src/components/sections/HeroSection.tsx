@@ -105,7 +105,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="mt-4 text-[1.85rem] sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight leading-[1.18] text-white max-w-xl"
+              className="mt-4 text-[1.85rem] sm:text-4xl lg:text-[2.65rem] font-bold font-display tracking-tight leading-[1.18] text-white max-w-xl"
             >
               Gestão clínica completa. Menos faltas. Mais controle.
             </motion.h1>
@@ -116,7 +116,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
               transition={{ duration: 0.5, delay: 0.16 }}
               className="mt-5 text-[15px] sm:text-base text-white/72 leading-relaxed max-w-md"
             >
-              Agenda, pacientes e evolução no Essencial. Financeiro, estoque e relatórios no Profissional. Lembretes por WhatsApp e e-mail no Ilimitado.
+              Agenda, pacientes, financeiro e lembretes no WhatsApp — em um só sistema para o consultório e a clínica.
             </motion.p>
 
             <motion.div
@@ -129,7 +129,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
                 onClick={onOpenDemo}
                 className="min-h-11 px-6 rounded-xl bg-ja-teal hover:bg-ja-teal-hover text-white font-semibold text-sm inline-flex items-center justify-center gap-2 transition-colors"
               >
-                <span>Experimentar 14 dias</span>
+                <span>Agendar demonstração</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
               <a
@@ -146,7 +146,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="mt-6 text-[12px] font-medium tracking-[0.14em] uppercase text-white/65"
             >
-              Essencial · Profissional · Ilimitado
+              Demonstração gratuita · teste de 14 dias
             </motion.p>
           </div>
 

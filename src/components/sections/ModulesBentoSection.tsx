@@ -244,10 +244,7 @@ export function ModulesBentoSection() {
           </motion.div>
         </motion.div>
 
-        <a
-          href="#estilizacao"
-          className="mt-8 flex items-center justify-between gap-4 rounded-2xl border border-ja-line bg-ja-surface px-5 py-4 hover:border-ja-teal/40 transition-colors"
-        >
+        <div className="mt-8 flex items-center justify-between gap-4 rounded-2xl border border-ja-line bg-ja-surface px-5 py-4">
           <div className="flex items-center gap-3 min-w-0">
             <span className="w-10 h-10 rounded-xl bg-ja-teal text-white inline-flex items-center justify-center shrink-0">
               <Palette className="w-5 h-5" />
@@ -255,12 +252,11 @@ export function ModulesBentoSection() {
             <div className="min-w-0">
               <div className="text-sm font-bold text-ja-ink">Tema claro e escuro</div>
               <p className="text-xs text-ja-muted">
-                A preferência é salva na conta e vale em qualquer dispositivo. Experimente nesta página.
+                A preferência é salva na conta. Nesta página, alterne pelo ícone no topo.
               </p>
             </div>
           </div>
-          <span className="text-xs font-bold text-ja-teal shrink-0">Ver temas →</span>
-        </a>
+        </div>
       </div>
     </section>
   );

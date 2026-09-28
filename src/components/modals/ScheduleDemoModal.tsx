@@ -2,8 +2,20 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Calendar, CheckCircle2, Sparkles, Building2, User, Mail, Phone, ArrowRight } from "lucide-react";
+import {
+  X,
+  Calendar,
+  CheckCircle2,
+  Sparkles,
+  Building2,
+  User,
+  Mail,
+  Phone,
+  ArrowRight,
+} from "lucide-react";
 import confetti from "canvas-confetti";
+import { CONTACT_CONFIG } from "@/lib/constants";
+import { BRAND } from "@/lib/brand";
 
 interface ScheduleDemoModalProps {
   isOpen: boolean;
@@ -17,11 +29,24 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
     email: "",
     phone: "",
     clinicType: "Multi-especialidades",
-    doctorsCount: "1 a 5 profissionais",
+    doctorsCount: "2 a 5 profissionais",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const message = [
+      `Olá! Quero agendar uma demonstração da ${BRAND.name} e conhecer o teste de 14 dias.`,
+      "",
+      `Nome: ${formData.name}`,
+      `WhatsApp: ${formData.phone}`,
+      `E-mail: ${formData.email}`,
+      `Tipo de clínica: ${formData.clinicType}`,
+      `Profissionais: ${formData.doctorsCount}`,
+    ].join("\n");
+
+    window.open(CONTACT_CONFIG.getWhatsAppUrl(message), "_blank", "noopener,noreferrer");
+
     setSubmitted(true);
     confetti({
       particleCount: 80,
@@ -33,6 +58,13 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
 
   const handleReset = () => {
     setSubmitted(false);
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      clinicType: "Multi-especialidades",
+      doctorsCount: "2 a 5 profissionais",
+    });
     onClose();
   };
 
@@ -40,7 +72,6 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -49,7 +80,6 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
             className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
           />
 
-          {/* Modal Card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -57,7 +87,6 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
             transition={{ type: "spring", duration: 0.5, bounce: 0.2 }}
             className="relative w-full max-w-lg bg-ja-card rounded-3xl shadow-2xl border border-ja-line overflow-hidden z-10"
           >
-            {/* Header with gradient strip */}
             <div className="bg-ja-brand p-6 text-white relative">
               <button
                 onClick={onClose}
@@ -69,28 +98,28 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
 
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-medium text-white/80 mb-2 border border-white/10">
                 <Sparkles className="w-3.5 h-3.5" />
-                Demonstração Guiada & Gratuita
+                Demonstração gratuita · 14 dias de teste
               </div>
-              <h3 className="text-2xl font-bold text-white">
-                Veja a J.A. Clinics em ação
+              <h3 className="text-2xl font-bold text-white font-display">
+                Veja a {BRAND.name} em ação
               </h3>
               <p className="text-white/70 text-sm mt-1">
-                Apresentação personalizada de 15 minutos sem compromisso com nossos especialistas.
+                Apresentação de 15 minutos sem compromisso. Depois, se fizer sentido, você testa a plataforma por 14 dias.
               </p>
             </div>
 
-            {/* Content */}
             <div className="p-6 sm:p-8">
               {submitted ? (
                 <div className="text-center py-6">
                   <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
-                  <h4 className="text-xl font-bold text-ja-ink">
-                    Solicitação Recebida com Sucesso!
+                  <h4 className="text-xl font-bold text-ja-ink font-display">
+                    Abrimos o WhatsApp para você
                   </h4>
                   <p className="text-ja-muted text-sm mt-2 max-w-sm mx-auto">
-                    Obrigado, <strong className="text-ja-ink">{formData.name || "Doutor(a)"}</strong>! Um de nossos consultores entrará em contato via WhatsApp no número informado nos próximos minutos.
+                    Obrigado, <strong className="text-ja-ink">{formData.name || "Doutor(a)"}</strong>!
+                    Envie a mensagem no WhatsApp que abriu — respondemos no {CONTACT_CONFIG.phoneFormatted}.
                   </p>
 
                   <div className="mt-6 p-4 rounded-xl bg-ja-surface border border-ja-line text-xs text-ja-muted text-left">
@@ -100,14 +129,26 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
                     </div>
                     <ul className="space-y-1 ml-5 list-disc">
                       <li>Tour pelos módulos que sua clínica mais precisa</li>
-                      <li>Simulação de importação de pacientes sem perda de histórico</li>
+                      <li>Como funciona a migração de pacientes</li>
                       <li>Comparação dos planos Essencial, Profissional e Ilimitado</li>
                     </ul>
                   </div>
 
+                  <a
+                    href={CONTACT_CONFIG.getWhatsAppUrl(
+                      `Olá! Sou ${formData.name || "um interessado"} e quero agendar a demonstração da ${BRAND.name}.`,
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 w-full min-h-11 py-3 bg-ja-surface border border-ja-line text-ja-ink font-medium rounded-xl transition-colors inline-flex items-center justify-center gap-2 hover:bg-ja-subtle"
+                  >
+                    <Phone className="w-4 h-4 text-ja-teal" />
+                    Reabrir WhatsApp
+                  </a>
+
                   <button
                     onClick={handleReset}
-                    className="mt-6 w-full min-h-11 py-3 bg-ja-teal hover:bg-ja-dark text-white font-medium rounded-xl transition-colors"
+                    className="mt-3 w-full min-h-11 py-3 bg-ja-teal hover:bg-ja-dark text-white font-medium rounded-xl transition-colors"
                   >
                     Concluir
                   </button>
@@ -141,7 +182,7 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
                         <input
                           type="tel"
                           required
-                          placeholder="(11) 99999-9999"
+                          placeholder="(16) 99999-9999"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-ja-line focus:outline-none focus:ring-2 focus:ring-ja-teal focus:border-transparent text-sm bg-ja-surface text-ja-ink"
@@ -210,11 +251,11 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
                       type="submit"
                       className="w-full min-h-11 py-3.5 px-6 rounded-xl bg-ja-teal hover:bg-ja-dark text-white font-semibold flex items-center justify-center gap-2 transition-colors group"
                     >
-                      <span>Agendar Demonstração Gratuita</span>
+                      <span>Continuar no WhatsApp</span>
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </button>
                     <p className="text-center text-[11px] text-ja-muted mt-2">
-                      🔒 Seus dados estão 100% seguros de acordo com a LGPD.
+                      Seus dados seguem para o comercial no WhatsApp {CONTACT_CONFIG.phoneFormatted}. Também pelo e-mail {CONTACT_CONFIG.email}.
                     </p>
                   </div>
                 </form>

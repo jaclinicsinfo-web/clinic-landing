@@ -31,7 +31,7 @@ export function CtaBannerSection({ onOpenDemo }: CtaBannerSectionProps) {
             </h2>
 
             <p className="text-sm sm:text-base text-white/70 max-w-2xl mx-auto leading-relaxed">
-              Junte-se a mais de 1.500 clínicas e consultórios que simplificaram a agenda, automatizaram lembretes e zeraram o retrabalho de faturamento.
+              Agende uma demonstração, escolha o plano certo e teste a plataforma por 14 dias — sem cartão e sem compromisso.
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -39,7 +39,7 @@ export function CtaBannerSection({ onOpenDemo }: CtaBannerSectionProps) {
                 onClick={onOpenDemo}
                 className="w-full sm:w-auto min-h-11 px-7 rounded-xl bg-ja-teal hover:bg-ja-teal-hover text-white font-semibold text-sm inline-flex items-center justify-center gap-2 transition-colors"
               >
-                <span>Experimentar 14 dias</span>
+                <span>Agendar demonstração</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 

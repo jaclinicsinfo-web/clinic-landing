@@ -43,8 +43,8 @@
   --color-ja-line: var(--ja-line);
   --color-ja-brand: var(--ja-brand);
   --color-ja-subtle: var(--ja-subtle);
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-ja-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-ja-display), ui-serif, Georgia, serif;
 }
 
 @layer base {
@@ -55,7 +55,7 @@
   body {
     background-color: var(--ja-surface);
     color: var(--ja-ink);
-    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-ja-sans), ui-sans-serif, system-ui, sans-serif;
     overflow-x: hidden;
   }
 

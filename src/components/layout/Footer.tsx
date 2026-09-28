@@ -27,15 +27,6 @@ export function Footer() {
             <p className="text-[11px] tracking-wide text-white/40">
               {BRAND.poweredBy}
             </p>
-
-            <div className="flex items-center gap-2 text-[12px] text-white/70 font-medium">
-              <span className="h-1.5 w-1.5 rounded-full bg-ja-teal" />
-              <span>Sistemas operando normalmente · 99.9% uptime</span>
-            </div>
-
-            <div className="text-[11px] text-white/40">
-              CNPJ: 00.000.000/0001-00 · São Paulo - SP, Brasil
-            </div>
           </div>
 
           <div className="space-y-3">
@@ -49,8 +40,6 @@ export function Footer() {
               <li><a href="#modulos" className="hover:text-white transition-colors">Financeiro e convênios</a></li>
               <li><a href="#modulos" className="hover:text-white transition-colors">Estoque</a></li>
               <li><a href="#modulos" className="hover:text-white transition-colors">Lembretes WhatsApp e e-mail</a></li>
-              <li><a href="#modulos" className="hover:text-white transition-colors">Power BI e agente de IA</a></li>
-              <li><a href="#estilizacao" className="hover:text-white transition-colors">Tema claro e escuro</a></li>
             </ul>
           </div>
 
@@ -61,7 +50,6 @@ export function Footer() {
             <ul className="space-y-2 text-[13px] text-white/60">
               <li><a href="#planos" className="hover:text-white transition-colors">Planos</a></li>
               <li><a href="#modulos" className="hover:text-white transition-colors">Funcionalidades</a></li>
-              <li><a href="#estilizacao" className="hover:text-white transition-colors">Estilização</a></li>
               <li><a href="#preview" className="hover:text-white transition-colors">Preview Interativo</a></li>
               <li><a href="#calculadora" className="hover:text-white transition-colors">Calculadora de ROI</a></li>
               <li><a href="#seguranca" className="hover:text-white transition-colors">Segurança & LGPD</a></li>
@@ -82,24 +70,24 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-white"
                 >
-                  {CONTACT_CONFIG.phoneFormatted} (WhatsApp)
+                  {CONTACT_CONFIG.phone} (WhatsApp)
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-white/50" />
-                <a href={`mailto:${CONTACT_CONFIG.email}`} className="hover:text-white">
+              <li className="flex items-start gap-2">
+                <Mail className="w-3.5 h-3.5 text-white/50 mt-0.5 shrink-0" />
+                <a href={`mailto:${CONTACT_CONFIG.email}`} className="hover:text-white break-all">
                   {CONTACT_CONFIG.email}
                 </a>
               </li>
               <li className="flex items-center gap-2 text-white/45">
                 <MapPin className="w-3.5 h-3.5" />
-                <span>Atendimento em todo o território nacional</span>
+                <span>Atendimento em todo o Brasil</span>
               </li>
             </ul>
 
             <div className="pt-2">
               <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-[12px] text-white/70">
-                Suporte técnico humanizado com especialistas reais, de segunda a sábado.
+                Suporte de segunda a sábado pelo WhatsApp e e-mail.
               </div>
             </div>
           </div>
@@ -111,9 +99,9 @@ export function Footer() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-5">
-            <a href="#" className="hover:text-white/70 transition-colors">Termos de Uso</a>
-            <a href="#" className="hover:text-white/70 transition-colors">Política de Privacidade LGPD</a>
-            <a href="#" className="hover:text-white/70 transition-colors">Segurança da Informação</a>
+            <a href={`mailto:${CONTACT_CONFIG.email}`} className="hover:text-white/70 transition-colors">
+              Contato
+            </a>
             <button
               onClick={scrollToTop}
               className="min-h-11 min-w-11 px-3 rounded-xl bg-white/8 hover:bg-white/14 text-white/80 transition-colors inline-flex items-center justify-center gap-1.5"

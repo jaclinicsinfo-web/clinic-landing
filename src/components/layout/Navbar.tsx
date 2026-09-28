@@ -26,7 +26,6 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
   const navLinks = [
     { label: "Funcionalidades", href: "#modulos" },
     { label: "Planos", href: "#planos" },
-    { label: "Tema", href: "#estilizacao" },
     { label: "Preview", href: "#preview" },
     { label: "ROI", href: "#calculadora" },
     { label: "Segurança", href: "#seguranca" },
@@ -63,7 +62,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
               onClick={onOpenDemo}
               className="min-h-11 px-5 rounded-xl bg-ja-teal hover:bg-ja-teal-hover text-white text-[13px] font-semibold inline-flex items-center justify-center transition-colors"
             >
-              Experimentar 14 dias
+              Agendar demonstração
             </button>
           </div>
 
@@ -75,7 +74,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
               onClick={onOpenDemo}
               className="sm:hidden min-h-11 px-3.5 rounded-xl bg-ja-teal text-white text-[13px] font-semibold"
             >
-              Experimentar 14 dias
+              Demonstração
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -115,7 +114,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
                 }}
                 className="mt-3 min-h-11 w-full rounded-xl bg-ja-teal text-white font-semibold text-sm"
               >
-                Experimentar 14 dias
+                Agendar demonstração
               </button>
               <a
                 href={CONTACT_CONFIG.getWhatsAppUrl(

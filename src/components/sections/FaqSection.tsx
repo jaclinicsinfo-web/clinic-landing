@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle, MessageSquare } from "lucide-react";
+import { CONTACT_CONFIG } from "@/lib/constants";
 
 export function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -11,7 +12,7 @@ export function FaqSection() {
     {
       question: "Como funciona o período de teste grátis de 14 dias?",
       answer:
-        "Você terá acesso aos recursos da plataforma por 14 dias. Sem taxa de adesão: o comercial apresenta as condições e você só segue se fizer sentido para a clínica.",
+        "Após a demonstração, você pode testar os recursos da plataforma por 14 dias. Sem taxa de adesão: o comercial apresenta as condições e você só segue se fizer sentido para a clínica.",
     },
     {
       question: "Vocês ajudam a migrar os dados do meu sistema antigo?",
@@ -36,8 +37,8 @@ export function FaqSection() {
     {
       question: "Como faço para contratar?",
       answer:
-        "Os planos estão na página: Essencial a R$ 300, Profissional a R$ 700 e Ilimitado a R$ 1.200 por mês. Escolha o que a clínica usa e fale com o comercial para o teste de 14 dias.",
-    },
+        "Os planos estão na página: Essencial a R$ 300, Profissional a R$ 700 e Ilimitado a R$ 1.200 por mês. Agende uma demonstração com o comercial e, se fizer sentido, siga com o teste de 14 dias.",
+      },
     {
       question: "O que o agente de IA faz?",
       answer:
@@ -118,10 +119,14 @@ export function FaqSection() {
         <div className="mt-12 p-6 rounded-2xl bg-ja-surface border border-ja-line flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div>
             <h4 className="text-sm font-bold text-ja-ink">Ainda tem alguma dúvida específica?</h4>
-            <p className="text-xs text-ja-muted mt-0.5">Nossa equipe de consultores responde em menos de 5 minutos.</p>
+            <p className="text-xs text-ja-muted mt-0.5">
+              WhatsApp {CONTACT_CONFIG.phoneFormatted} · {CONTACT_CONFIG.email}
+            </p>
           </div>
           <a
-            href="https://wa.me/5516992792142?text=Ol%C3%A1%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20a%20J.A.%20Clinics"
+            href={CONTACT_CONFIG.getWhatsAppUrl(
+              "Olá, tenho uma dúvida sobre a J.A. Clinics",
+            )}
             target="_blank"
             rel="noopener noreferrer"
             className="min-h-11 px-5 py-2.5 rounded-xl bg-ja-teal hover:bg-ja-dark text-white font-bold text-xs flex items-center gap-2 transition-colors shrink-0"

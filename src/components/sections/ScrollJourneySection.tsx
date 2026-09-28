@@ -7,8 +7,7 @@ import {
   DollarSign,
   TrendingUp,
   Clock,
-  Sparkles,
-  Bot,
+  Calendar,
   ArrowRight,
 } from "lucide-react";
 
@@ -47,27 +46,32 @@ export function ScrollJourneySection() {
     },
     {
       time: "10:30",
-      tag: "Agente de IA",
-      title: "Assistente em desenvolvimento",
-      desc: "O agente de IA está no plano Ilimitado e segue em desenvolvimento. A tela já aparece no menu e ainda não responde no painel.",
-      icon: Bot,
+      tag: "Agenda",
+      title: "Recepção com a agenda do dia",
+      desc: "A recepção vê o dia, a semana ou o mês por profissional e sala, com bloqueios e lista de espera. Confirmações e status ficam no mesmo fluxo.",
+      icon: Calendar,
       accent: "text-ja-teal bg-ja-surface border-ja-line",
-      uiTitle: "Agente de IA",
+      uiTitle: "Agenda do dia",
       uiContent: (
-        <div className="space-y-3 text-xs">
-          <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-            <div className="text-white font-bold text-[10px] flex items-center gap-1 mb-1">
-              <Sparkles className="w-3 h-3" />
-              Em desenvolvimento
+        <div className="space-y-2 text-xs">
+          {[
+            { time: "10:30", name: "Marcos Castro", status: "Confirmado" },
+            { time: "11:00", name: "Aline Silveira", status: "Em espera" },
+            { time: "11:30", name: "Helena Vaz", status: "Confirmado" },
+          ].map((row) => (
+            <div
+              key={row.time}
+              className="p-2.5 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between gap-3"
+            >
+              <div className="min-w-0">
+                <div className="text-[10px] text-white/60 font-mono">{row.time}</div>
+                <div className="text-white/90 font-semibold truncate">{row.name}</div>
+              </div>
+              <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-ja-teal text-white shrink-0">
+                {row.status}
+              </span>
             </div>
-            <p className="text-white/85 leading-relaxed">
-              Incluso no plano Ilimitado. A área está liberada no menu e a implementação entra nas próximas entregas.
-            </p>
-          </div>
-          <div className="p-2.5 rounded-lg bg-white/5 border border-white/10 flex items-center justify-between text-white/75 text-[11px]">
-            <span>Status no painel:</span>
-            <span className="font-bold text-white">Em breve neste plano</span>
-          </div>
+          ))}
         </div>
       ),
     },
@@ -146,7 +150,7 @@ export function ScrollJourneySection() {
             A jornada completa da recepção ao fechamento
           </h2>
           <p className="mt-4 text-base sm:text-lg text-ja-muted">
-            Veja como a operação roda de ponta a ponta sem ruídos e com total automação.
+            Lembretes, agenda, financeiro e indicadores — o que a clínica usa de verdade no dia a dia.
           </p>
         </div>
 

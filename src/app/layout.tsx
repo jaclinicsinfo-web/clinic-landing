@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import { BRAND } from "@/lib/brand";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { CONTACT_CONFIG } from "@/lib/constants";
 
-const inter = Inter({
-  variable: "--font-inter",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-ja-sans",
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
+});
+
+const sourceSerif = Source_Serif_4({
+  variable: "--font-ja-display",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["600", "700"],
 });
 
 const themeInitScript = `(function(){try{var t=localStorage.getItem('ja-theme');if(t==='dark'){document.documentElement.classList.add('dark');document.documentElement.style.colorScheme='dark'}}catch(e){}})();`;
@@ -17,7 +25,7 @@ const themeInitScript = `(function(){try{var t=localStorage.getItem('ja-theme');
 export const metadata: Metadata = {
   title: `${BRAND.name} | Gestão clínica completa. Menos faltas. Mais controle.`,
   description:
-    "Gestão clínica com agenda, pacientes, financeiro, estoque, relatórios e lembretes por WhatsApp e e-mail. Planos Essencial, Profissional e Ilimitado. Experimente 14 dias.",
+    "Gestão clínica com agenda, pacientes, financeiro, estoque, relatórios e lembretes por WhatsApp e e-mail. Planos Essencial, Profissional e Ilimitado. Agende uma demonstração e teste por 14 dias.",
   keywords: [
     "J.A. Clinics",
     "gestão de clínicas",
@@ -40,6 +48,10 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     siteName: BRAND.name,
   },
+  other: {
+    "contact:email": CONTACT_CONFIG.email,
+    "contact:phone_number": CONTACT_CONFIG.phone,
+  },
 };
 
 export default function RootLayout({
@@ -48,7 +60,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} scroll-smooth`} suppressHydrationWarning>
+    <html
+      lang="pt-BR"
+      className={`${plusJakarta.variable} ${sourceSerif.variable} scroll-smooth`}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen bg-ja-surface text-ja-ink antialiased selection:bg-ja-teal selection:text-white flex flex-col font-sans">
         <Script id="ja-theme-init" strategy="beforeInteractive">
           {themeInitScript}
