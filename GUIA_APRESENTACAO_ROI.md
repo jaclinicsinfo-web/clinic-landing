@@ -100,7 +100,7 @@ Use esta estrutura de 4 etapas na sua reunião ou chamada de demonstração:
 > *"Olha só esse número: com 4 profissionais e 10 atendimentos/dia, a sua clínica realiza cerca de 880 atendimentos por mês. Mesmo com uma estimativa super conservadora de resgate de apenas 16% das faltas através da confirmação automática no WhatsApp oficial, estamos falando de **141 pacientes a mais no consultório**, o que representa **mais de R$ 31.000,00 de faturamento recuperado** todo santo mês."*
 
 ### Etapa 4: Fazer o Fechamento por Comparação
-> *"O plano Profissional com suporte humanizado no WhatsApp e financeiro completo custa R$ 700 por mês. Para pagar o sistema inteiro, você só precisa salvar 4 consultas no mês todo. Se o Clinic Manager te devolver 5 consultas, ele já colocou dinheiro no seu bolso. Faz sentido começarmos o teste gratuito de 14 dias hoje?"*
+> *"O plano Profissional com suporte humanizado no WhatsApp e financeiro completo custa R$ 700 por mês. Para pagar o sistema inteiro, você só precisa salvar 4 consultas no mês todo. Se o Clinic Manager te devolver 5 consultas, ele já colocou dinheiro no seu bolso. Faz sentido começarmos o teste gratuito de 7 dias hoje?"*
 
 ---
 
@@ -126,4 +126,4 @@ Use esta estrutura de 4 etapas na sua reunião ou chamada de demonstração:
 * **Dias úteis no mês**: 22 dias.
 * **Tempo poupado por paciente**: 6 minutos.
 * **Ponto de Equilíbrio (Payback)**: De 2 a 6 consultas salvas no mês pagam qualquer plano.
-* **Garantia de Fechamento**: 14 dias grátis para testar sem risco e migração gratuita de dados antigos.
+* **Garantia de Fechamento**: 7 dias grátis para testar sem risco e migração gratuita de dados antigos.

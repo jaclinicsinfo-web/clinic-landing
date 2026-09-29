@@ -36,7 +36,7 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
     e.preventDefault();
 
     const message = [
-      `Olá! Quero agendar uma demonstração da ${BRAND.name} e conhecer o teste de 14 dias.`,
+      `Olá! Quero agendar uma demonstração da ${BRAND.name} e conhecer o teste de 7 dias.`,
       "",
       `Nome: ${formData.name}`,
       `WhatsApp: ${formData.phone}`,
@@ -98,13 +98,13 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
 
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-medium text-white/80 mb-2 border border-white/10">
                 <Sparkles className="w-3.5 h-3.5" />
-                Demonstração gratuita · 14 dias de teste
+                Demonstração gratuita · 7 dias de teste
               </div>
               <h3 className="text-2xl font-bold text-white font-display">
                 Veja a {BRAND.name} em ação
               </h3>
               <p className="text-white/70 text-sm mt-1">
-                Apresentação de 15 minutos sem compromisso. Depois, se fizer sentido, você testa a plataforma por 14 dias.
+                Apresentação de 15 minutos sem compromisso. Depois, se fizer sentido, você testa a plataforma por 7 dias.
               </p>
             </div>
 

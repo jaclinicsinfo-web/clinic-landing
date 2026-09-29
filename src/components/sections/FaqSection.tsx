@@ -10,9 +10,9 @@ export function FaqSection() {
 
   const faqs = [
     {
-      question: "Como funciona o período de teste grátis de 14 dias?",
+      question: "Como funciona o período de teste grátis de 7 dias?",
       answer:
-        "Após a demonstração, você pode testar os recursos da plataforma por 14 dias. Sem taxa de adesão: o comercial apresenta as condições e você só segue se fizer sentido para a clínica.",
+        "Após a demonstração, você pode testar os recursos da plataforma por 7 dias. Sem taxa de adesão: o comercial apresenta as condições e você só segue se fizer sentido para a clínica.",
     },
     {
       question: "Vocês ajudam a migrar os dados do meu sistema antigo?",
@@ -37,7 +37,7 @@ export function FaqSection() {
     {
       question: "Como faço para contratar?",
       answer:
-        "Os planos estão na página: Essencial a R$ 300, Profissional a R$ 700 e Ilimitado a R$ 1.200 por mês. Agende uma demonstração com o comercial e, se fizer sentido, siga com o teste de 14 dias.",
+        "Os planos estão na página: Essencial a R$ 300, Profissional a R$ 700 e Ilimitado a R$ 1.200 por mês. Agende uma demonstração com o comercial e, se fizer sentido, siga com o teste de 7 dias.",
       },
     {
       question: "O que o agente de IA faz?",

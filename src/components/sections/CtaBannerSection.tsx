@@ -31,7 +31,7 @@ export function CtaBannerSection({ onOpenDemo }: CtaBannerSectionProps) {
             </h2>
 
             <p className="text-sm sm:text-base text-white/70 max-w-2xl mx-auto leading-relaxed">
-              Agende uma demonstração, escolha o plano certo e teste a plataforma por 14 dias — sem cartão e sem compromisso.
+              Agende uma demonstração, escolha o plano certo e teste a plataforma por 7 dias — sem cartão e sem compromisso.
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -59,7 +59,7 @@ export function CtaBannerSection({ onOpenDemo }: CtaBannerSectionProps) {
             <div className="pt-2 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs text-white/60 font-medium">
               <span className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-white/70" />
-                Teste grátis por 14 dias
+                Teste grátis por 7 dias
               </span>
               <span className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-white/70" />

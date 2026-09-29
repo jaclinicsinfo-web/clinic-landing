@@ -25,7 +25,7 @@ const themeInitScript = `(function(){try{var t=localStorage.getItem('ja-theme');
 export const metadata: Metadata = {
   title: `${BRAND.name} | Gestão clínica completa. Menos faltas. Mais controle.`,
   description:
-    "Gestão clínica com agenda, pacientes, financeiro, estoque, relatórios e lembretes por WhatsApp e e-mail. Planos Essencial, Profissional e Ilimitado. Agende uma demonstração e teste por 14 dias.",
+    "Gestão clínica com agenda, pacientes, financeiro, estoque, relatórios e lembretes por WhatsApp e e-mail. Planos Essencial, Profissional e Ilimitado. Agende uma demonstração e teste por 7 dias.",
   keywords: [
     "J.A. Clinics",
     "gestão de clínicas",
