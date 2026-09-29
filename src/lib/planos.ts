@@ -8,19 +8,17 @@ export interface ItemPlano {
 export interface PlanoComercial {
   codigo: "essencial" | "profissional" | "ilimitado";
   nome: string;
-  preco: number;
   destaque: boolean;
   resumo: string;
   limites: string[];
   itens: ItemPlano[];
 }
 
-/** Preços do material comercial atual. Limites e módulos seguem a API e o painel. */
+/** Limites e módulos seguem a API e o painel. Valores sob consulta. */
 export const PLANOS: PlanoComercial[] = [
   {
     codigo: "essencial",
     nome: "Essencial",
-    preco: 300,
     destaque: false,
     resumo: "Para o consultório operar agenda, pacientes, convênios e a equipe.",
     limites: ["Até 5 usuários", "1 unidade"],
@@ -37,7 +35,6 @@ export const PLANOS: PlanoComercial[] = [
   {
     codigo: "profissional",
     nome: "Profissional",
-    preco: 700,
     destaque: true,
     resumo: "Para a clínica que fecha o caixa, controla estoque e lê os indicadores.",
     limites: ["Até 20 usuários", "Unidades sem limite"],
@@ -53,7 +50,6 @@ export const PLANOS: PlanoComercial[] = [
   {
     codigo: "ilimitado",
     nome: "Ilimitado",
-    preco: 1200,
     destaque: false,
     resumo: "Para confirmar a agenda sozinha e reservar os módulos avançados.",
     limites: ["Usuários sem limite", "Unidades sem limite"],

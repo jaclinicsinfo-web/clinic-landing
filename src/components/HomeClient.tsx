@@ -32,7 +32,7 @@ export function HomeClient() {
       <InteractiveDemoSection />
       <ScrollJourneySection />
       <ModulesBentoSection />
-      <PlansSection onOpenDemo={openDemo} />
+      <PlansSection />
       <RoiCalculatorSection onOpenDemo={openDemo} />
       <SecuritySection />
       <TestimonialsSection />

@@ -5,13 +5,9 @@ import { motion } from "framer-motion";
 import { ArrowRight, Check, Clock3, Layers } from "lucide-react";
 import { CONTACT_CONFIG } from "@/lib/constants";
 import { PLANOS } from "@/lib/planos";
-import { formatCurrency } from "@/lib/utils";
+import { BRAND } from "@/lib/brand";
 
-interface PlansSectionProps {
-  onOpenDemo: () => void;
-}
-
-export function PlansSection({ onOpenDemo }: PlansSectionProps) {
+export function PlansSection() {
   return (
     <section id="planos" className="py-12 md:py-16 lg:py-20 bg-ja-surface text-ja-ink relative border-t border-ja-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,7 +20,7 @@ export function PlansSection({ onOpenDemo }: PlansSectionProps) {
             Escolha o plano pelo que a clínica usa hoje
           </h2>
           <p className="mt-4 text-base sm:text-lg text-ja-muted">
-            Cada item abaixo existe no sistema. O que ainda não opera no dia a dia aparece como em desenvolvimento.
+            Compare os módulos e solicite um orçamento sob medida. Valores sob consulta.
           </p>
         </div>
 
@@ -55,9 +51,15 @@ export function PlansSection({ onOpenDemo }: PlansSectionProps) {
                 {plano.resumo}
               </p>
 
-              <div className="mt-5 flex items-end gap-1">
-                <span className="text-4xl font-bold tracking-tight">{formatCurrency(plano.preco)}</span>
-                <span className={`mb-1 text-sm ${plano.destaque ? "text-white/65" : "text-ja-muted"}`}>/mês</span>
+              <div className={`mt-5 rounded-xl border px-4 py-3 ${
+                plano.destaque ? "border-white/15 bg-white/8" : "border-ja-line bg-ja-surface"
+              }`}>
+                <p className={`text-sm font-semibold ${plano.destaque ? "text-white" : "text-ja-ink"}`}>
+                  Orçamento sob consulta
+                </p>
+                <p className={`mt-0.5 text-xs ${plano.destaque ? "text-white/65" : "text-ja-muted"}`}>
+                  Fale conosco e receba a proposta do plano {plano.nome}.
+                </p>
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2">
@@ -104,29 +106,28 @@ export function PlansSection({ onOpenDemo }: PlansSectionProps) {
                 })}
               </ul>
 
-              <button
-                onClick={onOpenDemo}
+              <a
+                href={CONTACT_CONFIG.getWhatsAppUrl(
+                  `Olá! Gostaria de solicitar um orçamento do plano ${plano.nome} da ${BRAND.name}.`,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`mt-7 min-h-11 w-full rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-colors ${
                   plano.destaque
                     ? "bg-ja-teal hover:bg-ja-teal-hover text-white"
                     : "bg-ja-brand hover:bg-ja-dark text-white"
                 }`}
               >
-                Agendar demonstração
+                Solicite seu orçamento
                 <ArrowRight className="w-4 h-4" />
-              </button>
-              <a
-                href={CONTACT_CONFIG.getWhatsAppUrl(
-                  `Olá, quero saber mais sobre o plano ${plano.nome} da J.A. Clinics (${formatCurrency(plano.preco)}/mês).`,
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`mt-3 text-center text-xs font-semibold underline-offset-2 hover:underline ${
-                  plano.destaque ? "text-white/75" : "text-ja-teal"
+              </a>
+              <p
+                className={`mt-3 text-center text-xs ${
+                  plano.destaque ? "text-white/65" : "text-ja-muted"
                 }`}
               >
-                Falar do plano {plano.nome} no WhatsApp
-              </a>
+                WhatsApp {CONTACT_CONFIG.phoneFormatted}
+              </p>
             </motion.article>
           ))}
         </div>

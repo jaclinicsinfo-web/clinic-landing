@@ -37,7 +37,7 @@ export function FaqSection() {
     {
       question: "Como faço para contratar?",
       answer:
-        "Os planos estão na página: Essencial a R$ 300, Profissional a R$ 700 e Ilimitado a R$ 1.200 por mês. Agende uma demonstração com o comercial e, se fizer sentido, siga com o teste de 7 dias.",
+        "Os planos (Essencial, Profissional e Ilimitado) estão na página com os módulos de cada um. Os valores são sob consulta: solicite seu orçamento pelo WhatsApp e, se fizer sentido, siga com o teste de 7 dias.",
       },
     {
       question: "O que o agente de IA faz?",
