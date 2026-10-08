@@ -3,7 +3,7 @@ import { listarPlanosPublicos } from "@/lib/planos-publicos";
 
 export const dynamic = "force-dynamic";
 
-// .
+// ..
 
 export default async function Home() {
   const planos = await listarPlanosPublicos();
