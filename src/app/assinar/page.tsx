@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export default async function AssinarPage({
   searchParams,
 }: {
-  searchParams: Promise<{ plano?: string; modo?: string; ciclo?: string }>;
+  searchParams: Promise<{ plano?: string; modo?: string; ciclo?: string; nome?: string; email?: string; telefone?: string }>;
 }) {
   const params = await searchParams;
   const modo = params.modo === "pago" ? "pago" : params.modo === "gratuito" ? "gratuito" : null;
@@ -30,6 +30,11 @@ export default async function AssinarPage({
         preco={preco}
         modo={modo}
         ciclo={ciclo}
+        iniciais={{
+          adminNome: params.nome,
+          adminEmail: params.email,
+          telefone: params.telefone,
+        }}
       />
     </MolduraAssinatura>
   );

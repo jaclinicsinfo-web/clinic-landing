@@ -12,6 +12,11 @@ interface FormularioAssinaturaProps {
   preco: number;
   modo: "gratuito" | "pago";
   ciclo: "mensal" | "anual";
+  iniciais?: {
+    adminNome?: string;
+    adminEmail?: string;
+    telefone?: string;
+  };
 }
 
 interface Resultado {
@@ -35,9 +40,14 @@ const VAZIO = {
 const CAMPO =
   "mt-1.5 w-full rounded-xl border border-ja-line bg-ja-surface px-3 py-2.5 text-sm text-ja-ink focus:border-transparent focus:outline-none focus:ring-2 focus:ring-ja-teal";
 
-export function FormularioAssinatura({ plano, nomePlano, preco, modo, ciclo }: FormularioAssinaturaProps) {
+export function FormularioAssinatura({ plano, nomePlano, preco, modo, ciclo, iniciais }: FormularioAssinaturaProps) {
   const router = useRouter();
-  const [valores, setValores] = React.useState(VAZIO);
+  const [valores, setValores] = React.useState({
+    ...VAZIO,
+    telefone: iniciais?.telefone?.trim() || "",
+    adminNome: iniciais?.adminNome?.trim() || "",
+    adminEmail: iniciais?.adminEmail?.trim() || "",
+  });
   const [erro, setErro] = React.useState("");
   const [enviando, setEnviando] = React.useState(false);
   const [resultado, setResultado] = React.useState<Resultado | null>(null);

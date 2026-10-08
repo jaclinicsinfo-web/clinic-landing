@@ -1,29 +1,36 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X,
-  Calendar,
-  CheckCircle2,
   Sparkles,
   Building2,
   User,
   Mail,
   Phone,
   ArrowRight,
+  Layers,
 } from "lucide-react";
-import confetti from "canvas-confetti";
-import { CONTACT_CONFIG } from "@/lib/constants";
 import { BRAND } from "@/lib/brand";
+import { PLANOS, type PlanoComercial } from "@/lib/planos";
 
 interface ScheduleDemoModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+function planoPeloPorte(quantidade: string): PlanoComercial["codigo"] {
+  if (quantidade.startsWith("1 ")) return "essencial";
+  if (quantidade.startsWith("6") || quantidade.startsWith("Mais")) return "ilimitado";
+  return "profissional";
+}
+
 export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
-  const [submitted, setSubmitted] = useState(false);
+  const router = useRouter();
+  const [planoManual, setPlanoManual] = useState(false);
+  const [plano, setPlano] = useState<PlanoComercial["codigo"]>("profissional");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -34,39 +41,18 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    const message = [
-      `Olá! Quero agendar uma demonstração da ${BRAND.name} e conhecer o teste de 7 dias.`,
-      "",
-      `Nome: ${formData.name}`,
-      `WhatsApp: ${formData.phone}`,
-      `E-mail: ${formData.email}`,
-      `Tipo de clínica: ${formData.clinicType}`,
-      `Profissionais: ${formData.doctorsCount}`,
-    ].join("\n");
-
-    window.open(CONTACT_CONFIG.getWhatsAppUrl(message), "_blank", "noopener,noreferrer");
-
-    setSubmitted(true);
-    confetti({
-      particleCount: 80,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ["#0D3B44", "#145C69", "#FFFFFF", "#D4E0E3"],
-    });
-  };
-
-  const handleReset = () => {
-    setSubmitted(false);
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      clinicType: "Multi-especialidades",
-      doctorsCount: "2 a 5 profissionais",
-    });
+    const params = new URLSearchParams({ plano, modo: "gratuito" });
+    if (formData.name.trim()) params.set("nome", formData.name.trim());
+    if (formData.email.trim()) params.set("email", formData.email.trim());
+    if (formData.phone.trim()) params.set("telefone", formData.phone.trim());
     onClose();
+    router.push(`/assinar?${params.toString()}`);
   };
+
+  function mudarPorte(quantidade: string) {
+    setFormData((atual) => ({ ...atual, doctorsCount: quantidade }));
+    if (!planoManual) setPlano(planoPeloPorte(quantidade));
+  }
 
   return (
     <AnimatePresence>
@@ -104,56 +90,11 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
                 Veja a {BRAND.name} em ação
               </h3>
               <p className="text-white/70 text-sm mt-1">
-                Apresentação de 15 minutos sem compromisso. Depois, se fizer sentido, você testa a plataforma por 7 dias.
+                São 7 dias no plano escolhido, sem cartão. A senha do administrador chega por e-mail.
               </p>
             </div>
 
             <div className="p-6 sm:p-8">
-              {submitted ? (
-                <div className="text-center py-6">
-                  <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle2 className="w-10 h-10" />
-                  </div>
-                  <h4 className="text-xl font-bold text-ja-ink font-display">
-                    Abrimos o WhatsApp para você
-                  </h4>
-                  <p className="text-ja-muted text-sm mt-2 max-w-sm mx-auto">
-                    Obrigado, <strong className="text-ja-ink">{formData.name || "Doutor(a)"}</strong>!
-                    Envie a mensagem no WhatsApp que abriu — respondemos no {CONTACT_CONFIG.phoneFormatted}.
-                  </p>
-
-                  <div className="mt-6 p-4 rounded-xl bg-ja-surface border border-ja-line text-xs text-ja-muted text-left">
-                    <div className="font-semibold text-ja-ink mb-1 flex items-center gap-1.5">
-                      <Calendar className="w-4 h-4 text-ja-teal" />
-                      O que esperar da demonstração:
-                    </div>
-                    <ul className="space-y-1 ml-5 list-disc">
-                      <li>Tour pelos módulos que sua clínica mais precisa</li>
-                      <li>Como funciona a migração de pacientes</li>
-                      <li>Comparação dos planos Essencial, Profissional e Ilimitado</li>
-                    </ul>
-                  </div>
-
-                  <a
-                    href={CONTACT_CONFIG.getWhatsAppUrl(
-                      `Olá! Sou ${formData.name || "um interessado"} e quero agendar a demonstração da ${BRAND.name}.`,
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 w-full min-h-11 py-3 bg-ja-surface border border-ja-line text-ja-ink font-medium rounded-xl transition-colors inline-flex items-center justify-center gap-2 hover:bg-ja-subtle"
-                  >
-                    <Phone className="w-4 h-4 text-ja-teal" />
-                    Reabrir WhatsApp
-                  </a>
-
-                  <button
-                    onClick={handleReset}
-                    className="mt-3 w-full min-h-11 py-3 bg-ja-teal hover:bg-ja-dark text-white font-medium rounded-xl transition-colors"
-                  >
-                    Concluir
-                  </button>
-                </div>
-              ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label className="block text-xs font-semibold text-ja-ink uppercase tracking-wider mb-1.5">
@@ -235,7 +176,7 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
                       </label>
                       <select
                         value={formData.doctorsCount}
-                        onChange={(e) => setFormData({ ...formData, doctorsCount: e.target.value })}
+                        onChange={(e) => mudarPorte(e.target.value)}
                         className="w-full px-4 py-2.5 rounded-xl border border-ja-line focus:outline-none focus:ring-2 focus:ring-ja-teal focus:border-transparent text-sm bg-ja-surface text-ja-ink"
                       >
                         <option>1 profissional (Consultório)</option>
@@ -246,20 +187,42 @@ export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
                     </div>
                   </div>
 
+                  <div>
+                    <label className="block text-xs font-semibold text-ja-ink uppercase tracking-wider mb-1.5">
+                      Plano do teste
+                    </label>
+                    <div className="relative">
+                      <Layers className="w-4 h-4 text-ja-muted absolute left-3.5 top-3.5" />
+                      <select
+                        value={plano}
+                        onChange={(e) => {
+                          setPlanoManual(true);
+                          setPlano(e.target.value as PlanoComercial["codigo"]);
+                        }}
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-ja-line focus:outline-none focus:ring-2 focus:ring-ja-teal focus:border-transparent text-sm bg-ja-surface text-ja-ink"
+                      >
+                        {PLANOS.map((item) => (
+                          <option key={item.codigo} value={item.codigo}>
+                            {item.nome}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
                   <div className="pt-2">
                     <button
                       type="submit"
                       className="w-full min-h-11 py-3.5 px-6 rounded-xl bg-ja-teal hover:bg-ja-dark text-white font-semibold flex items-center justify-center gap-2 transition-colors group"
                     >
-                      <span>Continuar no WhatsApp</span>
+                      <span>Começar 7 dias grátis</span>
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </button>
                     <p className="text-center text-[11px] text-ja-muted mt-2">
-                      Seus dados seguem para o comercial no WhatsApp {CONTACT_CONFIG.phoneFormatted}. Também pelo e-mail {CONTACT_CONFIG.email}.
+                      O próximo passo abre a clínica no teste. Sem cartão.
                     </p>
                   </div>
                 </form>
-              )}
             </div>
           </motion.div>
         </div>
