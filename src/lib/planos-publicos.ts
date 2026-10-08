@@ -2,6 +2,7 @@ export interface PlanoPublico {
   codigo: string;
   nome: string;
   precoMensal: number;
+  precoAnual: number;
 }
 
 export function reais(valor: number) {

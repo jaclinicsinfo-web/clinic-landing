@@ -52,7 +52,7 @@ function RetornoPagamento() {
         }
         setMensagem(json?.mensagem || "Pagamento recebido.");
         setEmail(json?.email || "");
-        setEstado(json?.status === "pago" ? "pago" : "pendente");
+        setEstado(json?.status === "pago" ? "pago" : json?.status === "revisao" ? "erro" : "pendente");
       })
       .catch(() => {
         if (!ativo) return;

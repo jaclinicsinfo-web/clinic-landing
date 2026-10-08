@@ -20,9 +20,10 @@ import { CONTACT_CONFIG } from "@/lib/constants";
 
 interface HomeClientProps {
   precos: Record<string, number> | null;
+  precosAnuais: Record<string, number> | null;
 }
 
-export function HomeClient({ precos }: HomeClientProps) {
+export function HomeClient({ precos, precosAnuais }: HomeClientProps) {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const openDemo = () => setDemoModalOpen(true);
 
@@ -36,7 +37,7 @@ export function HomeClient({ precos }: HomeClientProps) {
       <InteractiveDemoSection />
       <ScrollJourneySection />
       <ModulesBentoSection />
-      <PlansSection precos={precos} />
+      <PlansSection precos={precos} precosAnuais={precosAnuais} />
       <RoiCalculatorSection onOpenDemo={openDemo} />
       <SecuritySection />
       <TestimonialsSection />

@@ -11,9 +11,10 @@ import { reais } from "@/lib/planos-publicos";
 
 interface PlansSectionProps {
   precos: Record<string, number> | null;
+  precosAnuais: Record<string, number> | null;
 }
 
-export function PlansSection({ precos }: PlansSectionProps) {
+export function PlansSection({ precos, precosAnuais }: PlansSectionProps) {
   return (
     <section id="planos" className="py-12 md:py-16 lg:py-20 bg-ja-surface text-ja-ink relative border-t border-ja-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,7 +40,9 @@ export function PlansSection({ precos }: PlansSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
           {PLANOS.map((plano, index) => {
             const preco = precos?.[plano.codigo];
+            const precoAnual = precosAnuais?.[plano.codigo];
             const aVenda = preco != null && preco > 0;
+            const anualAVenda = precoAnual != null && precoAnual > 0;
             return (
             <motion.article
               key={plano.codigo}
@@ -76,7 +79,7 @@ export function PlansSection({ precos }: PlansSectionProps) {
                       <span className={`text-sm font-semibold ${plano.destaque ? "text-white/70" : "text-ja-muted"}`}> /mês</span>
                     </p>
                     <p className={`mt-0.5 text-xs ${plano.destaque ? "text-white/65" : "text-ja-muted"}`}>
-                      7 dias grátis ou assinatura agora.
+                      {anualAVenda ? `${reais(precoAnual)} por ano, cobrado à vista.` : "7 dias grátis ou assinatura mensal."}
                     </p>
                   </>
                 ) : (
@@ -144,15 +147,27 @@ export function PlansSection({ precos }: PlansSectionProps) {
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                   <Link
-                    href={`/assinar?plano=${plano.codigo}&modo=pago`}
+                    href={`/assinar?plano=${plano.codigo}&modo=pago&ciclo=mensal`}
                     className={`min-h-11 w-full rounded-xl border font-semibold text-sm inline-flex items-center justify-center transition-colors ${
                       plano.destaque
                         ? "border-white/25 text-white hover:bg-white/10"
                         : "border-ja-line text-ja-ink hover:bg-ja-surface"
                     }`}
                   >
-                    Assinar agora
+                    Assinar mensal
                   </Link>
+                  {anualAVenda ? (
+                    <Link
+                      href={`/assinar?plano=${plano.codigo}&modo=pago&ciclo=anual`}
+                      className={`min-h-11 w-full rounded-xl border font-semibold text-sm inline-flex items-center justify-center transition-colors ${
+                        plano.destaque
+                          ? "border-white/25 text-white hover:bg-white/10"
+                          : "border-ja-line text-ja-ink hover:bg-ja-surface"
+                      }`}
+                    >
+                      Assinar anual à vista
+                    </Link>
+                  ) : null}
                 </div>
               ) : null}
               <a

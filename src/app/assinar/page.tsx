@@ -9,17 +9,28 @@ export const dynamic = "force-dynamic";
 export default async function AssinarPage({
   searchParams,
 }: {
-  searchParams: Promise<{ plano?: string; modo?: string }>;
+  searchParams: Promise<{ plano?: string; modo?: string; ciclo?: string }>;
 }) {
   const params = await searchParams;
   const modo = params.modo === "pago" ? "pago" : params.modo === "gratuito" ? "gratuito" : null;
+  const ciclo = params.ciclo === "anual" ? "anual" : "mensal";
   const planos = await listarPlanosPublicos();
   const plano = planos?.find((item) => item.codigo === params.plano);
+  const precoAnual = Number(plano?.precoAnual);
   if (!modo || !plano || plano.precoMensal <= 0) notFound();
+  if (modo === "pago" && ciclo === "anual" && !(precoAnual > 0)) notFound();
+
+  const preco = modo === "pago" && ciclo === "anual" ? precoAnual : plano.precoMensal;
 
   return (
     <MolduraAssinatura>
-      <FormularioAssinatura plano={plano.codigo} nomePlano={plano.nome} preco={plano.precoMensal} modo={modo} />
+      <FormularioAssinatura
+        plano={plano.codigo}
+        nomePlano={plano.nome}
+        preco={preco}
+        modo={modo}
+        ciclo={ciclo}
+      />
     </MolduraAssinatura>
   );
 }

@@ -8,6 +8,9 @@ export default async function Home() {
   const precos = planos
     ? Object.fromEntries(planos.map((plano) => [plano.codigo, plano.precoMensal]))
     : null;
+  const precosAnuais = planos
+    ? Object.fromEntries(planos.map((plano) => [plano.codigo, plano.precoAnual]))
+    : null;
 
-  return <HomeClient precos={precos} />;
+  return <HomeClient precos={precos} precosAnuais={precosAnuais} />;
 }

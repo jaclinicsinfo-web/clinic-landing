@@ -11,6 +11,7 @@ interface FormularioAssinaturaProps {
   nomePlano: string;
   preco: number;
   modo: "gratuito" | "pago";
+  ciclo: "mensal" | "anual";
 }
 
 interface Resultado {
@@ -34,13 +35,14 @@ const VAZIO = {
 const CAMPO =
   "mt-1.5 w-full rounded-xl border border-ja-line bg-ja-surface px-3 py-2.5 text-sm text-ja-ink focus:border-transparent focus:outline-none focus:ring-2 focus:ring-ja-teal";
 
-export function FormularioAssinatura({ plano, nomePlano, preco, modo }: FormularioAssinaturaProps) {
+export function FormularioAssinatura({ plano, nomePlano, preco, modo, ciclo }: FormularioAssinaturaProps) {
   const router = useRouter();
   const [valores, setValores] = React.useState(VAZIO);
   const [erro, setErro] = React.useState("");
   const [enviando, setEnviando] = React.useState(false);
   const [resultado, setResultado] = React.useState<Resultado | null>(null);
   const pago = modo === "pago";
+  const anual = pago && ciclo === "anual";
   const login = linkDoSistema("/login");
 
   function alterar(campo: keyof typeof VAZIO, valor: string) {
@@ -55,6 +57,7 @@ export function FormularioAssinatura({ plano, nomePlano, preco, modo }: Formular
     const base = urlApi(`/assinatura/${pago ? "checkout" : "gratuito"}`);
     const corpo = {
       plano,
+      ciclo: pago ? ciclo : "mensal",
       clinica: {
         nomeFantasia: valores.nomeFantasia,
         razaoSocial: valores.razaoSocial,
@@ -131,12 +134,17 @@ export function FormularioAssinatura({ plano, nomePlano, preco, modo }: Formular
       </p>
       <h1 className="mt-2 text-2xl font-bold tracking-tight">
         {nomePlano}
-        <span className="ml-2 text-base font-semibold text-ja-muted">{reais(preco)}/mês</span>
+        <span className="ml-2 text-base font-semibold text-ja-muted">
+          {reais(preco)}
+          {anual ? " à vista no ano" : "/mês"}
+        </span>
       </h1>
       <p className="mt-2 text-sm text-ja-muted">
-        {pago
-          ? "Depois do pagamento, o acesso chega no e-mail do administrador."
-          : "São 7 dias no plano escolhido. A senha temporária chega no e-mail do administrador."}
+        {anual
+          ? "O Mercado Pago cobra o ano inteiro de uma vez. Depois do pagamento, o acesso chega no e-mail do administrador."
+          : pago
+            ? "Depois do pagamento, o acesso chega no e-mail do administrador."
+            : "São 7 dias no plano escolhido. A senha temporária chega no e-mail do administrador."}
       </p>
 
       {erro ? (
@@ -171,7 +179,7 @@ export function FormularioAssinatura({ plano, nomePlano, preco, modo }: Formular
           disabled={enviando}
           className="inline-flex min-h-11 items-center justify-center rounded-xl bg-ja-teal px-5 text-sm font-semibold text-white hover:bg-ja-teal-hover disabled:opacity-60"
         >
-          {enviando ? "Enviando…" : pago ? "Ir para o pagamento" : "Começar 7 dias grátis"}
+          {enviando ? "Enviando…" : anual ? "Pagar o ano à vista" : pago ? "Ir para o pagamento" : "Começar 7 dias grátis"}
         </button>
         <Link href="/#planos" className="text-sm font-medium text-ja-muted hover:text-ja-ink">
           Trocar plano
