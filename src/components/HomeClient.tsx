@@ -18,7 +18,11 @@ import { ScheduleDemoModal } from "@/components/modals/ScheduleDemoModal";
 import { MessageCircle } from "lucide-react";
 import { CONTACT_CONFIG } from "@/lib/constants";
 
-export function HomeClient() {
+interface HomeClientProps {
+  precos: Record<string, number> | null;
+}
+
+export function HomeClient({ precos }: HomeClientProps) {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const openDemo = () => setDemoModalOpen(true);
 
@@ -32,12 +36,12 @@ export function HomeClient() {
       <InteractiveDemoSection />
       <ScrollJourneySection />
       <ModulesBentoSection />
-      <PlansSection />
+      <PlansSection precos={precos} />
       <RoiCalculatorSection onOpenDemo={openDemo} />
       <SecuritySection />
       <TestimonialsSection />
       <FaqSection />
-      <CtaBannerSection onOpenDemo={openDemo} />
+      <CtaBannerSection />
 
       <Footer />
 

@@ -146,7 +146,7 @@ export function HeroSection({ onOpenDemo }: HeroSectionProps) {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="mt-6 text-[12px] font-medium tracking-[0.14em] uppercase text-white/65"
             >
-              Demonstração gratuita · teste de 7 dias
+              7 dias grátis, sem cartão · ou assine na hora
             </motion.p>
           </div>
 

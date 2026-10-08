@@ -1,13 +1,19 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, Clock3, Layers } from "lucide-react";
 import { CONTACT_CONFIG } from "@/lib/constants";
 import { PLANOS } from "@/lib/planos";
 import { BRAND } from "@/lib/brand";
+import { reais } from "@/lib/planos-publicos";
 
-export function PlansSection() {
+interface PlansSectionProps {
+  precos: Record<string, number> | null;
+}
+
+export function PlansSection({ precos }: PlansSectionProps) {
   return (
     <section id="planos" className="py-12 md:py-16 lg:py-20 bg-ja-surface text-ja-ink relative border-t border-ja-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,12 +26,21 @@ export function PlansSection() {
             Escolha o plano pelo que a clínica usa hoje
           </h2>
           <p className="mt-4 text-base sm:text-lg text-ja-muted">
-            Compare os módulos e solicite um orçamento sob medida. Valores sob consulta.
+            Compare os módulos, teste 7 dias ou assine agora. O acesso chega por e-mail.
           </p>
         </div>
 
+        {precos === null ? (
+          <p className="mb-6 rounded-2xl border border-ja-line bg-ja-card px-5 py-4 text-center text-sm text-ja-muted">
+            Não foi possível carregar os preços agora. Atualize a página em instantes para testar ou assinar.
+          </p>
+        ) : null}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-          {PLANOS.map((plano, index) => (
+          {PLANOS.map((plano, index) => {
+            const preco = precos?.[plano.codigo];
+            const aVenda = preco != null && preco > 0;
+            return (
             <motion.article
               key={plano.codigo}
               initial={{ opacity: 0, y: 20 }}
@@ -54,12 +69,21 @@ export function PlansSection() {
               <div className={`mt-5 rounded-xl border px-4 py-3 ${
                 plano.destaque ? "border-white/15 bg-white/8" : "border-ja-line bg-ja-surface"
               }`}>
-                <p className={`text-sm font-semibold ${plano.destaque ? "text-white" : "text-ja-ink"}`}>
-                  Orçamento sob consulta
-                </p>
-                <p className={`mt-0.5 text-xs ${plano.destaque ? "text-white/65" : "text-ja-muted"}`}>
-                  Fale conosco e receba a proposta do plano {plano.nome}.
-                </p>
+                {aVenda ? (
+                  <>
+                    <p className={`text-3xl font-bold tracking-tight ${plano.destaque ? "text-white" : "text-ja-ink"}`}>
+                      {reais(preco)}
+                      <span className={`text-sm font-semibold ${plano.destaque ? "text-white/70" : "text-ja-muted"}`}> /mês</span>
+                    </p>
+                    <p className={`mt-0.5 text-xs ${plano.destaque ? "text-white/65" : "text-ja-muted"}`}>
+                      7 dias grátis ou assinatura agora.
+                    </p>
+                  </>
+                ) : (
+                  <p className={`text-sm font-semibold ${plano.destaque ? "text-white" : "text-ja-ink"}`}>
+                    Preço indisponível no momento.
+                  </p>
+                )}
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2">
@@ -106,30 +130,46 @@ export function PlansSection() {
                 })}
               </ul>
 
+              {aVenda ? (
+                <div className="mt-7 grid gap-2">
+                  <Link
+                    href={`/assinar?plano=${plano.codigo}&modo=gratuito`}
+                    className={`min-h-11 w-full rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-colors ${
+                      plano.destaque
+                        ? "bg-ja-teal hover:bg-ja-teal-hover text-white"
+                        : "bg-ja-brand hover:bg-ja-dark text-white"
+                    }`}
+                  >
+                    Testar 7 dias grátis
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    href={`/assinar?plano=${plano.codigo}&modo=pago`}
+                    className={`min-h-11 w-full rounded-xl border font-semibold text-sm inline-flex items-center justify-center transition-colors ${
+                      plano.destaque
+                        ? "border-white/25 text-white hover:bg-white/10"
+                        : "border-ja-line text-ja-ink hover:bg-ja-surface"
+                    }`}
+                  >
+                    Assinar agora
+                  </Link>
+                </div>
+              ) : null}
               <a
                 href={CONTACT_CONFIG.getWhatsAppUrl(
-                  `Olá! Gostaria de solicitar um orçamento do plano ${plano.nome} da ${BRAND.name}.`,
+                  `Olá! Gostaria de tirar uma dúvida sobre o plano ${plano.nome} da ${BRAND.name}.`,
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`mt-7 min-h-11 w-full rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-colors ${
-                  plano.destaque
-                    ? "bg-ja-teal hover:bg-ja-teal-hover text-white"
-                    : "bg-ja-brand hover:bg-ja-dark text-white"
-                }`}
-              >
-                Solicite seu orçamento
-                <ArrowRight className="w-4 h-4" />
-              </a>
-              <p
-                className={`mt-3 text-center text-xs ${
+                className={`mt-3 text-center text-xs underline-offset-2 hover:underline ${
                   plano.destaque ? "text-white/65" : "text-ja-muted"
                 }`}
               >
-                WhatsApp {CONTACT_CONFIG.phoneFormatted}
-              </p>
+                Dúvidas no WhatsApp {CONTACT_CONFIG.phoneFormatted}
+              </a>
             </motion.article>
-          ))}
+          );
+          })}
         </div>
 
         <p className="mt-8 text-center text-xs text-ja-muted max-w-2xl mx-auto">

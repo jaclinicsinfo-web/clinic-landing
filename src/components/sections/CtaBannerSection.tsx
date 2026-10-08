@@ -6,11 +6,7 @@ import { ArrowRight, CheckCircle2, Phone } from "lucide-react";
 import { CONTACT_CONFIG } from "@/lib/constants";
 import { BRAND } from "@/lib/brand";
 
-interface CtaBannerSectionProps {
-  onOpenDemo: () => void;
-}
-
-export function CtaBannerSection({ onOpenDemo }: CtaBannerSectionProps) {
+export function CtaBannerSection() {
   return (
     <section className="py-12 md:py-16 lg:py-20 bg-ja-surface relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,17 +27,17 @@ export function CtaBannerSection({ onOpenDemo }: CtaBannerSectionProps) {
             </h2>
 
             <p className="text-sm sm:text-base text-white/70 max-w-2xl mx-auto leading-relaxed">
-              Agende uma demonstração, escolha o plano certo e teste a plataforma por 7 dias — sem cartão e sem compromisso.
+              Escolha o plano, teste 7 dias sem cartão ou assine agora. O acesso chega por e-mail.
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <button
-                onClick={onOpenDemo}
+              <a
+                href="#planos"
                 className="w-full sm:w-auto min-h-11 px-7 rounded-xl bg-ja-teal hover:bg-ja-teal-hover text-white font-semibold text-sm inline-flex items-center justify-center gap-2 transition-colors"
               >
-                <span>Agendar demonstração</span>
+                <span>Ver planos e assinar</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </a>
 
               <a
                 href={CONTACT_CONFIG.getWhatsAppUrl(

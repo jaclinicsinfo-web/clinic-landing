@@ -12,7 +12,7 @@ export function FaqSection() {
     {
       question: "Como funciona o período de teste grátis de 7 dias?",
       answer:
-        "Após a demonstração, você pode testar os recursos da plataforma por 7 dias. Sem taxa de adesão: o comercial apresenta as condições e você só segue se fizer sentido para a clínica.",
+        "Na seção de planos, escolha Testar 7 dias grátis. Sem cartão. A senha do administrador chega por e-mail e o acesso vale 7 dias no plano escolhido.",
     },
     {
       question: "Vocês ajudam a migrar os dados do meu sistema antigo?",
@@ -37,7 +37,7 @@ export function FaqSection() {
     {
       question: "Como faço para contratar?",
       answer:
-        "Os planos (Essencial, Profissional e Ilimitado) estão na página com os módulos de cada um. Os valores são sob consulta: solicite seu orçamento pelo WhatsApp e, se fizer sentido, siga com o teste de 7 dias.",
+        "Escolha Essencial, Profissional ou Ilimitado na página. Dá para testar 7 dias ou assinar na hora. O acesso do administrador chega por e-mail e a entrada é no sistema da clínica.",
       },
     {
       question: "O que o agente de IA faz?",
