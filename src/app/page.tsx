@@ -5,7 +5,12 @@ export const dynamic = "force-dynamic";
 
 // ..
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ teste?: string; nome?: string; email?: string; telefone?: string }>;
+}) {
+  const params = await searchParams;
   const planos = await listarPlanosPublicos();
   const precos = planos
     ? Object.fromEntries(planos.map((plano) => [plano.codigo, plano.precoMensal]))
@@ -14,5 +19,14 @@ export default async function Home() {
     ? Object.fromEntries(planos.map((plano) => [plano.codigo, plano.precoAnual]))
     : null;
 
-  return <HomeClient precos={precos} precosAnuais={precosAnuais} />;
+  return (
+    <HomeClient
+      precos={precos}
+      precosAnuais={precosAnuais}
+      testeInicial={params.teste}
+      nomeInicial={params.nome}
+      emailInicial={params.email}
+      telefoneInicial={params.telefone}
+    />
+  );
 }

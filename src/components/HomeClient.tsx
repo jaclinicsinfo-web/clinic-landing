@@ -15,17 +15,36 @@ import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { CtaBannerSection } from "@/components/sections/CtaBannerSection";
 import { ScheduleDemoModal } from "@/components/modals/ScheduleDemoModal";
+import type { PlanoComercial } from "@/lib/planos";
 import { MessageCircle } from "lucide-react";
 import { CONTACT_CONFIG } from "@/lib/constants";
 
 interface HomeClientProps {
   precos: Record<string, number> | null;
   precosAnuais: Record<string, number> | null;
+  testeInicial?: string;
+  nomeInicial?: string;
+  emailInicial?: string;
+  telefoneInicial?: string;
 }
 
-export function HomeClient({ precos, precosAnuais }: HomeClientProps) {
-  const [demoModalOpen, setDemoModalOpen] = useState(false);
-  const openDemo = () => setDemoModalOpen(true);
+function planoValido(valor?: string): valor is PlanoComercial["codigo"] {
+  return valor === "essencial" || valor === "profissional" || valor === "ilimitado";
+}
+
+export function HomeClient({ precos, precosAnuais, testeInicial, nomeInicial, emailInicial, telefoneInicial }: HomeClientProps) {
+  const [demoModalOpen, setDemoModalOpen] = useState(() => planoValido(testeInicial));
+  const [planoTeste, setPlanoTeste] = useState<PlanoComercial["codigo"] | undefined>(
+    planoValido(testeInicial) ? testeInicial : undefined,
+  );
+  const openDemo = () => {
+    setPlanoTeste(undefined);
+    setDemoModalOpen(true);
+  };
+  const abrirTeste = (plano: PlanoComercial["codigo"]) => {
+    setPlanoTeste(plano);
+    setDemoModalOpen(true);
+  };
 
   return (
     <main className="min-h-screen relative flex flex-col bg-ja-surface text-ja-ink selection:bg-ja-teal selection:text-white">
@@ -37,7 +56,7 @@ export function HomeClient({ precos, precosAnuais }: HomeClientProps) {
       <InteractiveDemoSection />
       <ScrollJourneySection />
       <ModulesBentoSection />
-      <PlansSection precos={precos} precosAnuais={precosAnuais} />
+      <PlansSection precos={precos} precosAnuais={precosAnuais} onTestarGratis={abrirTeste} />
       <RoiCalculatorSection onOpenDemo={openDemo} />
       <SecuritySection />
       <TestimonialsSection />
@@ -64,6 +83,8 @@ export function HomeClient({ precos, precosAnuais }: HomeClientProps) {
       <ScheduleDemoModal
         isOpen={demoModalOpen}
         onClose={() => setDemoModalOpen(false)}
+        planoInicial={planoTeste}
+        iniciais={{ nome: nomeInicial, email: emailInicial, telefone: telefoneInicial }}
       />
     </main>
   );

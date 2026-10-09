@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 
+import { formatarCnpj, formatarTelefone } from "@/lib/mascara";
 import { linkDoSistema, reais, urlApi } from "@/lib/planos-publicos";
 
 interface FormularioAssinaturaProps {
@@ -44,23 +45,39 @@ export function FormularioAssinatura({ plano, nomePlano, preco, modo, ciclo, ini
   const router = useRouter();
   const [valores, setValores] = React.useState({
     ...VAZIO,
-    telefone: iniciais?.telefone?.trim() || "",
+    telefone: formatarTelefone(iniciais?.telefone?.trim() || ""),
     adminNome: iniciais?.adminNome?.trim() || "",
     adminEmail: iniciais?.adminEmail?.trim() || "",
   });
   const [erro, setErro] = React.useState("");
   const [enviando, setEnviando] = React.useState(false);
   const [resultado, setResultado] = React.useState<Resultado | null>(null);
+  const [etapa, setEtapa] = React.useState<1 | 2>(1);
   const pago = modo === "pago";
   const anual = pago && ciclo === "anual";
   const login = linkDoSistema("/login");
 
   function alterar(campo: keyof typeof VAZIO, valor: string) {
-    setValores((atual) => ({ ...atual, [campo]: valor }));
+    const formatado =
+      campo === "telefone" ? formatarTelefone(valor) : campo === "cnpj" ? formatarCnpj(valor) : valor;
+    setValores((atual) => ({ ...atual, [campo]: formatado }));
   }
 
-  async function enviar(evento: React.FormEvent) {
+  function aoEnviar(evento: React.FormEvent) {
     evento.preventDefault();
+    if (!pago && etapa === 1) {
+      setErro("");
+      setValores((atual) => ({
+        ...atual,
+        emailClinica: atual.emailClinica.trim() || atual.adminEmail.trim(),
+      }));
+      setEtapa(2);
+      return;
+    }
+    void concluir();
+  }
+
+  async function concluir() {
     setErro("");
     setEnviando(true);
 
@@ -138,7 +155,7 @@ export function FormularioAssinatura({ plano, nomePlano, preco, modo, ciclo, ini
   }
 
   return (
-    <form onSubmit={enviar} className="rounded-2xl border border-ja-line bg-ja-card p-6 sm:p-8">
+    <form onSubmit={aoEnviar} className="rounded-2xl border border-ja-line bg-ja-card p-6 sm:p-8">
       <p className="text-xs font-bold uppercase tracking-wider text-ja-teal">
         {pago ? "Assinatura" : "Acesso gratuito"}
       </p>
@@ -154,8 +171,19 @@ export function FormularioAssinatura({ plano, nomePlano, preco, modo, ciclo, ini
           ? "O Mercado Pago cobra o ano inteiro de uma vez. Depois do pagamento, o acesso chega no e-mail do administrador."
           : pago
             ? "Depois do pagamento, o acesso chega no e-mail do administrador."
-            : "São 7 dias no plano escolhido. A senha temporária chega no e-mail do administrador."}
+            : etapa === 1
+              ? "Primeiro, quem vai administrar a clínica. A senha temporária chega nesse e-mail."
+              : "Agora os dados da clínica. São 7 dias no plano escolhido, sem cartão."}
       </p>
+      {!pago ? (
+        <div className="mt-4 flex items-center gap-3">
+          <div className="flex flex-1 gap-1.5" aria-hidden>
+            <span className="h-1 flex-1 rounded-full bg-ja-teal" />
+            <span className={`h-1 flex-1 rounded-full ${etapa === 2 ? "bg-ja-teal" : "bg-ja-line"}`} />
+          </div>
+          <p className="text-xs font-semibold text-ja-muted">Etapa {etapa} de 2</p>
+        </div>
+      ) : null}
 
       {erro ? (
         <p role="alert" className="mt-4 rounded-xl border border-ja-line bg-ja-surface px-3 py-2 text-sm text-ja-ink">
@@ -164,32 +192,63 @@ export function FormularioAssinatura({ plano, nomePlano, preco, modo, ciclo, ini
       ) : null}
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <Campo rotulo="Nome fantasia" valor={valores.nomeFantasia} onChange={(valor) => alterar("nomeFantasia", valor)} />
-        <Campo rotulo="Razão social" valor={valores.razaoSocial} onChange={(valor) => alterar("razaoSocial", valor)} />
-        <Campo rotulo="CNPJ" valor={valores.cnpj} onChange={(valor) => alterar("cnpj", valor)} />
-        <Campo rotulo="Telefone" valor={valores.telefone} onChange={(valor) => alterar("telefone", valor)} />
-        <Campo rotulo="E-mail da clínica" tipo="email" valor={valores.emailClinica} onChange={(valor) => alterar("emailClinica", valor)} />
-        <Campo rotulo="Cidade da unidade" valor={valores.cidade} onChange={(valor) => alterar("cidade", valor)} />
-        <Campo rotulo="Nome da unidade" valor={valores.unidadeNome} onChange={(valor) => alterar("unidadeNome", valor)} />
-        <Campo rotulo="Nome do administrador" valor={valores.adminNome} onChange={(valor) => alterar("adminNome", valor)} />
-        <div className="sm:col-span-2">
-          <Campo
-            rotulo="E-mail do administrador"
-            tipo="email"
-            valor={valores.adminEmail}
-            onChange={(valor) => alterar("adminEmail", valor)}
-          />
-          <p className="mt-1 text-xs text-ja-muted">O acesso é enviado para este e-mail.</p>
-        </div>
+        {(pago || etapa === 2) && (
+          <>
+            <Campo rotulo="Nome fantasia" valor={valores.nomeFantasia} onChange={(valor) => alterar("nomeFantasia", valor)} />
+            <Campo rotulo="Razão social" valor={valores.razaoSocial} onChange={(valor) => alterar("razaoSocial", valor)} />
+            <Campo rotulo="CNPJ" valor={valores.cnpj} onChange={(valor) => alterar("cnpj", valor)} />
+            <Campo rotulo="Telefone" valor={valores.telefone} onChange={(valor) => alterar("telefone", valor)} />
+            <Campo rotulo="E-mail da clínica" tipo="email" valor={valores.emailClinica} onChange={(valor) => alterar("emailClinica", valor)} />
+            <Campo rotulo="Cidade da unidade" valor={valores.cidade} onChange={(valor) => alterar("cidade", valor)} />
+            <Campo rotulo="Nome da unidade" valor={valores.unidadeNome} onChange={(valor) => alterar("unidadeNome", valor)} />
+          </>
+        )}
+        {(pago || etapa === 1) && (
+          <>
+            <Campo rotulo="Nome do administrador" valor={valores.adminNome} onChange={(valor) => alterar("adminNome", valor)} />
+            <div className="sm:col-span-2">
+              <Campo
+                rotulo="E-mail do administrador"
+                tipo="email"
+                valor={valores.adminEmail}
+                onChange={(valor) => alterar("adminEmail", valor)}
+              />
+              <p className="mt-1 text-xs text-ja-muted">O acesso é enviado para este e-mail.</p>
+            </div>
+          </>
+        )}
+        {!pago && etapa === 1 ? (
+          <Campo rotulo="Telefone" valor={valores.telefone} onChange={(valor) => alterar("telefone", valor)} />
+        ) : null}
       </div>
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
+        {!pago && etapa === 2 ? (
+          <button
+            type="button"
+            onClick={() => {
+              setErro("");
+              setEtapa(1);
+            }}
+            className="inline-flex min-h-11 items-center justify-center rounded-xl border border-ja-line px-5 text-sm font-semibold text-ja-ink hover:bg-ja-surface"
+          >
+            Voltar
+          </button>
+        ) : null}
         <button
           type="submit"
           disabled={enviando}
           className="inline-flex min-h-11 items-center justify-center rounded-xl bg-ja-teal px-5 text-sm font-semibold text-white hover:bg-ja-teal-hover disabled:opacity-60"
         >
-          {enviando ? "Enviando…" : anual ? "Pagar o ano à vista" : pago ? "Ir para o pagamento" : "Começar 7 dias grátis"}
+          {enviando
+            ? "Enviando…"
+            : !pago && etapa === 1
+              ? "Continuar"
+              : anual
+                ? "Pagar o ano à vista"
+                : pago
+                  ? "Ir para o pagamento"
+                  : "Começar 7 dias grátis"}
         </button>
         <Link href="/#planos" className="text-sm font-medium text-ja-muted hover:text-ja-ink">
           Trocar plano

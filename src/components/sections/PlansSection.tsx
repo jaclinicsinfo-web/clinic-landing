@@ -12,9 +12,10 @@ import { reais } from "@/lib/planos-publicos";
 interface PlansSectionProps {
   precos: Record<string, number> | null;
   precosAnuais: Record<string, number> | null;
+  onTestarGratis: (plano: "essencial" | "profissional" | "ilimitado") => void;
 }
 
-export function PlansSection({ precos, precosAnuais }: PlansSectionProps) {
+export function PlansSection({ precos, precosAnuais, onTestarGratis }: PlansSectionProps) {
   return (
     <section id="planos" className="py-12 md:py-16 lg:py-20 bg-ja-surface text-ja-ink relative border-t border-ja-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -135,8 +136,9 @@ export function PlansSection({ precos, precosAnuais }: PlansSectionProps) {
 
               {aVenda ? (
                 <div className="mt-7 grid gap-2">
-                  <Link
-                    href={`/assinar?plano=${plano.codigo}&modo=gratuito`}
+                  <button
+                    type="button"
+                    onClick={() => onTestarGratis(plano.codigo)}
                     className={`min-h-11 w-full rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-colors ${
                       plano.destaque
                         ? "bg-ja-teal hover:bg-ja-teal-hover text-white"
@@ -145,7 +147,7 @@ export function PlansSection({ precos, precosAnuais }: PlansSectionProps) {
                   >
                     Testar 7 dias grátis
                     <ArrowRight className="w-4 h-4" />
-                  </Link>
+                  </button>
                   <Link
                     href={`/assinar?plano=${plano.codigo}&modo=pago&ciclo=mensal`}
                     className={`min-h-11 w-full rounded-xl border font-semibold text-sm inline-flex items-center justify-center transition-colors ${

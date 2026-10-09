@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { FormularioAssinatura } from "@/components/assinatura/formulario-assinatura";
 import { MolduraAssinatura } from "@/components/assinatura/moldura";
@@ -19,6 +19,14 @@ export default async function AssinarPage({
   const precoAnual = Number(plano?.precoAnual);
   if (!modo || !plano || plano.precoMensal <= 0) notFound();
   if (modo === "pago" && ciclo === "anual" && !(precoAnual > 0)) notFound();
+
+  if (modo === "gratuito") {
+    const destino = new URLSearchParams({ teste: plano.codigo });
+    if (params.nome) destino.set("nome", params.nome);
+    if (params.email) destino.set("email", params.email);
+    if (params.telefone) destino.set("telefone", params.telefone);
+    redirect(`/?${destino.toString()}`);
+  }
 
   const preco = modo === "pago" && ciclo === "anual" ? precoAnual : plano.precoMensal;
 

@@ -1,232 +1,441 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  X,
-  Sparkles,
-  Building2,
-  User,
-  Mail,
-  Phone,
+  ArrowLeft,
   ArrowRight,
-  Layers,
+  Building2,
+  Check,
+  Mail,
+  MapPin,
+  Phone,
+  Sparkles,
+  User,
+  X,
 } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import { PLANOS, type PlanoComercial } from "@/lib/planos";
+import { formatarCnpj, formatarTelefone } from "@/lib/mascara";
+import { linkDoSistema, urlApi } from "@/lib/planos-publicos";
 
 interface ScheduleDemoModalProps {
   isOpen: boolean;
   onClose: () => void;
-}
-
-function planoPeloPorte(quantidade: string): PlanoComercial["codigo"] {
-  if (quantidade.startsWith("1 ")) return "essencial";
-  if (quantidade.startsWith("6") || quantidade.startsWith("Mais")) return "ilimitado";
-  return "profissional";
-}
-
-export function ScheduleDemoModal({ isOpen, onClose }: ScheduleDemoModalProps) {
-  const router = useRouter();
-  const [planoManual, setPlanoManual] = useState(false);
-  const [plano, setPlano] = useState<PlanoComercial["codigo"]>("profissional");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    clinicType: "Multi-especialidades",
-    doctorsCount: "2 a 5 profissionais",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const params = new URLSearchParams({ plano, modo: "gratuito" });
-    if (formData.name.trim()) params.set("nome", formData.name.trim());
-    if (formData.email.trim()) params.set("email", formData.email.trim());
-    if (formData.phone.trim()) params.set("telefone", formData.phone.trim());
-    onClose();
-    router.push(`/assinar?${params.toString()}`);
+  planoInicial?: PlanoComercial["codigo"];
+  iniciais?: {
+    nome?: string;
+    email?: string;
+    telefone?: string;
   };
+}
 
-  function mudarPorte(quantidade: string) {
-    setFormData((atual) => ({ ...atual, doctorsCount: quantidade }));
-    if (!planoManual) setPlano(planoPeloPorte(quantidade));
+const CLINICA_VAZIA = {
+  nomeFantasia: "",
+  razaoSocial: "",
+  cnpj: "",
+  emailClinica: "",
+  cidade: "",
+  unidadeNome: "Matriz",
+};
+
+const CAMPO =
+  "w-full rounded-xl border border-ja-line bg-ja-surface py-2.5 pl-10 pr-3 text-sm text-ja-ink placeholder:text-ja-muted/80 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-ja-teal";
+
+export function ScheduleDemoModal({ isOpen, onClose, planoInicial, iniciais }: ScheduleDemoModalProps) {
+  const [plano, setPlano] = useState<PlanoComercial["codigo"]>(planoInicial ?? "profissional");
+  const [etapa, setEtapa] = useState<1 | 2>(1);
+  const [enviando, setEnviando] = useState(false);
+  const [erro, setErro] = useState("");
+  const [resultado, setResultado] = useState<{ mensagem: string; email: string } | null>(null);
+  const [contato, setContato] = useState({
+    nome: iniciais?.nome?.trim() || "",
+    email: iniciais?.email?.trim() || "",
+    telefone: formatarTelefone(iniciais?.telefone?.trim() || ""),
+  });
+  const [clinica, setClinica] = useState(CLINICA_VAZIA);
+  const estavaAberto = useRef(false);
+  const login = linkDoSistema("/login");
+  const planoAtual = PLANOS.find((item) => item.codigo === plano);
+
+  useEffect(() => {
+    if (!isOpen) {
+      estavaAberto.current = false;
+      return;
+    }
+    const anterior = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    if (!estavaAberto.current) {
+      setEtapa(1);
+      setErro("");
+      setResultado(null);
+      setPlano(planoInicial ?? "profissional");
+    }
+    estavaAberto.current = true;
+    return () => {
+      document.body.style.overflow = anterior;
+    };
+  }, [isOpen, planoInicial]);
+
+  function fechar() {
+    onClose();
+  }
+
+  function alterarContato(campo: keyof typeof contato, valor: string) {
+    const formatado = campo === "telefone" ? formatarTelefone(valor) : valor;
+    setContato((atual) => ({ ...atual, [campo]: formatado }));
+  }
+
+  function alterarClinica(campo: keyof typeof CLINICA_VAZIA, valor: string) {
+    const formatado = campo === "cnpj" ? formatarCnpj(valor) : valor;
+    setClinica((atual) => ({ ...atual, [campo]: formatado }));
+  }
+
+  function avancar(evento: React.FormEvent) {
+    evento.preventDefault();
+    if (etapa === 1) {
+      setErro("");
+      setClinica((atual) => ({
+        ...atual,
+        emailClinica: atual.emailClinica.trim() || contato.email.trim(),
+        nomeFantasia: atual.nomeFantasia.trim(),
+      }));
+      setEtapa(2);
+      return;
+    }
+    void concluir();
+  }
+
+  async function concluir() {
+    setErro("");
+    setEnviando(true);
+    const base = urlApi("/assinatura/gratuito");
+    try {
+      if (!base) throw new Error("O endereço da API não está configurado.");
+      const resposta = await fetch(base, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          plano,
+          ciclo: "mensal",
+          clinica: {
+            nomeFantasia: clinica.nomeFantasia,
+            razaoSocial: clinica.razaoSocial,
+            cnpj: clinica.cnpj,
+            telefone: contato.telefone,
+            email: clinica.emailClinica || contato.email,
+          },
+          unidade: { nome: clinica.unidadeNome, cidade: clinica.cidade },
+          usuario: { nome: contato.nome, email: contato.email },
+        }),
+      });
+      const json = (await resposta.json().catch(() => null)) as { mensagem?: string; email?: string; message?: string } | null;
+      if (!resposta.ok) throw new Error(json?.message || "Não foi possível começar o teste.");
+      setResultado({
+        mensagem: json?.mensagem || "Enviamos o acesso para o e-mail do administrador.",
+        email: json?.email || contato.email,
+      });
+    } catch (err) {
+      setErro(err instanceof Error ? err.message : "Não foi possível começar o teste.");
+    } finally {
+      setEnviando(false);
+    }
   }
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div className="fixed inset-0 z-50 overflow-y-auto">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
+            onClick={fechar}
+            className="fixed inset-0 bg-slate-950/55 backdrop-blur-sm"
           />
 
+          <div className="relative z-10 flex min-h-full items-center justify-center p-4 sm:p-6">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", duration: 0.5, bounce: 0.2 }}
-            className="relative w-full max-w-lg bg-ja-card rounded-3xl shadow-2xl border border-ja-line overflow-hidden z-10"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-teste"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 16 }}
+            transition={{ type: "spring", duration: 0.45, bounce: 0.18 }}
+            className="w-full max-w-xl"
           >
-            <div className="bg-ja-brand p-6 text-white relative">
+            <div className="overflow-hidden rounded-3xl border border-ja-line bg-ja-card shadow-2xl">
+            <div className="relative bg-ja-brand px-5 pb-5 pt-5 text-white sm:px-7">
               <button
-                onClick={onClose}
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white/90 hover:text-white transition-colors"
+                type="button"
+                onClick={fechar}
+                className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white/90 transition-colors hover:bg-white/20 hover:text-white"
                 aria-label="Fechar"
               >
-                <X className="w-5 h-5" />
+                <X className="h-5 w-5" />
               </button>
 
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-medium text-white/80 mb-2 border border-white/10">
-                <Sparkles className="w-3.5 h-3.5" />
-                Demonstração gratuita · 7 dias de teste
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
+                <Sparkles className="h-3.5 w-3.5" />
+                7 dias grátis · sem cartão
               </div>
-              <h3 className="text-2xl font-bold text-white font-display">
-                Veja a {BRAND.name} em ação
+              <h3 id="titulo-teste" className="mt-3 pr-10 font-display text-2xl font-bold text-white">
+                {resultado ? "Teste liberado" : etapa === 1 ? `Comece na ${BRAND.name}` : "Dados da clínica"}
               </h3>
-              <p className="text-white/70 text-sm mt-1">
-                São 7 dias no plano escolhido, sem cartão. A senha do administrador chega por e-mail.
+              <p className="mt-1 max-w-md text-sm text-white/70">
+                {resultado
+                  ? "A senha do administrador já foi enviada por e-mail."
+                  : etapa === 1
+                    ? "Quem vai administrar a clínica. A senha chega neste e-mail."
+                    : `Plano ${planoAtual?.nome ?? "escolhido"}. Falta só o cadastro da clínica.`}
               </p>
+
+              {!resultado ? (
+                <div className="mt-5 grid grid-cols-2 gap-2">
+                  <Passo numero="1" rotulo="Seus dados" ativo={etapa === 1} concluido={etapa === 2} />
+                  <Passo numero="2" rotulo="A clínica" ativo={etapa === 2} concluido={false} />
+                </div>
+              ) : null}
             </div>
 
-            <div className="p-6 sm:p-8">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-ja-ink uppercase tracking-wider mb-1.5">
-                      Seu Nome Completo
-                    </label>
-                    <div className="relative">
-                      <User className="w-4 h-4 text-ja-muted absolute left-3.5 top-3.5" />
-                      <input
-                        type="text"
-                        required
-                        placeholder="Ex: Dra. Juliana Santos"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-ja-line focus:outline-none focus:ring-2 focus:ring-ja-teal focus:border-transparent text-sm bg-ja-surface text-ja-ink"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-ja-ink uppercase tracking-wider mb-1.5">
-                        WhatsApp de Contato
-                      </label>
-                      <div className="relative">
-                        <Phone className="w-4 h-4 text-ja-muted absolute left-3.5 top-3.5" />
-                        <input
-                          type="tel"
-                          required
-                          placeholder="(16) 99999-9999"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-ja-line focus:outline-none focus:ring-2 focus:ring-ja-teal focus:border-transparent text-sm bg-ja-surface text-ja-ink"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-ja-ink uppercase tracking-wider mb-1.5">
-                        E-mail Profissional
-                      </label>
-                      <div className="relative">
-                        <Mail className="w-4 h-4 text-ja-muted absolute left-3.5 top-3.5" />
-                        <input
-                          type="email"
-                          required
-                          placeholder="juliana@clinica.com.br"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-ja-line focus:outline-none focus:ring-2 focus:ring-ja-teal focus:border-transparent text-sm bg-ja-surface text-ja-ink"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-ja-ink uppercase tracking-wider mb-1.5">
-                        Tipo de Clínica / Consultório
-                      </label>
-                      <div className="relative">
-                        <Building2 className="w-4 h-4 text-ja-muted absolute left-3.5 top-3.5" />
-                        <select
-                          value={formData.clinicType}
-                          onChange={(e) => setFormData({ ...formData, clinicType: e.target.value })}
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-ja-line focus:outline-none focus:ring-2 focus:ring-ja-teal focus:border-transparent text-sm bg-ja-surface text-ja-ink"
-                        >
-                          <option>Multi-especialidades</option>
-                          <option>Psicologia / Terapia</option>
-                          <option>Medicina Geral / Especialista</option>
-                          <option>Odontologia</option>
-                          <option>Fisioterapia / Estética</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-ja-ink uppercase tracking-wider mb-1.5">
-                        Número de Profissionais
-                      </label>
-                      <select
-                        value={formData.doctorsCount}
-                        onChange={(e) => mudarPorte(e.target.value)}
-                        className="w-full px-4 py-2.5 rounded-xl border border-ja-line focus:outline-none focus:ring-2 focus:ring-ja-teal focus:border-transparent text-sm bg-ja-surface text-ja-ink"
-                      >
-                        <option>1 profissional (Consultório)</option>
-                        <option>2 a 5 profissionais</option>
-                        <option>6 a 15 profissionais</option>
-                        <option>Mais de 15 (Rede/Hospital)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-ja-ink uppercase tracking-wider mb-1.5">
-                      Plano do teste
-                    </label>
-                    <div className="relative">
-                      <Layers className="w-4 h-4 text-ja-muted absolute left-3.5 top-3.5" />
-                      <select
-                        value={plano}
-                        onChange={(e) => {
-                          setPlanoManual(true);
-                          setPlano(e.target.value as PlanoComercial["codigo"]);
-                        }}
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-ja-line focus:outline-none focus:ring-2 focus:ring-ja-teal focus:border-transparent text-sm bg-ja-surface text-ja-ink"
-                      >
-                        {PLANOS.map((item) => (
-                          <option key={item.codigo} value={item.codigo}>
-                            {item.nome}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      className="w-full min-h-11 py-3.5 px-6 rounded-xl bg-ja-teal hover:bg-ja-dark text-white font-semibold flex items-center justify-center gap-2 transition-colors group"
-                    >
-                      <span>Começar 7 dias grátis</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </button>
-                    <p className="text-center text-[11px] text-ja-muted mt-2">
-                      O próximo passo abre a clínica no teste. Sem cartão.
+            {resultado ? (
+              <div className="space-y-5 px-5 py-6 sm:px-7">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-ja-teal/10 text-ja-teal">
+                  <Check className="h-6 w-6" />
+                </div>
+                <p className="text-sm leading-relaxed text-ja-muted">{resultado.mensagem}</p>
+                <p className="text-sm text-ja-ink">
+                  Entre no sistema com <span className="font-semibold">{resultado.email}</span>.
+                </p>
+                {login ? (
+                  <a
+                    href={login}
+                    className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-ja-teal text-sm font-semibold text-white transition-colors hover:bg-ja-teal-hover"
+                  >
+                    Ir para o sistema
+                  </a>
+                ) : null}
+              </div>
+            ) : (
+              <form onSubmit={avancar}>
+                <div className="space-y-4 px-5 py-5 sm:px-7">
+                  {erro ? (
+                    <p role="alert" className="rounded-xl border border-ja-line bg-ja-surface px-3 py-2 text-sm text-ja-ink">
+                      {erro}
                     </p>
-                  </div>
-                </form>
+                  ) : null}
+
+                  {etapa === 1 ? (
+                    <>
+                      <CampoIcone icone={User} rotulo="Nome completo">
+                        <input
+                          required
+                          minLength={3}
+                          autoComplete="name"
+                          value={contato.nome}
+                          onChange={(evento) => alterarContato("nome", evento.target.value)}
+                          placeholder="Ex: Dra. Juliana Santos"
+                          className={CAMPO}
+                        />
+                      </CampoIcone>
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <CampoIcone icone={Mail} rotulo="E-mail">
+                          <input
+                            required
+                            type="email"
+                            autoComplete="email"
+                            value={contato.email}
+                            onChange={(evento) => alterarContato("email", evento.target.value)}
+                            placeholder="juliana@clinica.com.br"
+                            className={CAMPO}
+                          />
+                        </CampoIcone>
+                        <CampoIcone icone={Phone} rotulo="WhatsApp">
+                          <input
+                            required
+                            type="tel"
+                            autoComplete="tel"
+                            value={contato.telefone}
+                            onChange={(evento) => alterarContato("telefone", evento.target.value)}
+                            placeholder="(16) 99999-9999"
+                            className={CAMPO}
+                          />
+                        </CampoIcone>
+                      </div>
+                      <div>
+                        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-ja-ink">Plano do teste</p>
+                        <div className="grid grid-cols-3 gap-2">
+                          {PLANOS.map((item) => {
+                            const escolhido = item.codigo === plano;
+                            return (
+                              <button
+                                key={item.codigo}
+                                type="button"
+                                onClick={() => setPlano(item.codigo)}
+                                aria-pressed={escolhido}
+                                className={`min-h-11 rounded-xl border px-2 text-sm font-semibold transition-colors ${
+                                  escolhido
+                                    ? "border-ja-teal bg-ja-teal text-white"
+                                    : "border-ja-line bg-ja-surface text-ja-ink hover:border-ja-teal/50"
+                                }`}
+                              >
+                                {item.nome}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <CampoIcone icone={Building2} rotulo="Nome fantasia">
+                        <input
+                          required
+                          minLength={3}
+                          value={clinica.nomeFantasia}
+                          onChange={(evento) => alterarClinica("nomeFantasia", evento.target.value)}
+                          placeholder="Clínica Jardins"
+                          className={CAMPO}
+                        />
+                      </CampoIcone>
+                      <CampoIcone icone={Building2} rotulo="Razão social">
+                        <input
+                          required
+                          minLength={3}
+                          value={clinica.razaoSocial}
+                          onChange={(evento) => alterarClinica("razaoSocial", evento.target.value)}
+                          placeholder="Jardins Saúde Ltda"
+                          className={CAMPO}
+                        />
+                      </CampoIcone>
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <CampoIcone icone={Building2} rotulo="CNPJ">
+                          <input
+                            required
+                            inputMode="numeric"
+                            value={clinica.cnpj}
+                            onChange={(evento) => alterarClinica("cnpj", evento.target.value)}
+                            placeholder="00.000.000/0001-00"
+                            className={CAMPO}
+                          />
+                        </CampoIcone>
+                        <CampoIcone icone={MapPin} rotulo="Cidade">
+                          <input
+                            required
+                            minLength={2}
+                            value={clinica.cidade}
+                            onChange={(evento) => alterarClinica("cidade", evento.target.value)}
+                            placeholder="Ribeirão Preto"
+                            className={CAMPO}
+                          />
+                        </CampoIcone>
+                      </div>
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <CampoIcone icone={Mail} rotulo="E-mail da clínica">
+                          <input
+                            required
+                            type="email"
+                            value={clinica.emailClinica}
+                            onChange={(evento) => alterarClinica("emailClinica", evento.target.value)}
+                            placeholder="contato@clinica.com.br"
+                            className={CAMPO}
+                          />
+                        </CampoIcone>
+                        <CampoIcone icone={Building2} rotulo="Unidade">
+                          <input
+                            required
+                            minLength={3}
+                            value={clinica.unidadeNome}
+                            onChange={(evento) => alterarClinica("unidadeNome", evento.target.value)}
+                            placeholder="Matriz"
+                            className={CAMPO}
+                          />
+                        </CampoIcone>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                <div className="flex shrink-0 items-center gap-3 border-t border-ja-line bg-ja-card px-5 py-4 sm:px-7">
+                  {etapa === 2 ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setErro("");
+                        setEtapa(1);
+                      }}
+                      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-ja-line px-4 text-sm font-semibold text-ja-ink transition-colors hover:bg-ja-surface"
+                    >
+                      <ArrowLeft className="h-4 w-4" />
+                      Voltar
+                    </button>
+                  ) : null}
+                  <button
+                    type="submit"
+                    disabled={enviando}
+                    className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-ja-teal text-sm font-semibold text-white transition-colors hover:bg-ja-teal-hover disabled:opacity-60"
+                  >
+                    {enviando ? "Enviando…" : etapa === 1 ? "Continuar" : "Começar 7 dias grátis"}
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                </div>
+              </form>
+            )}
             </div>
           </motion.div>
+          </div>
         </div>
       )}
     </AnimatePresence>
+  );
+}
+
+function Passo({
+  numero,
+  rotulo,
+  ativo,
+  concluido,
+}: {
+  numero: string;
+  rotulo: string;
+  ativo: boolean;
+  concluido: boolean;
+}) {
+  return (
+    <div
+      className={`flex items-center gap-2 rounded-xl px-3 py-2 text-sm ${
+        ativo || concluido ? "bg-white/12 text-white" : "bg-white/5 text-white/55"
+      }`}
+    >
+      <span
+        className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+          ativo ? "bg-ja-teal text-white" : concluido ? "bg-white text-ja-brand" : "bg-white/10 text-white/70"
+        }`}
+      >
+        {concluido ? <Check className="h-3.5 w-3.5" /> : numero}
+      </span>
+      <span className="font-semibold">{rotulo}</span>
+    </div>
+  );
+}
+
+function CampoIcone({
+  icone: Icone,
+  rotulo,
+  children,
+}: {
+  icone: React.ComponentType<{ className?: string }>;
+  rotulo: string;
+  children: React.ReactElement<{ className?: string }>;
+}) {
+  return (
+    <label className="block">
+      <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-ja-ink">{rotulo}</span>
+      <span className="relative block">
+        <Icone className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ja-muted" />
+        {children}
+      </span>
+    </label>
   );
 }
