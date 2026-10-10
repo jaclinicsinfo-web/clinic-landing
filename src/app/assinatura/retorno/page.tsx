@@ -15,6 +15,7 @@ function RetornoPagamento() {
   const [estado, setEstado] = React.useState<"aguardando" | "pago" | "pendente" | "erro">("aguardando");
   const [mensagem, setMensagem] = React.useState("Confirmando o pagamento…");
   const [email, setEmail] = React.useState("");
+  const [acessoEnviado, setAcessoEnviado] = React.useState(true);
   const login = linkDoSistema("/login");
 
   const url = urlApi("/assinatura/sincronizar");
@@ -47,6 +48,7 @@ function RetornoPagamento() {
           mensagem?: string;
           email?: string;
           status?: string;
+          acessoEnviado?: boolean;
         } | null;
         if (!ativo) return;
         if (!resposta.ok) {
@@ -56,6 +58,7 @@ function RetornoPagamento() {
         }
         setMensagem(json?.mensagem || "Pagamento recebido.");
         setEmail(json?.email || "");
+        setAcessoEnviado(json?.acessoEnviado !== false);
         const status = json?.status;
         setEstado(status === "pago" ? "pago" : status === "revisao" || status === "estornado" ? "erro" : "pendente");
         if (status === "pendente" && tentativa < 6) {
@@ -82,7 +85,7 @@ function RetornoPagamento() {
     <MolduraAssinatura>
       <div className="rounded-2xl border border-ja-line bg-ja-card p-6 sm:p-8">
         <h1 className="text-2xl font-bold tracking-tight">{mensagemTela}</h1>
-        {estadoTela === "pago" && email ? (
+        {estadoTela === "pago" && email && acessoEnviado ? (
           <p className="mt-3 text-sm text-ja-muted">O acesso foi enviado para {email}.</p>
         ) : null}
         {estadoTela === "pendente" && resultado === "pendente" ? (
