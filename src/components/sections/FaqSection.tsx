@@ -37,7 +37,7 @@ export function FaqSection() {
     {
       question: "Como faço para contratar?",
       answer:
-        "Escolha Essencial, Profissional ou Ilimitado na página. Dá para testar 7 dias, assinar o mês ou pagar o ano à vista. O acesso do administrador chega por e-mail e a entrada é no sistema da clínica.",
+        "Escolha Essencial, Profissional ou Ilimitado na página. Dá para testar 7 dias, pagar mês a mês (Pix ou cartão) ou pagar o ano no Pix à vista ou no cartão em até 12x. O acesso do administrador chega por e-mail e a entrada é no sistema da clínica.",
       },
     {
       question: "O que o agente de IA faz?",

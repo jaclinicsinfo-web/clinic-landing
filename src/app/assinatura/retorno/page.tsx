@@ -17,27 +17,31 @@ function RetornoPagamento() {
   const [email, setEmail] = React.useState("");
   const login = linkDoSistema("/login");
 
-  React.useEffect(() => {
-    if (!pedido || resultado === "recusado") {
-      setEstado(resultado === "recusado" ? "erro" : "pendente");
-      setMensagem(resultado === "recusado" ? "O pagamento não foi concluído." : "Não encontramos este pedido.");
-      return;
-    }
+  const url = urlApi("/assinatura/sincronizar");
+  // Casos que não precisam consultar a API.
+  const fixo: { estado: "pendente" | "erro"; mensagem: string } | null =
+    resultado === "recusado"
+      ? { estado: "erro", mensagem: "O pagamento não foi concluído." }
+      : !pedido
+        ? { estado: "pendente", mensagem: "Não encontramos este pedido." }
+        : !url
+          ? { estado: "erro", mensagem: "O endereço da API não está configurado." }
+          : null;
+  const temFixo = fixo !== null;
 
-    const url = urlApi("/assinatura/sincronizar");
-    if (!url) {
-      setEstado("erro");
-      setMensagem("O endereço da API não está configurado.");
-      return;
-    }
+  React.useEffect(() => {
+    if (temFixo || !url) return;
 
     let ativo = true;
-    void fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pedidoId: pedido }),
-    })
-      .then(async (resposta) => {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    // Pix pode levar alguns segundos para compensar: consulta de novo enquanto estiver pendente.
+    const consultar = async (tentativa: number) => {
+      try {
+        const resposta = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ pedidoId: pedido }),
+        });
         const json = (await resposta.json().catch(() => null)) as {
           message?: string;
           mensagem?: string;
@@ -52,26 +56,42 @@ function RetornoPagamento() {
         }
         setMensagem(json?.mensagem || "Pagamento recebido.");
         setEmail(json?.email || "");
-        setEstado(json?.status === "pago" ? "pago" : json?.status === "revisao" ? "erro" : "pendente");
-      })
-      .catch(() => {
+        const status = json?.status;
+        setEstado(status === "pago" ? "pago" : status === "revisao" || status === "estornado" ? "erro" : "pendente");
+        if (status === "pendente" && tentativa < 6) {
+          timer = setTimeout(() => void consultar(tentativa + 1), 5000);
+        }
+      } catch {
         if (!ativo) return;
         setEstado("erro");
         setMensagem("Não foi possível confirmar o pagamento.");
-      });
+      }
+    };
+    void consultar(1);
 
     return () => {
       ativo = false;
+      if (timer) clearTimeout(timer);
     };
-  }, [pedido, resultado]);
+  }, [pedido, url, temFixo]);
+
+  const estadoTela = fixo?.estado ?? estado;
+  const mensagemTela = fixo?.mensagem ?? mensagem;
 
   return (
     <MolduraAssinatura>
       <div className="rounded-2xl border border-ja-line bg-ja-card p-6 sm:p-8">
-        <h1 className="text-2xl font-bold tracking-tight">{mensagem}</h1>
-        {email ? <p className="mt-3 text-sm text-ja-muted">O acesso foi enviado para {email}.</p> : null}
+        <h1 className="text-2xl font-bold tracking-tight">{mensagemTela}</h1>
+        {estadoTela === "pago" && email ? (
+          <p className="mt-3 text-sm text-ja-muted">O acesso foi enviado para {email}.</p>
+        ) : null}
+        {estadoTela === "pendente" && resultado === "pendente" ? (
+          <p className="mt-3 text-sm text-ja-muted">
+            Assim que o Mercado Pago confirmar, o acesso chega no e-mail do administrador. Você pode fechar esta página.
+          </p>
+        ) : null}
         <div className="mt-6">
-          {estado === "pago" && login ? (
+          {estadoTela === "pago" && login ? (
             <a
               href={login}
               className="inline-flex min-h-11 items-center justify-center rounded-xl bg-ja-teal px-5 text-sm font-semibold text-white hover:bg-ja-teal-hover"

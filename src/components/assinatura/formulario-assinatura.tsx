@@ -163,14 +163,14 @@ export function FormularioAssinatura({ plano, nomePlano, preco, modo, ciclo, ini
         {nomePlano}
         <span className="ml-2 text-base font-semibold text-ja-muted">
           {reais(preco)}
-          {anual ? " à vista no ano" : "/mês"}
+          {anual ? " por ano" : "/mês"}
         </span>
       </h1>
       <p className="mt-2 text-sm text-ja-muted">
         {anual
-          ? "O Mercado Pago cobra o ano inteiro de uma vez. Depois do pagamento, o acesso chega no e-mail do administrador."
+          ? "No Mercado Pago, pague o ano no Pix à vista ou no cartão em até 12x. Depois do pagamento, o acesso chega no e-mail do administrador."
           : pago
-            ? "Depois do pagamento, o acesso chega no e-mail do administrador."
+            ? "A mensalidade é paga todo mês, no Pix ou no cartão. Depois do pagamento, o acesso chega no e-mail do administrador."
             : etapa === 1
               ? "Primeiro, quem vai administrar a clínica. A senha temporária chega nesse e-mail."
               : "Agora os dados da clínica. São 7 dias no plano escolhido, sem cartão."}
@@ -245,7 +245,7 @@ export function FormularioAssinatura({ plano, nomePlano, preco, modo, ciclo, ini
             : !pago && etapa === 1
               ? "Continuar"
               : anual
-                ? "Pagar o ano à vista"
+                ? "Ir para o pagamento anual"
                 : pago
                   ? "Ir para o pagamento"
                   : "Começar 7 dias grátis"}

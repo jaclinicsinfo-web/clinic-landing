@@ -80,7 +80,7 @@ export function PlansSection({ precos, precosAnuais, onTestarGratis }: PlansSect
                       <span className={`text-sm font-semibold ${plano.destaque ? "text-white/70" : "text-ja-muted"}`}> /mês</span>
                     </p>
                     <p className={`mt-0.5 text-xs ${plano.destaque ? "text-white/65" : "text-ja-muted"}`}>
-                      {anualAVenda ? `${reais(precoAnual)} por ano, cobrado à vista.` : "7 dias grátis ou assinatura mensal."}
+                      {anualAVenda ? `${reais(precoAnual)} por ano: Pix à vista ou cartão em até 12x.` : "7 dias grátis ou assinatura mensal."}
                     </p>
                   </>
                 ) : (
@@ -167,7 +167,7 @@ export function PlansSection({ precos, precosAnuais, onTestarGratis }: PlansSect
                           : "border-ja-line text-ja-ink hover:bg-ja-surface"
                       }`}
                     >
-                      Assinar anual à vista
+                      Assinar anual
                     </Link>
                   ) : null}
                 </div>
