@@ -47,7 +47,7 @@ export function ScheduleDemoModal({ isOpen, onClose, planoInicial, iniciais }: S
   const [etapa, setEtapa] = useState<1 | 2>(1);
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState("");
-  const [resultado, setResultado] = useState<{ mensagem: string; email: string } | null>(null);
+  const [resultado, setResultado] = useState<{ mensagem: string; email: string; acessoEnviado: boolean } | null>(null);
   const [contato, setContato] = useState({
     nome: iniciais?.nome?.trim() || "",
     email: iniciais?.email?.trim() || "",
@@ -129,10 +129,16 @@ export function ScheduleDemoModal({ isOpen, onClose, planoInicial, iniciais }: S
           usuario: { nome: contato.nome, email: contato.email },
         }),
       });
-      const json = (await resposta.json().catch(() => null)) as { mensagem?: string; email?: string; message?: string } | null;
+      const json = (await resposta.json().catch(() => null)) as {
+        mensagem?: string;
+        email?: string;
+        message?: string;
+        acessoEnviado?: boolean;
+      } | null;
       if (!resposta.ok) throw new Error(json?.message || "Não foi possível começar o teste.");
       setResultado({
         mensagem: json?.mensagem || "Enviamos o acesso para o e-mail do administrador.",
+        acessoEnviado: json?.acessoEnviado !== false,
         email: json?.email || contato.email,
       });
     } catch (err) {
@@ -185,7 +191,9 @@ export function ScheduleDemoModal({ isOpen, onClose, planoInicial, iniciais }: S
               </h3>
               <p className="mt-1 max-w-md text-sm text-white/70">
                 {resultado
-                  ? "A senha do administrador já foi enviada por e-mail."
+                  ? resultado.acessoEnviado
+                    ? "A senha do administrador já foi enviada por e-mail."
+                    : "A clínica foi aberta, mas o e-mail não saiu."
                   : etapa === 1
                     ? "Quem vai administrar a clínica. A senha chega neste e-mail."
                     : `Plano ${planoAtual?.nome ?? "escolhido"}. Falta só o cadastro da clínica.`}
